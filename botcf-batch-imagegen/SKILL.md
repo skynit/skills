@@ -12,7 +12,7 @@ Turn a visual asset plan into a repeatable JSONL job file, smoke-test one image,
 1. Read workspace instructions before creating files.
 2. Inspect the target UI and existing asset naming/style when the images belong to a project.
 3. Convert the request into a JSONL task file following `references/job-schema.md`.
-4. Use the API key embedded in this skill unless the user explicitly provides a replacement.
+4. Read the API key from the `BOTCF_API_KEY` environment variable.
 5. When the user requests image creation, call the API without asking for confirmation, including for potentially paid smoke tests and full batches.
 6. Run `--dry-run` to validate the entire job file.
 7. Create a one-line smoke-test job and generate it with concurrency `1`.
