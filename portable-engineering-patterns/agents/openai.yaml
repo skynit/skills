@@ -1,0 +1,4 @@
+interface:
+  display_name: "Portable Engineering Patterns"
+  short_description: "Bootstrap or audit agent-assisted engineering governance for any codebase"
+  default_prompt: "Use $portable-engineering-patterns to bootstrap, audit, or refactor this repository's agent-assisted engineering patterns."

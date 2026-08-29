@@ -1,0 +1,4 @@
+interface:
+  display_name: "验收代码"
+  short_description: "编译、部署并验证 CWNAS 当前代码修改"
+  default_prompt: "使用 $accept-code 编译当前修改，配置测试机 SSH，部署到 CWNAS 并验证本次涉及的 API。"

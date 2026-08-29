@@ -1,0 +1,4 @@
+interface:
+  display_name: "对话知识入库"
+  short_description: "汇总当前与相关侧边对话并写入本地 Obsidian 知识库"
+  default_prompt: "Use $capture-conversations-to-vault to distill this conversation and relevant side threads into my local knowledge vault."

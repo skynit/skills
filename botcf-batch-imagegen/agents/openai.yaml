@@ -1,0 +1,4 @@
+interface:
+  display_name: "BotCF 批量图片生成"
+  short_description: "通过 BotCF API 批量生成、下载并校验项目图片素材"
+  default_prompt: "使用 $botcf-batch-imagegen 根据素材任务清单批量生成并验证图片。"

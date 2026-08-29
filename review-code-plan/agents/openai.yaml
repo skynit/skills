@@ -1,0 +1,4 @@
+interface:
+  display_name: "Review Code Plan"
+  short_description: "Review implementation plans before coding"
+  default_prompt: "Use $review-code-plan to review this implementation plan before code changes."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "orz-gpt-bigman"
+  short_description: "Coordinate event-driven assistants with scoped skills and session reuse"
+  default_prompt: "Use $orz-gpt-bigman to plan and coordinate a multi-agent assistant team for this task."
