@@ -40,6 +40,7 @@
 | [`refactor`](refactor/) | 进行渐进、外部行为不变的代码重构，包括提取函数、重命名、拆分大函数和改善类型。 | 需要消除代码异味或提升可维护性，但不希望进行整体重写时使用。 |
 | [`review-code-plan`](review-code-plan/) | 在写代码前审查实现、重构、迁移、修复或发布计划。 | 需要发现计划中的风险、隐含假设、缺失验证、范围扩张或架构冲突时使用。 |
 | [`setup-matt-pocock-skills`](setup-matt-pocock-skills/) | 为工程 skills 初始化 issue tracker、分诊标签词汇和领域文档布局。 | 首次在仓库中启用相关工程工作流时显式调用一次。 |
+| [`sub2api-imagegen`](sub2api-imagegen/) | 通过自建 Sub2API 网关调用 GPT Image 生成或编辑图片，支持 generate/edit/batch 三种子命令。 | 内置 `image_gen` 工具不可用，或用户明确要求走 Sub2API/CLI 路径时使用；凭据已内置在脚本里（内网专用 key，离开内网无效）。 |
 | [`to-spec`](to-spec/) | 将当前对话和代码上下文直接整理成规格，并发布到项目 issue tracker。 | 讨论已经充分、不需要再访谈，希望形成 PRD/规格任务时显式调用。 |
 | [`ui-ux-pro-max`](ui-ux-pro-max/) | 基于本地 UI/UX 数据库提供风格、配色、字体、布局、动效、图表和技术栈建议。 | 设计、实现或审查 Web/移动端页面、组件、响应式布局、可访问性和交互体验时使用。 |
 
@@ -57,4 +58,5 @@ ${CODEX_HOME:-$HOME/.codex}/skills/<skill-name>/SKILL.md
 
 - 修改 skill 后先检查其 `SKILL.md` frontmatter、引用路径和配套脚本。
 - 不提交 API Key、Token、密码、私钥或本机生成的缓存文件。
+  - 已知例外：`sub2api-imagegen` 依用户决定内置了 Sub2API 网关的内网专用 key（离开内网无效），该 key 按公开信息对待，轮换时直接改脚本。
 - 各 skill 的许可证以其目录内的 `LICENSE`、`LICENSE.txt` 或第三方声明为准。

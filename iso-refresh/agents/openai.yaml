@@ -1,0 +1,4 @@
+interface:
+  display_name: "CWNAS ISO Refresh"
+  short_description: "Refresh app payloads in an existing CWNAS ISO"
+  default_prompt: "Use $iso-refresh to refresh the latest CWNAS ISO with the current cwnas binary and root directory."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "未提交代码精简审查"
+  short_description: "只读审查未提交改动，定位值得合并的重复逻辑和可以减少的声明"

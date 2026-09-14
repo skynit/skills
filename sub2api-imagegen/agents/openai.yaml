@@ -1,0 +1,4 @@
+interface:
+  display_name: "Sub2API 生图（CLI 回退）"
+  short_description: "通过自建 Sub2API 网关调用 GPT Image 生成或编辑图片"
+  default_prompt: "使用 $sub2api-imagegen 生成一张图片。"

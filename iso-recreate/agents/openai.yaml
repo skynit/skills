@@ -1,0 +1,4 @@
+interface:
+  display_name: "CWNAS ISO Recreate"
+  short_description: "Fully rebuild CWNAS RootFS and installer ISO"
+  default_prompt: "Use $iso-recreate to fully rebuild the requested CWNAS installer ISO."
