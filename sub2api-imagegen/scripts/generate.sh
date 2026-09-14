@@ -7,6 +7,9 @@ set -euo pipefail
 DEFAULT_BASE_URL="http://192.168.100.66:8080/v1"
 DEFAULT_API_KEY="sk-890375c09fb9ee17dba2aec38800178d8558f9f9e1a920928ca914006c1da162"
 
+# 默认模型。用 --model 可覆盖，例如 --model gpt-image-2（换回旧模型以解锁自定义尺寸）
+DEFAULT_MODEL="gpt-image-2.5-sunburst"
+
 VENV_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/sub2api-imagegen/venv"
 IMAGE_GEN="${CODEX_HOME:-$HOME/.codex}/skills/.system/imagegen/scripts/image_gen.py"
 
@@ -61,4 +64,18 @@ else
   PY="$VENV_DIR/bin/python"
 fi
 
-exec "$PY" "$IMAGE_GEN" "$@"
+# 未显式指定 --model 时注入默认模型。只对已知子命令注入，避免破坏 -h 等。
+TARGET_ARGS=("$@")
+case "${1:-}" in
+  generate|edit|generate-batch)
+    has_model=0
+    for arg in "$@"; do
+      case "$arg" in --model|--model=*) has_model=1 ;; esac
+    done
+    if [[ "$has_model" -eq 0 ]]; then
+      TARGET_ARGS=("$1" "--model" "$DEFAULT_MODEL" "${@:2}")
+    fi
+    ;;
+esac
+
+exec "$PY" "$IMAGE_GEN" "${TARGET_ARGS[@]}"

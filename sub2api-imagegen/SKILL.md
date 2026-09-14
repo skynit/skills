@@ -39,11 +39,15 @@ bash "$SKILL_DIR/scripts/generate.sh" generate \
 1. 用内置的网关地址和 key 设置 `OPENAI_BASE_URL` / `OPENAI_API_KEY`（同名环境变量优先）。
 2. 挑一个装了 `openai` 的解释器：`$IMAGEGEN_PYTHON` → 系统 `python3` → `~/.local/share/sub2api-imagegen/venv`（不存在就自动创建并装 `openai`）。
 3. 把网关主机加入 `no_proxy`，避免 Clash 之类的系统代理拦截 LAN 请求。
-4. 原样转发所有参数给 `.system/imagegen/scripts/image_gen.py`。
+4. 未显式传 `--model` 时注入默认模型 `gpt-image-2.5-sunburst`，其余参数原样转发给 `.system/imagegen/scripts/image_gen.py`。
 
 ## 网关注意事项
 
-- 模型是 `gpt-image-2`，`--size` 支持 `1024x1024`、`1536x1024`、`1024x1536`、`auto`。上游可能返回与请求不同的像素尺寸（实测请求 `1024x1024` 返回 `1360x1157`），以文件实际尺寸为准。
+- 网关提供的图片模型：`gpt-image-2.5-sunburst`（**本技能默认**）、`gpt-image-2.5-flare`、`gpt-image-2`、`gpt-image-1.5`、`gpt-image-1`。**没有裸名 `gpt-image-2.5`**，用 2.5 必须指定变体。不传 `--model` 时包装脚本注入 `gpt-image-2.5-sunburst`；传了就以传入的为准。
+- Sunburst 是精度档（细节保真优先），Flare 是速度档，两者同价。要速度、要迭代、或需要自定义尺寸时用 `--model gpt-image-2.5-flare` / `--model gpt-image-2`。
+- `--size`：默认模型（2.5）只能用 `1024x1024`、`1536x1024`、`1024x1536`、`auto`；**自定义 `宽x高` 仅 `--model gpt-image-2` 支持**。这是脚本层面的限制，不是网关的。同理 `--quality` 只接受 `low/medium/high/auto`，官方宣传的 `xhigh`/`max` 传不进去。
+- 上游可能返回与请求不同的像素尺寸（实测请求 `1024x1024` 返回 `1370x1148`），以文件实际尺寸为准。
+- 2.5 系列路由到另一个网关账号（日志里 `account_id: 4`，`gpt-image-2` 是 `account_id: 3`），额度可能独立计算。
 - 网关会把请求体的校验失败也映射成 **502**（例如缺 `prompt` 时报 `prompt is required`）。看到 502 先确认参数齐全，别直接判定上游故障。
 - 生图消耗网关绑定的 ChatGPT 账号额度，按次计费。
 - **不要修改** `.system/imagegen/scripts/image_gen.py`；缺什么先问用户。
