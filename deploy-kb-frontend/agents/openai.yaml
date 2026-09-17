@@ -1,0 +1,3 @@
+interface:
+  display_name: "部署知识库前端"
+  short_description: "构建并部署 CWNAS 知识库前端，保留旧版目录并校验线上静态资源"
