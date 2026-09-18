@@ -1,6 +1,6 @@
 # Codex Skills
 
-本仓库保存本机 Codex 使用的 skills。每个 skill 都以目录内的 `SKILL.md` 作为正式契约，Codex 会根据任务语义自动选择合适的 skill，也可以由用户明确点名调用。
+本仓库保存本机 Codex 使用的 skills。当前收录 53 个 skill，其中 6 个为 Codex 内置 skill，47 个为本机安装或维护的自定义 skill。每个 skill 都以目录内的 `SKILL.md` 作为正式契约，Codex 会根据任务语义自动选择合适的 skill，也可以由用户明确点名调用。
 
 ## 目录说明
 
@@ -31,18 +31,56 @@
 | [`codex-build`](codex-build/) | 把已冻结的实现规格交给 Codex 编码，再由 Claude 审查差异并迭代修正。 | 已有明确 `PLAN.md` 或锁定方案，需要委派中大型实现、迁移、修复或测试编写时使用。 |
 | [`codex-review`](codex-review/) | 让 Codex 以只读批评者身份反复审查实现计划，直至批准或达到轮次上限。 | 已经有方案，希望在编码前对认证、迁移、并发、支付等高风险计划做跨模型压力测试时使用。 |
 | [`cursor-clean-code`](cursor-clean-code/) | 约束代码改动保持小而清晰，强调命名、范围控制和克制的抽象。 | 编写、审查或重构代码，且需要避免过度设计和无关扩张时使用。 |
+| [`deploy-kb-frontend`](deploy-kb-frontend/) | 构建并通过 SSH 部署 CWNAS 知识库 Vue 前端，备份旧版本并校验线上资源。 | 部署知识库前端或更新 `ai.cwnas.com` 静态资源时使用；不用于 Flutter 穿透平台或 Go 后端。 |
+| [`deploy-tunnel-platform`](deploy-tunnel-platform/) | 快速部署 CWNAS Go 后端和 Flutter Web 前端到远程穿透平台，并执行备份、切换和服务检查。 | 部署、更新或重新发布穿透平台时使用；不用于 NAS 安装器或 ISO 构建。 |
 | [`diagram-design`](diagram-design/) | 创建带品牌风格的架构图、流程图、时序图、ER 图、状态图、数据图表等 HTML/SVG/PNG。 | 需要从描述、Draw.io 或 Mermaid 生成高质量可交付图示时使用。 |
+| [`executing-plans`](executing-plans/) | 按已有书面实现计划分阶段执行任务，并在检查点复核结果。 | 已有明确实施计划，需要在独立会话中逐项实现和验证时使用。 |
+| [`finishing-a-development-branch`](finishing-a-development-branch/) | 在实现和测试完成后，核对环境并选择合并、PR、保留或清理分支。 | 开发分支已经完成，需要决定如何集成和收尾时使用。 |
 | [`grill-me-codex`](grill-me-codex/) | 先通过逐问访谈锁定需求，再让 Codex 对计划进行只读对抗审查。 | 高风险设计尚有模糊决策，需要先澄清需求再做跨模型计划评审时使用。 |
 | [`grill-with-docs-codex`](grill-with-docs-codex/) | 在访谈中同步校准 `CONTEXT.md`、术语和 ADR，然后让 Codex 审查最终计划。 | 项目已有领域文档，希望需求、文档和高风险实现计划一起收敛时使用。 |
+| [`iso-recreate`](iso-recreate/) | 通过完整构建路径重新生成 CWNAS Ubuntu 安装 ISO，包括全新的目标 RootFS。 | 安装器、系统包、服务、内核、initrd、启动流程或构建脚本有变化时使用。 |
+| [`iso-refresh`](iso-refresh/) | 在现有安装 ISO 的 squashfs 中仅替换 cwnas 二进制和完整前端 root。 | 变更只涉及这两类载荷，希望复用已验证 ISO 时使用；其他变更应使用 `iso-recreate`。 |
 | [`migrate-to-codex`](migrate-to-codex/) | 将支持的指令、skills、agents 和 MCP 配置迁移到 Codex 项目级或全局配置。 | 从 Claude Code 等既有配置迁移到 Codex，并需要生成、校验目标文件时使用。 |
 | [`orz-gpt-bigman`](orz-gpt-bigman/) | 以事件驱动方式协调 Master 与多个独立 Codex 会话，负责创建、复用、分派和结果收敛。 | 需要跨会话并行处理独立工作，且要控制唤醒、等待、回调和恢复流程时使用。 |
 | [`portable-engineering-patterns`](portable-engineering-patterns/) | 为 agent 协作型仓库建立可迁移的上下文、变更记录、工具边界、审批和测试门禁。 | 初始化、审计或重构仓库的 `AGENTS.md`、ADR 策略和工程治理规则时使用。 |
 | [`refactor`](refactor/) | 进行渐进、外部行为不变的代码重构，包括提取函数、重命名、拆分大函数和改善类型。 | 需要消除代码异味或提升可维护性，但不希望进行整体重写时使用。 |
+| [`requesting-code-review`](requesting-code-review/) | 为已完成任务或重要功能准备精确上下文，并请求独立代码审查。 | 完成阶段性工作、实现重大功能或准备合并前，希望验证实现符合要求时使用。 |
 | [`review-code-plan`](review-code-plan/) | 在写代码前审查实现、重构、迁移、修复或发布计划。 | 需要发现计划中的风险、隐含假设、缺失验证、范围扩张或架构冲突时使用。 |
+| [`review-code-simplification`](review-code-simplification/) | 只读审查未提交代码中的重复实现、复用机会和可减少的声明。 | 希望精简当前改动，同时保持行为、生命周期、并发和隐式接口语义不变时使用。 |
+| [`sast-analysis`](sast-analysis/) | 建立代码库技术栈、入口、数据流和信任边界的安全架构图。 | 开始静态安全评估或缺少 `sast/architecture.md` 时首先使用。 |
+| [`sast-businesslogic`](sast-businesslogic/) | 检查价格篡改、流程绕过、限制规避、竞态和奖励滥用等业务逻辑漏洞。 | 已有安全架构文档，需要审查可被利用的业务规则缺口时使用。 |
+| [`sast-fileupload`](sast-fileupload/) | 发现并验证不安全文件上传、扩展名绕过和相关上传校验问题。 | 已有安全架构文档，需要审查上传入口时使用。 |
+| [`sast-graphql`](sast-graphql/) | 检查 GraphQL operation 文档的动态拼接和注入风险。 | 项目使用 GraphQL，且需要排查 operation 字符串注入时使用。 |
+| [`sast-hardcodedsecrets`](sast-hardcodedsecrets/) | 检查前端、移动端、客户端 bundle 和 HTML 中公开可达的硬编码凭据。 | 需要查找泄露的 API Key、Token、私钥或密码时使用。 |
+| [`sast-idor`](sast-idor/) | 检查用户可控对象标识是否缺少所有权或授权校验。 | 需要排查 IDOR 和水平越权问题时使用。 |
+| [`sast-jwt`](sast-jwt/) | 映射 JWT 签发与验证链路，并检查算法、签名、密钥、Header 和 Claim 校验弱点。 | 需要排查 Token 伪造或 JWT 认证绕过时使用。 |
+| [`sast-missingauth`](sast-missingauth/) | 映射端点与角色权限，检查缺失认证和功能级授权问题。 | 需要排查未认证访问、垂直越权或管理员功能暴露时使用。 |
+| [`sast-pathtraversal`](sast-pathtraversal/) | 追踪用户输入到动态文件路径，检查目录穿越和文件泄露风险。 | 需要排查 path traversal 或任意文件读取时使用。 |
+| [`sast-rce`](sast-rce/) | 检查命令执行、eval 类入口和不安全反序列化等远程代码执行风险。 | 需要排查 RCE、命令注入或不安全反序列化时使用。 |
+| [`sast-report`](sast-report/) | 汇总 `sast/` 下各专项结果，按严重性和机密性影响生成最终报告。 | 各漏洞专项检查完成后生成 `sast/final-report.md` 时使用。 |
+| [`sast-sqli`](sast-sqli/) | 检查 SQL 字符串拼接、不安全 ORM 方法和动态标识符导致的注入。 | 需要排查 SQL 注入或数据库查询注入时使用。 |
+| [`sast-ssrf`](sast-ssrf/) | 追踪用户输入到外部请求目标，检查服务端请求伪造风险。 | 需要排查 SSRF 或不受控出站请求时使用。 |
+| [`sast-ssti`](sast-ssti/) | 检查动态模板字符串和用户输入组合导致的服务端模板注入。 | 需要排查 SSTI 或模板执行风险时使用。 |
+| [`sast-xss`](sast-xss/) | 追踪用户输入到 HTML、JavaScript 和 DOM sink，检查跨站脚本风险。 | 需要排查存储型、反射型或 DOM XSS 时使用。 |
+| [`sast-xxe`](sast-xxe/) | 检查 XML 解析器的外部实体防护以及用户输入可达性。 | 需要排查 XXE、XML 注入或文件/网络读取风险时使用。 |
+| [`security-audit`](security-audit/) | 面向 Web、API、服务、CLI、库和守护进程执行以真实可利用性为中心的安全审计。 | 用户要求安全评审、漏洞审计或代码级渗透测试时使用。 |
 | [`setup-matt-pocock-skills`](setup-matt-pocock-skills/) | 为工程 skills 初始化 issue tracker、分诊标签词汇和领域文档布局。 | 首次在仓库中启用相关工程工作流时显式调用一次。 |
 | [`sub2api-imagegen`](sub2api-imagegen/) | 通过自建 Sub2API 网关调用 GPT Image 生成或编辑图片，支持 generate/edit/batch 三种子命令。 | 内置 `image_gen` 工具不可用，或用户明确要求走 Sub2API/CLI 路径时使用；凭据已内置在脚本里（内网专用 key，离开内网无效）。 |
+| [`systematic-debugging`](systematic-debugging/) | 在提出修复前系统地复现问题、收集证据并定位根因。 | 遇到 bug、测试失败或任何非预期行为时使用。 |
 | [`to-spec`](to-spec/) | 将当前对话和代码上下文直接整理成规格，并发布到项目 issue tracker。 | 讨论已经充分、不需要再访谈，希望形成 PRD/规格任务时显式调用。 |
 | [`ui-ux-pro-max`](ui-ux-pro-max/) | 基于本地 UI/UX 数据库提供风格、配色、字体、布局、动效、图表和技术栈建议。 | 设计、实现或审查 Web/移动端页面、组件、响应式布局、可访问性和交互体验时使用。 |
+| [`using-git-worktrees`](using-git-worktrees/) | 检测现有隔离环境，并通过平台能力或 Git worktree 创建独立工作区。 | 开始需要隔离的功能开发或执行实现计划前使用。 |
+| [`verification-before-completion`](verification-before-completion/) | 要求在声称完成、修复或通过前运行最新验证并读取完整结果。 | 提交、创建 PR、交付任务或作出任何成功结论前使用。 |
+
+## SAST 使用顺序
+
+安全专项 skill 依赖统一的架构上下文，推荐按以下顺序执行：
+
+1. 使用 [`sast-analysis`](sast-analysis/) 生成 `sast/architecture.md`。
+2. 根据目标运行一个或多个 `sast-*` 漏洞专项检查。
+3. 使用 [`sast-report`](sast-report/) 汇总现有 `*-results.md`，生成 `sast/final-report.md`。
+
+`security-audit` 提供通用安全审计方法；`sast-*` 则提供按漏洞类型拆分的结构化流程。它们都是审计工作流说明，不是独立的二进制扫描器。
 
 ## 使用方式
 
