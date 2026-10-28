@@ -1,0 +1,1839 @@
+{
+  "repository": "https://github.com/samber/cc-skills-golang",
+  "version": "2.0.1",
+  "commit": "246b6c4c1ab3077dee114beb9ade3bb0527dfebc",
+  "imported_on": "2026-10-28",
+  "license": "MIT",
+  "license_sha256": "a6735e3815503be2fc1ae4813758cb3d0c24a5309df508309ce180cf5a4ead58",
+  "topic_count": 46,
+  "source_file_count": 299,
+  "transformations": [
+    "Convert each SKILL.md to guide.md and replace entrypoint YAML with a reference heading.",
+    "Adjust local Markdown links to imported destinations.",
+    "Repair upstream relative links listed in repaired_source_links.",
+    "Retain all companion references, assets and evaluation data."
+  ],
+  "repaired_source_links": [
+    {
+      "file": "golang-documentation/references/library.md",
+      "old": "./templates/llms.txt",
+      "source_target": "golang-documentation/assets/templates/llms.txt"
+    },
+    {
+      "file": "golang-documentation/references/project-docs.md",
+      "old": "./templates/README.md",
+      "source_target": "golang-documentation/assets/templates/README.md"
+    },
+    {
+      "file": "golang-documentation/references/project-docs.md",
+      "old": "./templates/CONTRIBUTING.md",
+      "source_target": "golang-documentation/assets/templates/CONTRIBUTING.md"
+    },
+    {
+      "file": "golang-documentation/references/project-docs.md",
+      "old": "./templates/CHANGELOG.md",
+      "source_target": "golang-documentation/assets/templates/CHANGELOG.md"
+    },
+    {
+      "file": "golang-troubleshooting/references/methodology.md",
+      "old": "./SKILL.md",
+      "source_target": "golang-troubleshooting/SKILL.md"
+    }
+  ],
+  "files": [
+    {
+      "source": "skills/golang-benchmark/SKILL.md",
+      "reference": "references/topics/golang-benchmark/guide.md",
+      "source_sha256": "35f74a20f926c629af3ca39936fb9bf2a9b52ca55f8a3ea1476d32b08d328a70",
+      "reference_sha256": "5eb6a40684a09ef305f4aab676ba4d622604db57924f54d3aa0f59b425b83dea"
+    },
+    {
+      "source": "skills/golang-benchmark/evals/evals.json",
+      "reference": "references/topics/golang-benchmark/evals/evals.json",
+      "source_sha256": "8eabb8fbacea945c0f4d855073e39db1727a9193b9f14c6c4c8a61b4b2164d56",
+      "reference_sha256": "8eabb8fbacea945c0f4d855073e39db1727a9193b9f14c6c4c8a61b4b2164d56"
+    },
+    {
+      "source": "skills/golang-benchmark/references/benchstat.md",
+      "reference": "references/topics/golang-benchmark/references/benchstat.md",
+      "source_sha256": "5df4026b3b1bb628ee25afaea804ee00560461bcca83e81caadc32712a6124b1",
+      "reference_sha256": "e73c50aa0a16fb180ec72bf63947ad5b4725d8a19e4f8d5659654271062c9beb"
+    },
+    {
+      "source": "skills/golang-benchmark/references/ci-regression.md",
+      "reference": "references/topics/golang-benchmark/references/ci-regression.md",
+      "source_sha256": "ff02834abf7ccace3d478a14241af28843e355eaba1f89d26099eb0511de8624",
+      "reference_sha256": "ff02834abf7ccace3d478a14241af28843e355eaba1f89d26099eb0511de8624"
+    },
+    {
+      "source": "skills/golang-benchmark/references/compiler-analysis.md",
+      "reference": "references/topics/golang-benchmark/references/compiler-analysis.md",
+      "source_sha256": "05e1df8abaa28fba34720bae61ef0fd7d81fc27cc338b2b350662f90dfd640ab",
+      "reference_sha256": "05e1df8abaa28fba34720bae61ef0fd7d81fc27cc338b2b350662f90dfd640ab"
+    },
+    {
+      "source": "skills/golang-benchmark/references/investigation-session.md",
+      "reference": "references/topics/golang-benchmark/references/investigation-session.md",
+      "source_sha256": "86c060fa9add260d8dc77e3919d97d410ca0ea09c47d8f0af44ab8a042eac8a7",
+      "reference_sha256": "820b3ec13db6cce2d7bcbe4f321bcd1e036c01769474841485b495b43888504c"
+    },
+    {
+      "source": "skills/golang-benchmark/references/pprof.md",
+      "reference": "references/topics/golang-benchmark/references/pprof.md",
+      "source_sha256": "49c7c969499cd001f7d6f9345d66057475290d30576a5d62b5c0d278ca0aee57",
+      "reference_sha256": "83658ff4029a73512a2e24bab8c429788931c9c2f913ffce557a690836cd4466"
+    },
+    {
+      "source": "skills/golang-benchmark/references/prometheus-go-metrics.md",
+      "reference": "references/topics/golang-benchmark/references/prometheus-go-metrics.md",
+      "source_sha256": "b52eb0ba6bfaa467dce1013bf5dd46ea9f363fd78276acd647b24a57e4a9219b",
+      "reference_sha256": "b52eb0ba6bfaa467dce1013bf5dd46ea9f363fd78276acd647b24a57e4a9219b"
+    },
+    {
+      "source": "skills/golang-benchmark/references/tools.md",
+      "reference": "references/topics/golang-benchmark/references/tools.md",
+      "source_sha256": "d236bd750d0b612ba46a79267ab1cd5c241eda97a35163b53882031fb537902c",
+      "reference_sha256": "539a1d59249612db94f02cda57ee8bbe3ee9ddb5f98f78cac0088d2f1f209af2"
+    },
+    {
+      "source": "skills/golang-benchmark/references/trace.md",
+      "reference": "references/topics/golang-benchmark/references/trace.md",
+      "source_sha256": "626f155a2dd7d7364461bed0fb195ebd4286d526b5d52c4bc39cf39763820fba",
+      "reference_sha256": "626f155a2dd7d7364461bed0fb195ebd4286d526b5d52c4bc39cf39763820fba"
+    },
+    {
+      "source": "skills/golang-cli/SKILL.md",
+      "reference": "references/topics/golang-cli/guide.md",
+      "source_sha256": "da9eef3871a94cccbcbab77c2b3a5990e7fe00d9434f3728cb427e520ae77311",
+      "reference_sha256": "b9b94f483cf7569a724e93ab25ea28805a9ceaa9bec44d37253a96bdcfd77477"
+    },
+    {
+      "source": "skills/golang-cli/assets/examples/args.go",
+      "reference": "references/topics/golang-cli/assets/examples/args.go",
+      "source_sha256": "024d75e8fcb55ce84930b2e07b7f464d8f9eb2b55f47eb0cd6b1abb6e9bb3ae9",
+      "reference_sha256": "024d75e8fcb55ce84930b2e07b7f464d8f9eb2b55f47eb0cd6b1abb6e9bb3ae9"
+    },
+    {
+      "source": "skills/golang-cli/assets/examples/cli_test.go",
+      "reference": "references/topics/golang-cli/assets/examples/cli_test.go",
+      "source_sha256": "0086d4f0f075744519d2366c87fc90e5a7c1739b6bfa5b5dc430d5f79bfd6226",
+      "reference_sha256": "0086d4f0f075744519d2366c87fc90e5a7c1739b6bfa5b5dc430d5f79bfd6226"
+    },
+    {
+      "source": "skills/golang-cli/assets/examples/completion.go",
+      "reference": "references/topics/golang-cli/assets/examples/completion.go",
+      "source_sha256": "3e91ac78c36d706bb6db5b6395f62f08c5176460de1d52870a11b5753fda3b1e",
+      "reference_sha256": "3e91ac78c36d706bb6db5b6395f62f08c5176460de1d52870a11b5753fda3b1e"
+    },
+    {
+      "source": "skills/golang-cli/assets/examples/config.go",
+      "reference": "references/topics/golang-cli/assets/examples/config.go",
+      "source_sha256": "24f6c7653b90b141c8f1dec2be9c4b22198fd3d66de9cd2d64dc73ddf40954a4",
+      "reference_sha256": "24f6c7653b90b141c8f1dec2be9c4b22198fd3d66de9cd2d64dc73ddf40954a4"
+    },
+    {
+      "source": "skills/golang-cli/assets/examples/exit_codes.go",
+      "reference": "references/topics/golang-cli/assets/examples/exit_codes.go",
+      "source_sha256": "27d02ca34c939fe7c7c1f663c9a6bddfb6c3dd5eabc68890f72ff32e2a085965",
+      "reference_sha256": "27d02ca34c939fe7c7c1f663c9a6bddfb6c3dd5eabc68890f72ff32e2a085965"
+    },
+    {
+      "source": "skills/golang-cli/assets/examples/flags.go",
+      "reference": "references/topics/golang-cli/assets/examples/flags.go",
+      "source_sha256": "d8a7164364e6a4d69c5eb57fe866d6793f41d8b8c6f09d2e2df1b2140083e038",
+      "reference_sha256": "d8a7164364e6a4d69c5eb57fe866d6793f41d8b8c6f09d2e2df1b2140083e038"
+    },
+    {
+      "source": "skills/golang-cli/assets/examples/go.mod",
+      "reference": "references/topics/golang-cli/assets/examples/go.mod",
+      "source_sha256": "fd364ee1dbc1fa462527ad9e8bb061d58ebdf7da73c20d04472977bea3ffc63a",
+      "reference_sha256": "fd364ee1dbc1fa462527ad9e8bb061d58ebdf7da73c20d04472977bea3ffc63a"
+    },
+    {
+      "source": "skills/golang-cli/assets/examples/main.go",
+      "reference": "references/topics/golang-cli/assets/examples/main.go",
+      "source_sha256": "f529e3cfddb3915dffb882bc0f7f63cd5e0cc60a18cb4c8b92359b5f069a4dd1",
+      "reference_sha256": "f529e3cfddb3915dffb882bc0f7f63cd5e0cc60a18cb4c8b92359b5f069a4dd1"
+    },
+    {
+      "source": "skills/golang-cli/assets/examples/output.go",
+      "reference": "references/topics/golang-cli/assets/examples/output.go",
+      "source_sha256": "1520680bb6fe50cc3f95bd8b6237fa53a4bba5ef334e46424d1aaecd2f5bdb30",
+      "reference_sha256": "1520680bb6fe50cc3f95bd8b6237fa53a4bba5ef334e46424d1aaecd2f5bdb30"
+    },
+    {
+      "source": "skills/golang-cli/assets/examples/root.go",
+      "reference": "references/topics/golang-cli/assets/examples/root.go",
+      "source_sha256": "fe6429593d1a91c9c0d729719e9a0eda4cb661815cccd713c7c5918e7abafe47",
+      "reference_sha256": "fe6429593d1a91c9c0d729719e9a0eda4cb661815cccd713c7c5918e7abafe47"
+    },
+    {
+      "source": "skills/golang-cli/assets/examples/serve.go",
+      "reference": "references/topics/golang-cli/assets/examples/serve.go",
+      "source_sha256": "0b8c5253a1cd6e6c14875d640c2f7aadb9c3ad1b9cb213ff5d6845f595ad07aa",
+      "reference_sha256": "0b8c5253a1cd6e6c14875d640c2f7aadb9c3ad1b9cb213ff5d6845f595ad07aa"
+    },
+    {
+      "source": "skills/golang-cli/assets/examples/signal.go",
+      "reference": "references/topics/golang-cli/assets/examples/signal.go",
+      "source_sha256": "620e92cdf1a0c21f6fbd6a5d2786bc599d8b957a47ae68ba25af81f5f3f693c0",
+      "reference_sha256": "620e92cdf1a0c21f6fbd6a5d2786bc599d8b957a47ae68ba25af81f5f3f693c0"
+    },
+    {
+      "source": "skills/golang-cli/assets/examples/version.go",
+      "reference": "references/topics/golang-cli/assets/examples/version.go",
+      "source_sha256": "660668240b0eebb5f7f506f2446ea357b6bfdf15f3842d7c7aa0b1db4b83fda6",
+      "reference_sha256": "660668240b0eebb5f7f506f2446ea357b6bfdf15f3842d7c7aa0b1db4b83fda6"
+    },
+    {
+      "source": "skills/golang-cli/evals/evals.json",
+      "reference": "references/topics/golang-cli/evals/evals.json",
+      "source_sha256": "b2a08339a212d386e4743db83335030f98c13c73fd1dd201544d78918d662acf",
+      "reference_sha256": "b2a08339a212d386e4743db83335030f98c13c73fd1dd201544d78918d662acf"
+    },
+    {
+      "source": "skills/golang-code-style/SKILL.md",
+      "reference": "references/topics/golang-code-style/guide.md",
+      "source_sha256": "1c53d6b8405fc2992b92524d4782c826845916d64f90a5af483b9401865b9a76",
+      "reference_sha256": "98924fe274b42c98307c826eccfbd4d69b2c0d52ad98a69c1ea0ced80ce01964"
+    },
+    {
+      "source": "skills/golang-code-style/evals/evals.json",
+      "reference": "references/topics/golang-code-style/evals/evals.json",
+      "source_sha256": "a439625516667ab0e60e58003294da3c0cf5a579d1c4741c5b5a57514ec35356",
+      "reference_sha256": "a439625516667ab0e60e58003294da3c0cf5a579d1c4741c5b5a57514ec35356"
+    },
+    {
+      "source": "skills/golang-code-style/references/details.md",
+      "reference": "references/topics/golang-code-style/references/details.md",
+      "source_sha256": "3969d18fb54e59c032de0463b44b6b5bd125dfe8b726ef0f009190da81f3df07",
+      "reference_sha256": "3969d18fb54e59c032de0463b44b6b5bd125dfe8b726ef0f009190da81f3df07"
+    },
+    {
+      "source": "skills/golang-concurrency/SKILL.md",
+      "reference": "references/topics/golang-concurrency/guide.md",
+      "source_sha256": "b56255b765a50c1052c5d71cd60ddb1c2ef643ce3b447aa195ba81f31d10bd1c",
+      "reference_sha256": "fdc8e50194fa5c057d06082f2f6115a502337dc25ae75009dd0dd6c69ce4367e"
+    },
+    {
+      "source": "skills/golang-concurrency/evals/evals.json",
+      "reference": "references/topics/golang-concurrency/evals/evals.json",
+      "source_sha256": "045fcac623f3549608df0409edfd7863e9580249ae447499266e3a3d96798959",
+      "reference_sha256": "045fcac623f3549608df0409edfd7863e9580249ae447499266e3a3d96798959"
+    },
+    {
+      "source": "skills/golang-concurrency/references/channels-and-select.md",
+      "reference": "references/topics/golang-concurrency/references/channels-and-select.md",
+      "source_sha256": "3435dee63817a2829b48fbfbaebe25bbb448008d4d06e0e739c2f070b78328ab",
+      "reference_sha256": "3435dee63817a2829b48fbfbaebe25bbb448008d4d06e0e739c2f070b78328ab"
+    },
+    {
+      "source": "skills/golang-concurrency/references/pipelines.md",
+      "reference": "references/topics/golang-concurrency/references/pipelines.md",
+      "source_sha256": "c1b3f3dc4273370c61631328de11ec19b2fa1000c22ddff50d06bca059dd5d70",
+      "reference_sha256": "c1b3f3dc4273370c61631328de11ec19b2fa1000c22ddff50d06bca059dd5d70"
+    },
+    {
+      "source": "skills/golang-concurrency/references/sync-primitives.md",
+      "reference": "references/topics/golang-concurrency/references/sync-primitives.md",
+      "source_sha256": "f54e4343942feef72b2f371e5b67156469f82fd2ea0e4f2634c957530926d6de",
+      "reference_sha256": "f54e4343942feef72b2f371e5b67156469f82fd2ea0e4f2634c957530926d6de"
+    },
+    {
+      "source": "skills/golang-context/SKILL.md",
+      "reference": "references/topics/golang-context/guide.md",
+      "source_sha256": "257a3e5a07d686ef617a59bc55e5b320665381e50dbc696d0aacc43aee687da2",
+      "reference_sha256": "cc7706a1abe4e68c1b018b67116219e178881a6e90a8a7b826177da03f44a1aa"
+    },
+    {
+      "source": "skills/golang-context/evals/evals.json",
+      "reference": "references/topics/golang-context/evals/evals.json",
+      "source_sha256": "b53b95d0c3a8ade1da1c3ea7f2bec22bfd8da37b61cb77be050100ccba738a89",
+      "reference_sha256": "b53b95d0c3a8ade1da1c3ea7f2bec22bfd8da37b61cb77be050100ccba738a89"
+    },
+    {
+      "source": "skills/golang-context/references/cancellation.md",
+      "reference": "references/topics/golang-context/references/cancellation.md",
+      "source_sha256": "7d99f6982a0e397e42321791e8a39a63058bd0164ee6bd0ef1b4a17510be10c6",
+      "reference_sha256": "7d99f6982a0e397e42321791e8a39a63058bd0164ee6bd0ef1b4a17510be10c6"
+    },
+    {
+      "source": "skills/golang-context/references/http-services.md",
+      "reference": "references/topics/golang-context/references/http-services.md",
+      "source_sha256": "a676622a134b7363ffced7d1e6e0b11acbee0c8e226140d428494b741a3819ab",
+      "reference_sha256": "a676622a134b7363ffced7d1e6e0b11acbee0c8e226140d428494b741a3819ab"
+    },
+    {
+      "source": "skills/golang-context/references/values-tracing.md",
+      "reference": "references/topics/golang-context/references/values-tracing.md",
+      "source_sha256": "7ef49277791408380d3b8ad285a81fe7814f5d727c3950abae2958e6dd9058af",
+      "reference_sha256": "7ef49277791408380d3b8ad285a81fe7814f5d727c3950abae2958e6dd9058af"
+    },
+    {
+      "source": "skills/golang-continuous-integration/SKILL.md",
+      "reference": "references/topics/golang-continuous-integration/guide.md",
+      "source_sha256": "106f80606011f563fb56565095d08f3eb21f06771577a124c8522088671b9b3b",
+      "reference_sha256": "b40aff39a1e3df4f919dec580819fb2a4e59e6566fe0cc728a0bcf89bc4a76ce"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/claude-code-review.yml",
+      "reference": "references/topics/golang-continuous-integration/assets/claude-code-review.yml",
+      "source_sha256": "44dc118833565ccc5540a6544356c1c62920b819ca493b542a9eece3584693c6",
+      "reference_sha256": "44dc118833565ccc5540a6544356c1c62920b819ca493b542a9eece3584693c6"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/codecov.yml",
+      "reference": "references/topics/golang-continuous-integration/assets/codecov.yml",
+      "source_sha256": "6fd9fcc281e3c5e78636e8722c5ce6dfa235bc86319a645629f79d0557235365",
+      "reference_sha256": "6fd9fcc281e3c5e78636e8722c5ce6dfa235bc86319a645629f79d0557235365"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/codeql-config.yml",
+      "reference": "references/topics/golang-continuous-integration/assets/codeql-config.yml",
+      "source_sha256": "e656a4bfd48df5172a6bbc627ccc9cc9afee27317c37444c19cd24b0a37c0cf7",
+      "reference_sha256": "e656a4bfd48df5172a6bbc627ccc9cc9afee27317c37444c19cd24b0a37c0cf7"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/copilot-review-instructions.md",
+      "reference": "references/topics/golang-continuous-integration/assets/copilot-review-instructions.md",
+      "source_sha256": "87fc280e934242e129e66a2f51a85de22cec15fd3f553ddc02881ef9aa673fff",
+      "reference_sha256": "87fc280e934242e129e66a2f51a85de22cec15fd3f553ddc02881ef9aa673fff"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/dependabot-auto-merge.yml",
+      "reference": "references/topics/golang-continuous-integration/assets/dependabot-auto-merge.yml",
+      "source_sha256": "bf51d1604c483aa4fe68be861570203b77cacc06b08ec6f1b448b1641ee87d76",
+      "reference_sha256": "bf51d1604c483aa4fe68be861570203b77cacc06b08ec6f1b448b1641ee87d76"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/dependabot.yml",
+      "reference": "references/topics/golang-continuous-integration/assets/dependabot.yml",
+      "source_sha256": "e0e1bc6589c17fa8bac435fb7c8087dabf36da82fd4ce6c7fbd0017353237c3e",
+      "reference_sha256": "e0e1bc6589c17fa8bac435fb7c8087dabf36da82fd4ce6c7fbd0017353237c3e"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/docker.yml",
+      "reference": "references/topics/golang-continuous-integration/assets/docker.yml",
+      "source_sha256": "96e9b83fdde1f01ed0ac63d602395fd57aa2918b340f66d741d3d5785ef60db1",
+      "reference_sha256": "96e9b83fdde1f01ed0ac63d602395fd57aa2918b340f66d741d3d5785ef60db1"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/goreleaser-cli.yml",
+      "reference": "references/topics/golang-continuous-integration/assets/goreleaser-cli.yml",
+      "source_sha256": "71443d4d6baca1aa79601ef18faa48a6557caf889036556633d4518a1e141e50",
+      "reference_sha256": "71443d4d6baca1aa79601ef18faa48a6557caf889036556633d4518a1e141e50"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/goreleaser-lib.yml",
+      "reference": "references/topics/golang-continuous-integration/assets/goreleaser-lib.yml",
+      "source_sha256": "55962e46bab389746bebc001b08ba242766fa0a79c36aa925561aa8899a76cd8",
+      "reference_sha256": "55962e46bab389746bebc001b08ba242766fa0a79c36aa925561aa8899a76cd8"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/goreleaser-monorepo.yml",
+      "reference": "references/topics/golang-continuous-integration/assets/goreleaser-monorepo.yml",
+      "source_sha256": "3726554731cd2baa084aea59b177637cc8c981f8fcc75040e53b87fc86978162",
+      "reference_sha256": "3726554731cd2baa084aea59b177637cc8c981f8fcc75040e53b87fc86978162"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/integration.yml",
+      "reference": "references/topics/golang-continuous-integration/assets/integration.yml",
+      "source_sha256": "66d55a41c058e816d851d4dc2099b8e3d299d95b85897abb912f0652c86b01b8",
+      "reference_sha256": "66d55a41c058e816d851d4dc2099b8e3d299d95b85897abb912f0652c86b01b8"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/lint.yml",
+      "reference": "references/topics/golang-continuous-integration/assets/lint.yml",
+      "source_sha256": "f97f43de7ea822d7906d1d360f321826933ec288cb6369d95be19fcad14a0dfc",
+      "reference_sha256": "f97f43de7ea822d7906d1d360f321826933ec288cb6369d95be19fcad14a0dfc"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/release.yml",
+      "reference": "references/topics/golang-continuous-integration/assets/release.yml",
+      "source_sha256": "a99ceea9da5f6de14fb97f89c3edddbd6e5167015528554d129261db4f61c05e",
+      "reference_sha256": "a99ceea9da5f6de14fb97f89c3edddbd6e5167015528554d129261db4f61c05e"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/renovate.json",
+      "reference": "references/topics/golang-continuous-integration/assets/renovate.json",
+      "source_sha256": "56eebfd3354023f302c10758023b1604f50da79ad035124dfd416ac5ed32ebcd",
+      "reference_sha256": "56eebfd3354023f302c10758023b1604f50da79ad035124dfd416ac5ed32ebcd"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/security.yml",
+      "reference": "references/topics/golang-continuous-integration/assets/security.yml",
+      "source_sha256": "fe3de422399a07791960e058974c76d2ce27d5e0a347ae0a24be5cf1eebec987",
+      "reference_sha256": "fe3de422399a07791960e058974c76d2ce27d5e0a347ae0a24be5cf1eebec987"
+    },
+    {
+      "source": "skills/golang-continuous-integration/assets/test.yml",
+      "reference": "references/topics/golang-continuous-integration/assets/test.yml",
+      "source_sha256": "4f6eb041bd997f941335b95f22c4c63d41b8ca01ed6e88b4902bdc346e132de8",
+      "reference_sha256": "4f6eb041bd997f941335b95f22c4c63d41b8ca01ed6e88b4902bdc346e132de8"
+    },
+    {
+      "source": "skills/golang-continuous-integration/evals/evals.json",
+      "reference": "references/topics/golang-continuous-integration/evals/evals.json",
+      "source_sha256": "f0e334bbc94d27b89b0c6a885638a7319faddac69a4dff0453dcb00515dc53e7",
+      "reference_sha256": "f0e334bbc94d27b89b0c6a885638a7319faddac69a4dff0453dcb00515dc53e7"
+    },
+    {
+      "source": "skills/golang-continuous-integration/references/repo-security.md",
+      "reference": "references/topics/golang-continuous-integration/references/repo-security.md",
+      "source_sha256": "925b28aa8119f497c0a08cb7547d7d9bdcf4cc0831a0fb43ee08a628ae28b8bc",
+      "reference_sha256": "925b28aa8119f497c0a08cb7547d7d9bdcf4cc0831a0fb43ee08a628ae28b8bc"
+    },
+    {
+      "source": "skills/golang-data-structures/SKILL.md",
+      "reference": "references/topics/golang-data-structures/guide.md",
+      "source_sha256": "36d8047541529a0254d3221b53c0d3b7c6c10b499a545201be55e0f0be510952",
+      "reference_sha256": "36b1c31942d253e3eb4914264b83f7146e51f8347256c3319770855ca09e5045"
+    },
+    {
+      "source": "skills/golang-data-structures/evals/evals.json",
+      "reference": "references/topics/golang-data-structures/evals/evals.json",
+      "source_sha256": "68608da5a4f672da5e288dfa57f3052a3016246f942c7bd16bb0a46c78002fd8",
+      "reference_sha256": "68608da5a4f672da5e288dfa57f3052a3016246f942c7bd16bb0a46c78002fd8"
+    },
+    {
+      "source": "skills/golang-data-structures/references/containers.md",
+      "reference": "references/topics/golang-data-structures/references/containers.md",
+      "source_sha256": "4b0a3879c55cb7f6a8959c07b93daf6c3a412b0b810c9ec3a099044023b2034e",
+      "reference_sha256": "4b0a3879c55cb7f6a8959c07b93daf6c3a412b0b810c9ec3a099044023b2034e"
+    },
+    {
+      "source": "skills/golang-data-structures/references/generics.md",
+      "reference": "references/topics/golang-data-structures/references/generics.md",
+      "source_sha256": "6b7bea407c3635b196c9056cbe151cb42d33ae0f4bc1f94028407ec13c60638e",
+      "reference_sha256": "6b7bea407c3635b196c9056cbe151cb42d33ae0f4bc1f94028407ec13c60638e"
+    },
+    {
+      "source": "skills/golang-data-structures/references/map-internals.md",
+      "reference": "references/topics/golang-data-structures/references/map-internals.md",
+      "source_sha256": "718881bc6009467ae809efebf1c9e5b16c6e25ce3233e12db6129ae2731e947e",
+      "reference_sha256": "718881bc6009467ae809efebf1c9e5b16c6e25ce3233e12db6129ae2731e947e"
+    },
+    {
+      "source": "skills/golang-data-structures/references/pointers.md",
+      "reference": "references/topics/golang-data-structures/references/pointers.md",
+      "source_sha256": "c7682eb6beb38e2174df94e26deb95e138be6b80557eb76167312148efd732df",
+      "reference_sha256": "c7682eb6beb38e2174df94e26deb95e138be6b80557eb76167312148efd732df"
+    },
+    {
+      "source": "skills/golang-data-structures/references/slice-internals.md",
+      "reference": "references/topics/golang-data-structures/references/slice-internals.md",
+      "source_sha256": "f01914bc8e5e61a071efcc0000dfe4de3b247c12700361f4c3fdb1e871898846",
+      "reference_sha256": "f01914bc8e5e61a071efcc0000dfe4de3b247c12700361f4c3fdb1e871898846"
+    },
+    {
+      "source": "skills/golang-database/SKILL.md",
+      "reference": "references/topics/golang-database/guide.md",
+      "source_sha256": "34889bcf13c1f66125b388cf0abbf5600f1d09ef50ad731f8b266c48efd5d6b3",
+      "reference_sha256": "1e6fb0baf56324eb22b03a4abe24425afb63846618b126ef4d9ec3740e671ae1"
+    },
+    {
+      "source": "skills/golang-database/evals/evals.json",
+      "reference": "references/topics/golang-database/evals/evals.json",
+      "source_sha256": "83fab14518ea25947732f5848e96f41cc1a07da0972be22f9fec3e2838aabcbc",
+      "reference_sha256": "83fab14518ea25947732f5848e96f41cc1a07da0972be22f9fec3e2838aabcbc"
+    },
+    {
+      "source": "skills/golang-database/references/performance.md",
+      "reference": "references/topics/golang-database/references/performance.md",
+      "source_sha256": "ef25539fe2670028748d31223d13f7c996696669b9e5a6d243ffc1cda36cdd77",
+      "reference_sha256": "ef25539fe2670028748d31223d13f7c996696669b9e5a6d243ffc1cda36cdd77"
+    },
+    {
+      "source": "skills/golang-database/references/scanning.md",
+      "reference": "references/topics/golang-database/references/scanning.md",
+      "source_sha256": "f89c7f6f17a4a21f90e22dd4ff1f9c3bea3d6c6a42de0b4d11869cae206ca678",
+      "reference_sha256": "f89c7f6f17a4a21f90e22dd4ff1f9c3bea3d6c6a42de0b4d11869cae206ca678"
+    },
+    {
+      "source": "skills/golang-database/references/testing.md",
+      "reference": "references/topics/golang-database/references/testing.md",
+      "source_sha256": "81bf4c1c0146ac9c1fb95ec7aba738fef3ad6ab96469f6945ac84ecff6099d67",
+      "reference_sha256": "81bf4c1c0146ac9c1fb95ec7aba738fef3ad6ab96469f6945ac84ecff6099d67"
+    },
+    {
+      "source": "skills/golang-database/references/transactions.md",
+      "reference": "references/topics/golang-database/references/transactions.md",
+      "source_sha256": "f5a2ccec4d0f8a6f94529e178dfc711f96f7768ce32695060f9cb8084d733819",
+      "reference_sha256": "f5a2ccec4d0f8a6f94529e178dfc711f96f7768ce32695060f9cb8084d733819"
+    },
+    {
+      "source": "skills/golang-dependency-injection/SKILL.md",
+      "reference": "references/topics/golang-dependency-injection/guide.md",
+      "source_sha256": "2c41da3950c03198fe8d5ea21ab024e8ea7ebd162925fe2b91024a750d63a1be",
+      "reference_sha256": "3521925662d80e0de2bdbe4c3fc6e1a7530c537fd729381b8a8de7c71e2ccd18"
+    },
+    {
+      "source": "skills/golang-dependency-injection/evals/evals.json",
+      "reference": "references/topics/golang-dependency-injection/evals/evals.json",
+      "source_sha256": "91fb15b20790e8acb509e9ef3947777aa6f48d2bbccc781889828f319d73a4c7",
+      "reference_sha256": "91fb15b20790e8acb509e9ef3947777aa6f48d2bbccc781889828f319d73a4c7"
+    },
+    {
+      "source": "skills/golang-dependency-injection/references/google-wire.md",
+      "reference": "references/topics/golang-dependency-injection/references/google-wire.md",
+      "source_sha256": "009c413c3de5b463b47d2035a4384abe24eccf9c66db934ec7572fbdb2de8068",
+      "reference_sha256": "009c413c3de5b463b47d2035a4384abe24eccf9c66db934ec7572fbdb2de8068"
+    },
+    {
+      "source": "skills/golang-dependency-injection/references/manual-di.md",
+      "reference": "references/topics/golang-dependency-injection/references/manual-di.md",
+      "source_sha256": "c8a7fc68f2ef7709ab69bc4b58e5270ca9675f7d77d4d71234a9ab3a1bcbf623",
+      "reference_sha256": "c8a7fc68f2ef7709ab69bc4b58e5270ca9675f7d77d4d71234a9ab3a1bcbf623"
+    },
+    {
+      "source": "skills/golang-dependency-injection/references/samber-do.md",
+      "reference": "references/topics/golang-dependency-injection/references/samber-do.md",
+      "source_sha256": "c2002f85d37e76215a49ecf42b3eba6767eca914e98c289e8e7cc52c57c9842e",
+      "reference_sha256": "c2002f85d37e76215a49ecf42b3eba6767eca914e98c289e8e7cc52c57c9842e"
+    },
+    {
+      "source": "skills/golang-dependency-injection/references/uber-dig-fx.md",
+      "reference": "references/topics/golang-dependency-injection/references/uber-dig-fx.md",
+      "source_sha256": "a3e2ed7b8ddf7346128e99f3f6c5c7fdf0e426a1e16282520646473fc6b99bbc",
+      "reference_sha256": "a3e2ed7b8ddf7346128e99f3f6c5c7fdf0e426a1e16282520646473fc6b99bbc"
+    },
+    {
+      "source": "skills/golang-dependency-management/SKILL.md",
+      "reference": "references/topics/golang-dependency-management/guide.md",
+      "source_sha256": "adedc0f78b8a469b8398434b8a9f373a380e50cf3a8a5a7974bb3f4a24c6166b",
+      "reference_sha256": "7a025ef7ce20f85a0247f7589d572cfae1a7ef4dd2cd062ad7a59759f5d32fd6"
+    },
+    {
+      "source": "skills/golang-dependency-management/evals/evals.json",
+      "reference": "references/topics/golang-dependency-management/evals/evals.json",
+      "source_sha256": "5770c0d59bc309930ba8f3c121f81c6a9afae42d2939f157004bd05a0fc566f4",
+      "reference_sha256": "5770c0d59bc309930ba8f3c121f81c6a9afae42d2939f157004bd05a0fc566f4"
+    },
+    {
+      "source": "skills/golang-dependency-management/references/auditing.md",
+      "reference": "references/topics/golang-dependency-management/references/auditing.md",
+      "source_sha256": "7edc2ee2e5a55a764e9a7dc73c482d197207722bd643362ab1d3cf5fa1687ec2",
+      "reference_sha256": "7edc2ee2e5a55a764e9a7dc73c482d197207722bd643362ab1d3cf5fa1687ec2"
+    },
+    {
+      "source": "skills/golang-dependency-management/references/automated-updates.md",
+      "reference": "references/topics/golang-dependency-management/references/automated-updates.md",
+      "source_sha256": "6ce7926a2f895fc2ccca7735521902f2575c73cf919c2788fb3bf740fb868b7b",
+      "reference_sha256": "6ce7926a2f895fc2ccca7735521902f2575c73cf919c2788fb3bf740fb868b7b"
+    },
+    {
+      "source": "skills/golang-dependency-management/references/conflicts.md",
+      "reference": "references/topics/golang-dependency-management/references/conflicts.md",
+      "source_sha256": "a3f9bc0f606b9395f3f4675bf6085b85a9a53efd3fc5fbd108e4954412654121",
+      "reference_sha256": "a3f9bc0f606b9395f3f4675bf6085b85a9a53efd3fc5fbd108e4954412654121"
+    },
+    {
+      "source": "skills/golang-dependency-management/references/versioning.md",
+      "reference": "references/topics/golang-dependency-management/references/versioning.md",
+      "source_sha256": "2c24099d6a648a93c8801521d698727bafd566fc4fea31b349f8398ee0f96860",
+      "reference_sha256": "2c24099d6a648a93c8801521d698727bafd566fc4fea31b349f8398ee0f96860"
+    },
+    {
+      "source": "skills/golang-dependency-management/references/visualization.md",
+      "reference": "references/topics/golang-dependency-management/references/visualization.md",
+      "source_sha256": "b23c9cff41abf43887224ab391b2f4e43a5f2e0f967246ebc480e0491190d3bd",
+      "reference_sha256": "b23c9cff41abf43887224ab391b2f4e43a5f2e0f967246ebc480e0491190d3bd"
+    },
+    {
+      "source": "skills/golang-dependency-management/references/workspaces.md",
+      "reference": "references/topics/golang-dependency-management/references/workspaces.md",
+      "source_sha256": "317022b4f20c2c311eaf9889ffa03be1853e02bfc027fc2780826593a41d7caf",
+      "reference_sha256": "317022b4f20c2c311eaf9889ffa03be1853e02bfc027fc2780826593a41d7caf"
+    },
+    {
+      "source": "skills/golang-design-patterns/SKILL.md",
+      "reference": "references/topics/golang-design-patterns/guide.md",
+      "source_sha256": "49bfe0170e71d2768f57415f0322b4e27149d03ea3d86b85ef346631668b0f51",
+      "reference_sha256": "8713b4d1579758c47428310625c4feda5355918e8c3ca17dd8aecf8d232a6946"
+    },
+    {
+      "source": "skills/golang-design-patterns/evals/evals.json",
+      "reference": "references/topics/golang-design-patterns/evals/evals.json",
+      "source_sha256": "7d2d8f0cfe749f3c4af88885c62ce27157c43576cc0550811b691c9fc23722b1",
+      "reference_sha256": "7d2d8f0cfe749f3c4af88885c62ce27157c43576cc0550811b691c9fc23722b1"
+    },
+    {
+      "source": "skills/golang-design-patterns/references/architecture.md",
+      "reference": "references/topics/golang-design-patterns/references/architecture.md",
+      "source_sha256": "c8a790ed9e180b52a412455bae24e7f0e68c6e605ba3acd90ab35cd16fb813eb",
+      "reference_sha256": "ecb4ed188b216e2963efa675b420c4707ce73c1906392d02e15f999e6e6b501f"
+    },
+    {
+      "source": "skills/golang-design-patterns/references/clean-architecture.md",
+      "reference": "references/topics/golang-design-patterns/references/clean-architecture.md",
+      "source_sha256": "b4625aa00c641fb106bf5cdabab38f70146f746a4d244f68a71b2b8bd6c7d268",
+      "reference_sha256": "b4625aa00c641fb106bf5cdabab38f70146f746a4d244f68a71b2b8bd6c7d268"
+    },
+    {
+      "source": "skills/golang-design-patterns/references/data-handling.md",
+      "reference": "references/topics/golang-design-patterns/references/data-handling.md",
+      "source_sha256": "72d78bf015637c7da90c3e298c1df89b20149421006d3dfd03e5f910212c9ce5",
+      "reference_sha256": "72d78bf015637c7da90c3e298c1df89b20149421006d3dfd03e5f910212c9ce5"
+    },
+    {
+      "source": "skills/golang-design-patterns/references/ddd.md",
+      "reference": "references/topics/golang-design-patterns/references/ddd.md",
+      "source_sha256": "bcd8382c1369bf505cb8422f83b46bd05e11f4587b6a173ca7eaa1a1a55080e6",
+      "reference_sha256": "bcd8382c1369bf505cb8422f83b46bd05e11f4587b6a173ca7eaa1a1a55080e6"
+    },
+    {
+      "source": "skills/golang-design-patterns/references/hexagonal-architecture.md",
+      "reference": "references/topics/golang-design-patterns/references/hexagonal-architecture.md",
+      "source_sha256": "d904cb06c027521ac86a300ae3834e8d317bdfd8a11cd53fbd4cfdac27407bba",
+      "reference_sha256": "d904cb06c027521ac86a300ae3834e8d317bdfd8a11cd53fbd4cfdac27407bba"
+    },
+    {
+      "source": "skills/golang-design-patterns/references/resource-management.md",
+      "reference": "references/topics/golang-design-patterns/references/resource-management.md",
+      "source_sha256": "29ea2e753445c1d3e13476bf8e61e28dcfc803769f23309c3a67f6ca71e7383a",
+      "reference_sha256": "29ea2e753445c1d3e13476bf8e61e28dcfc803769f23309c3a67f6ca71e7383a"
+    },
+    {
+      "source": "skills/golang-documentation/SKILL.md",
+      "reference": "references/topics/golang-documentation/guide.md",
+      "source_sha256": "a313e2a0037731074ae7e12a14727e42396ea397d84f53873400d3fc5c44fb2d",
+      "reference_sha256": "9b5c7055144dee32360f941f400d30b363eb2a116682c8f1fb245164a05ece2f"
+    },
+    {
+      "source": "skills/golang-documentation/assets/templates/CHANGELOG.md",
+      "reference": "references/topics/golang-documentation/assets/templates/CHANGELOG.md",
+      "source_sha256": "1b71c5ec952e6ad9df54301023e9b8e32c84518d5a12205bdd4fc66548a3310c",
+      "reference_sha256": "1b71c5ec952e6ad9df54301023e9b8e32c84518d5a12205bdd4fc66548a3310c"
+    },
+    {
+      "source": "skills/golang-documentation/assets/templates/CONTRIBUTING.md",
+      "reference": "references/topics/golang-documentation/assets/templates/CONTRIBUTING.md",
+      "source_sha256": "9f48475bf8e7456260ad386470577f5fba9466df0cdc888bedfb55d6e1188dd5",
+      "reference_sha256": "9f48475bf8e7456260ad386470577f5fba9466df0cdc888bedfb55d6e1188dd5"
+    },
+    {
+      "source": "skills/golang-documentation/assets/templates/README.md",
+      "reference": "references/topics/golang-documentation/assets/templates/README.md",
+      "source_sha256": "4055e43b9c0fdacf84a8fddd503968cc0d49e7555a642979ae81292fb65a47f1",
+      "reference_sha256": "4055e43b9c0fdacf84a8fddd503968cc0d49e7555a642979ae81292fb65a47f1"
+    },
+    {
+      "source": "skills/golang-documentation/assets/templates/llms.txt",
+      "reference": "references/topics/golang-documentation/assets/templates/llms.txt",
+      "source_sha256": "05e60afffcaff165cb416506f6b45f80143ab5453ab33a55499ab56d279b97d9",
+      "reference_sha256": "05e60afffcaff165cb416506f6b45f80143ab5453ab33a55499ab56d279b97d9"
+    },
+    {
+      "source": "skills/golang-documentation/evals/evals.json",
+      "reference": "references/topics/golang-documentation/evals/evals.json",
+      "source_sha256": "b23fac4a14e8d909e4efa402a23c5585efc33ef2079f5d79992e27f1da4654cf",
+      "reference_sha256": "b23fac4a14e8d909e4efa402a23c5585efc33ef2079f5d79992e27f1da4654cf"
+    },
+    {
+      "source": "skills/golang-documentation/references/application.md",
+      "reference": "references/topics/golang-documentation/references/application.md",
+      "source_sha256": "e9b8ddbfb0aef0090fdd29f41a020b829738a6cb504aa4276fcddff13f4767a5",
+      "reference_sha256": "e9b8ddbfb0aef0090fdd29f41a020b829738a6cb504aa4276fcddff13f4767a5"
+    },
+    {
+      "source": "skills/golang-documentation/references/code-comments.md",
+      "reference": "references/topics/golang-documentation/references/code-comments.md",
+      "source_sha256": "b30a972c758fe5f75615c91024cd2189a12e2d68f61128026c4e4809fc1679f4",
+      "reference_sha256": "b30a972c758fe5f75615c91024cd2189a12e2d68f61128026c4e4809fc1679f4"
+    },
+    {
+      "source": "skills/golang-documentation/references/library.md",
+      "reference": "references/topics/golang-documentation/references/library.md",
+      "source_sha256": "3cb75b20e9965d9f0c0e3a2a1f17d37d7d2d0278ac704dc4b15f9eed1620dd1c",
+      "reference_sha256": "4c84a6a5dc2b305bbe18ccca7c7272d8292ce22864020f85eec155f654a850e7"
+    },
+    {
+      "source": "skills/golang-documentation/references/project-docs.md",
+      "reference": "references/topics/golang-documentation/references/project-docs.md",
+      "source_sha256": "4eb0ec8988743d95b0d6c701a6070e74c54c40a9d775c074577032764c125199",
+      "reference_sha256": "c8d5a866f07cf2cbe72d086d2be9cd471bebc8a903d6d5d5463f326237853881"
+    },
+    {
+      "source": "skills/golang-error-handling/SKILL.md",
+      "reference": "references/topics/golang-error-handling/guide.md",
+      "source_sha256": "536c25e624c3cf3def98962d9f89db07b258cde6c9e7fd17009a9eb204ba631f",
+      "reference_sha256": "35dfffab9a61dc4ec56cf9fe356136dc93effb912d108946e32d2dcc74cccd19"
+    },
+    {
+      "source": "skills/golang-error-handling/evals/evals.json",
+      "reference": "references/topics/golang-error-handling/evals/evals.json",
+      "source_sha256": "a7b58b4f717745e606b067c1f65c93db55182b4a561b8ffa43158a7f64515fa7",
+      "reference_sha256": "a7b58b4f717745e606b067c1f65c93db55182b4a561b8ffa43158a7f64515fa7"
+    },
+    {
+      "source": "skills/golang-error-handling/references/error-creation.md",
+      "reference": "references/topics/golang-error-handling/references/error-creation.md",
+      "source_sha256": "8a5bda5a543ef7774ddc240cd198d34871222ed0335474df599d162f09d253c2",
+      "reference_sha256": "e5cb891d541ebf6de1b68c963d0c620e732df58cc63964e076772aa86206f842"
+    },
+    {
+      "source": "skills/golang-error-handling/references/error-handling.md",
+      "reference": "references/topics/golang-error-handling/references/error-handling.md",
+      "source_sha256": "ab9c510305a1fe043502a04fe935f16dac2f95c585820ae9f0568afb2a56d357",
+      "reference_sha256": "ab9c510305a1fe043502a04fe935f16dac2f95c585820ae9f0568afb2a56d357"
+    },
+    {
+      "source": "skills/golang-error-handling/references/error-wrapping.md",
+      "reference": "references/topics/golang-error-handling/references/error-wrapping.md",
+      "source_sha256": "6293caf2c41eef243dffbc2dbd17d045770f9a04e8ce910c4452b3d2b6abce06",
+      "reference_sha256": "6293caf2c41eef243dffbc2dbd17d045770f9a04e8ce910c4452b3d2b6abce06"
+    },
+    {
+      "source": "skills/golang-google-wire/SKILL.md",
+      "reference": "references/topics/golang-google-wire/guide.md",
+      "source_sha256": "3815eb855fbfe8bad1e6c092f7f5e3609c7f3551c7385e8e7c420369185de6cf",
+      "reference_sha256": "7b5c314228c894c514606573c536343f4ab3dc772baeb5769797adec12f5b4b5"
+    },
+    {
+      "source": "skills/golang-google-wire/evals/evals.json",
+      "reference": "references/topics/golang-google-wire/evals/evals.json",
+      "source_sha256": "2455d120524927b1b5352270e20988191b3447bc19b30e1af346ecfcb44af528",
+      "reference_sha256": "2455d120524927b1b5352270e20988191b3447bc19b30e1af346ecfcb44af528"
+    },
+    {
+      "source": "skills/golang-google-wire/references/advanced.md",
+      "reference": "references/topics/golang-google-wire/references/advanced.md",
+      "source_sha256": "c1038d1dd57b69c7de2988e00508690cb0611b98f5c04da592f6062c70abdb1d",
+      "reference_sha256": "c1038d1dd57b69c7de2988e00508690cb0611b98f5c04da592f6062c70abdb1d"
+    },
+    {
+      "source": "skills/golang-google-wire/references/recipes.md",
+      "reference": "references/topics/golang-google-wire/references/recipes.md",
+      "source_sha256": "8ea694349ed656cd868a8afb8a1d6e65d6604f290dc17c3284a8436ca1164419",
+      "reference_sha256": "8ea694349ed656cd868a8afb8a1d6e65d6604f290dc17c3284a8436ca1164419"
+    },
+    {
+      "source": "skills/golang-google-wire/references/testing.md",
+      "reference": "references/topics/golang-google-wire/references/testing.md",
+      "source_sha256": "6c9fa926c813bfbdf1ccfbf63c4846b3442ca9ee7ba5705ddf260e9e80ae3cce",
+      "reference_sha256": "6c9fa926c813bfbdf1ccfbf63c4846b3442ca9ee7ba5705ddf260e9e80ae3cce"
+    },
+    {
+      "source": "skills/golang-gopls/SKILL.md",
+      "reference": "references/topics/golang-gopls/guide.md",
+      "source_sha256": "198024b700b0011d5caccff80031b975c060c2cdb6bdf980a371bf0533fa34a7",
+      "reference_sha256": "f83e3e06e4749535a59451985d257874ab55c12ab0de3051dfe1200ffa658356"
+    },
+    {
+      "source": "skills/golang-gopls/references/cli.md",
+      "reference": "references/topics/golang-gopls/references/cli.md",
+      "source_sha256": "9f4d5c832a83d61ae04403fcd521b548db29481c37b3fb4aadf23f6bc924de07",
+      "reference_sha256": "9f4d5c832a83d61ae04403fcd521b548db29481c37b3fb4aadf23f6bc924de07"
+    },
+    {
+      "source": "skills/golang-gopls/references/features.md",
+      "reference": "references/topics/golang-gopls/references/features.md",
+      "source_sha256": "4519f0d37f8826f80824b10cd5892da0f0babb9934efecc083f81a70b5e4771f",
+      "reference_sha256": "4519f0d37f8826f80824b10cd5892da0f0babb9934efecc083f81a70b5e4771f"
+    },
+    {
+      "source": "skills/golang-gopls/references/matrix.md",
+      "reference": "references/topics/golang-gopls/references/matrix.md",
+      "source_sha256": "cfa641a7389136377f7841ca471f887e85348597de87b05ecb96e4a4ffdda87f",
+      "reference_sha256": "cfa641a7389136377f7841ca471f887e85348597de87b05ecb96e4a4ffdda87f"
+    },
+    {
+      "source": "skills/golang-gopls/references/mcp.md",
+      "reference": "references/topics/golang-gopls/references/mcp.md",
+      "source_sha256": "982d7e0d8c3ae3de10451a9e0d05847105c71e9d71c70b4ccc052cfa7b6516a6",
+      "reference_sha256": "41339235ceaec9fcc04e75a78ff2445324106c530b2a5a68ae668dfa0d38b3a6"
+    },
+    {
+      "source": "skills/golang-gopls/references/settings.md",
+      "reference": "references/topics/golang-gopls/references/settings.md",
+      "source_sha256": "443d18fcc1e1c75dfbc99fb9fb5c5b5fcc3fb703648847be8ca68a92d2eb0896",
+      "reference_sha256": "443d18fcc1e1c75dfbc99fb9fb5c5b5fcc3fb703648847be8ca68a92d2eb0896"
+    },
+    {
+      "source": "skills/golang-graphql/SKILL.md",
+      "reference": "references/topics/golang-graphql/guide.md",
+      "source_sha256": "98c62367ab8bd4e5b58d0765f8cf26133198e11715c5b938b4e810a1b03e3867",
+      "reference_sha256": "be51c7331cab7fb1360fce3fdb355f37669f40e91d320016ebd300a2a467c91f"
+    },
+    {
+      "source": "skills/golang-graphql/evals/evals.json",
+      "reference": "references/topics/golang-graphql/evals/evals.json",
+      "source_sha256": "965bd5c7d32338e249442254c21290e463e23d727b706e15d8101df6c8937843",
+      "reference_sha256": "965bd5c7d32338e249442254c21290e463e23d727b706e15d8101df6c8937843"
+    },
+    {
+      "source": "skills/golang-graphql/references/gqlgen.md",
+      "reference": "references/topics/golang-graphql/references/gqlgen.md",
+      "source_sha256": "2ad4ebb630261d8f1ca3963ba86006e2ab0a4ccbf9ebff4869c03c01512eaf9c",
+      "reference_sha256": "2ad4ebb630261d8f1ca3963ba86006e2ab0a4ccbf9ebff4869c03c01512eaf9c"
+    },
+    {
+      "source": "skills/golang-graphql/references/graphql-go.md",
+      "reference": "references/topics/golang-graphql/references/graphql-go.md",
+      "source_sha256": "83f1c9bc4cb9ae606583fee9f0f647079ef8280889ec93655ce44113efa70b8e",
+      "reference_sha256": "83f1c9bc4cb9ae606583fee9f0f647079ef8280889ec93655ce44113efa70b8e"
+    },
+    {
+      "source": "skills/golang-graphql/references/testing.md",
+      "reference": "references/topics/golang-graphql/references/testing.md",
+      "source_sha256": "ff26ecd462bc042ae09519ff12e9828802c4b09ad0f0cb023c1452eea653282b",
+      "reference_sha256": "ff26ecd462bc042ae09519ff12e9828802c4b09ad0f0cb023c1452eea653282b"
+    },
+    {
+      "source": "skills/golang-grpc/SKILL.md",
+      "reference": "references/topics/golang-grpc/guide.md",
+      "source_sha256": "d8732f0761893ce1140d6861b9138090980651cea6f4e73e10b54e6755cf1160",
+      "reference_sha256": "d59f39bd3f3cf30734dc63512c0fafc399a8eaf67f28a2d5540be8d0fdf88027"
+    },
+    {
+      "source": "skills/golang-grpc/evals/evals.json",
+      "reference": "references/topics/golang-grpc/evals/evals.json",
+      "source_sha256": "9b4a44685dd1e2159a5498ea4bb0ebf3ab001338745897e0cf9edd6ee5382d01",
+      "reference_sha256": "9b4a44685dd1e2159a5498ea4bb0ebf3ab001338745897e0cf9edd6ee5382d01"
+    },
+    {
+      "source": "skills/golang-grpc/references/protoc-reference.md",
+      "reference": "references/topics/golang-grpc/references/protoc-reference.md",
+      "source_sha256": "aee337f0d04e44f21adb5395032f1ecbfdbf7e0233c1ad43793688caa8e449ae",
+      "reference_sha256": "aee337f0d04e44f21adb5395032f1ecbfdbf7e0233c1ad43793688caa8e449ae"
+    },
+    {
+      "source": "skills/golang-grpc/references/testing.md",
+      "reference": "references/topics/golang-grpc/references/testing.md",
+      "source_sha256": "5aa4ef95e39bd539aa9130927538e9d0d475d779feda7e501255c66368fec552",
+      "reference_sha256": "5aa4ef95e39bd539aa9130927538e9d0d475d779feda7e501255c66368fec552"
+    },
+    {
+      "source": "skills/golang-how-to/SKILL.md",
+      "reference": "references/topics/golang-how-to/guide.md",
+      "source_sha256": "ec364f51bec96667a20d67d3f8e8b5b9b7a2220bb9ed60581edf634f868313c2",
+      "reference_sha256": "542540df14bcfbe3173d1698bf868cba29b93e02b9b2e95d301e8aa52a22841f"
+    },
+    {
+      "source": "skills/golang-how-to/assets/cursor-go-skills.mdc",
+      "reference": "references/topics/golang-how-to/assets/cursor-go-skills.mdc",
+      "source_sha256": "4edbbb2ddef9a2841105613e6c14080b536a25e5ca40d13e6208191b0648ff61",
+      "reference_sha256": "4edbbb2ddef9a2841105613e6c14080b536a25e5ca40d13e6208191b0648ff61"
+    },
+    {
+      "source": "skills/golang-how-to/references/by-category.md",
+      "reference": "references/topics/golang-how-to/references/by-category.md",
+      "source_sha256": "e57a7babbe33784e08919e09c43cff35a8e0b27d195cb486a48878f98628d575",
+      "reference_sha256": "e57a7babbe33784e08919e09c43cff35a8e0b27d195cb486a48878f98628d575"
+    },
+    {
+      "source": "skills/golang-how-to/references/disambiguation.md",
+      "reference": "references/topics/golang-how-to/references/disambiguation.md",
+      "source_sha256": "ceb39c9d65c304731c84fdd342265d70f96427c2d6bebdf243c4636731f84ba5",
+      "reference_sha256": "ceb39c9d65c304731c84fdd342265d70f96427c2d6bebdf243c4636731f84ba5"
+    },
+    {
+      "source": "skills/golang-how-to/references/project-config.md",
+      "reference": "references/topics/golang-how-to/references/project-config.md",
+      "source_sha256": "739c1d1ed10f7900206bc67bdf33c8d6cbc46eb3c636c75b2d848b782bf1e8ba",
+      "reference_sha256": "739c1d1ed10f7900206bc67bdf33c8d6cbc46eb3c636c75b2d848b782bf1e8ba"
+    },
+    {
+      "source": "skills/golang-lint/SKILL.md",
+      "reference": "references/topics/golang-lint/guide.md",
+      "source_sha256": "45e510222626ab4367e7831dcef2560c9c54a7f489ec4219eec89f4fdc4e6930",
+      "reference_sha256": "c34ba05d86fd3530b1f785240bdc2cda59813280a209beecacd9f692eb5981b0"
+    },
+    {
+      "source": "skills/golang-lint/assets/.golangci.yml",
+      "reference": "references/topics/golang-lint/assets/.golangci.yml",
+      "source_sha256": "ad4284596f57d66bcdbc92687011a4dce1699cc684283eb172cd3dd91047646e",
+      "reference_sha256": "ad4284596f57d66bcdbc92687011a4dce1699cc684283eb172cd3dd91047646e"
+    },
+    {
+      "source": "skills/golang-lint/evals/evals.json",
+      "reference": "references/topics/golang-lint/evals/evals.json",
+      "source_sha256": "b075c4894cb663b067b5cfeaf5525ed49af1dffda24b36c458d09c2f40ffb90a",
+      "reference_sha256": "b075c4894cb663b067b5cfeaf5525ed49af1dffda24b36c458d09c2f40ffb90a"
+    },
+    {
+      "source": "skills/golang-lint/references/linter-reference.md",
+      "reference": "references/topics/golang-lint/references/linter-reference.md",
+      "source_sha256": "0858adf98ca9cdcd8f614176008a58098a267bdbc4a5de976d7180e8a11e4f18",
+      "reference_sha256": "0858adf98ca9cdcd8f614176008a58098a267bdbc4a5de976d7180e8a11e4f18"
+    },
+    {
+      "source": "skills/golang-lint/references/nolint-directives.md",
+      "reference": "references/topics/golang-lint/references/nolint-directives.md",
+      "source_sha256": "be12adeb536e134398243b8cee0433eb27fefabae3f13092b826198c5e461067",
+      "reference_sha256": "be12adeb536e134398243b8cee0433eb27fefabae3f13092b826198c5e461067"
+    },
+    {
+      "source": "skills/golang-modernize/SKILL.md",
+      "reference": "references/topics/golang-modernize/guide.md",
+      "source_sha256": "4690bd30545ecd8bd4af278684773c2cde19981aae5dd97ba45a90f5ea560c60",
+      "reference_sha256": "da62b03251e0b26f00a51e688e48e32e5cc0c157f1f14d5639f91630b9b70a8b"
+    },
+    {
+      "source": "skills/golang-modernize/evals/evals.json",
+      "reference": "references/topics/golang-modernize/evals/evals.json",
+      "source_sha256": "e923a941e050165dbffc51553aa8f6952715fbf81c89b9c9f4e52d6711ec7a91",
+      "reference_sha256": "e923a941e050165dbffc51553aa8f6952715fbf81c89b9c9f4e52d6711ec7a91"
+    },
+    {
+      "source": "skills/golang-modernize/references/tooling.md",
+      "reference": "references/topics/golang-modernize/references/tooling.md",
+      "source_sha256": "4521eb3455c40f2cd59da2613e0623c871fbcd3993fa69b70dbafdc0c15e3bd9",
+      "reference_sha256": "4521eb3455c40f2cd59da2613e0623c871fbcd3993fa69b70dbafdc0c15e3bd9"
+    },
+    {
+      "source": "skills/golang-modernize/references/versions.md",
+      "reference": "references/topics/golang-modernize/references/versions.md",
+      "source_sha256": "01bfbb8e86318eae4a9faf7d6b6010a6aa2686ea958b5a5c185f66346df8ced4",
+      "reference_sha256": "099ceacf227d0502341aa50a903a0fe38dc4d874cd6209587bd640b013350dbf"
+    },
+    {
+      "source": "skills/golang-naming/SKILL.md",
+      "reference": "references/topics/golang-naming/guide.md",
+      "source_sha256": "ff6e9b3d1ba65f8e243d872501f44fe8d48f90da8e9441d682e56d3e6d9e2ac7",
+      "reference_sha256": "eb6bb2b96497a93db48568e9ccf89ee817afe404f5a4b668b582a5064c4a4674"
+    },
+    {
+      "source": "skills/golang-naming/evals/evals.json",
+      "reference": "references/topics/golang-naming/evals/evals.json",
+      "source_sha256": "450298ba90598fcaaff513e057c0de7c1a61ab2f1c8125f1ac26129860b4829c",
+      "reference_sha256": "450298ba90598fcaaff513e057c0de7c1a61ab2f1c8125f1ac26129860b4829c"
+    },
+    {
+      "source": "skills/golang-naming/references/functions-methods.md",
+      "reference": "references/topics/golang-naming/references/functions-methods.md",
+      "source_sha256": "859a54edf59b3f72b9176bed12d0173ee4aa8f1f8494e0c6d5e968dbce960d04",
+      "reference_sha256": "859a54edf59b3f72b9176bed12d0173ee4aa8f1f8494e0c6d5e968dbce960d04"
+    },
+    {
+      "source": "skills/golang-naming/references/identifiers.md",
+      "reference": "references/topics/golang-naming/references/identifiers.md",
+      "source_sha256": "857684c5e46e9ec66cf46edb03b952b21054491cef4b06a46bb6cf7cf833fdb4",
+      "reference_sha256": "857684c5e46e9ec66cf46edb03b952b21054491cef4b06a46bb6cf7cf833fdb4"
+    },
+    {
+      "source": "skills/golang-naming/references/packages-files.md",
+      "reference": "references/topics/golang-naming/references/packages-files.md",
+      "source_sha256": "e507bd5a1b2fd690638de969084c14a9cbd7ca1038e1e51a297120672b27f8c1",
+      "reference_sha256": "e507bd5a1b2fd690638de969084c14a9cbd7ca1038e1e51a297120672b27f8c1"
+    },
+    {
+      "source": "skills/golang-naming/references/testing.md",
+      "reference": "references/topics/golang-naming/references/testing.md",
+      "source_sha256": "be7066959d1eb1da03b38ea93a2e7d6d69d3ed82b0bb5d0600a9e4065a819471",
+      "reference_sha256": "be7066959d1eb1da03b38ea93a2e7d6d69d3ed82b0bb5d0600a9e4065a819471"
+    },
+    {
+      "source": "skills/golang-naming/references/types-errors.md",
+      "reference": "references/topics/golang-naming/references/types-errors.md",
+      "source_sha256": "4402338a460d05026beeab82a92258ea0b81145f43cf6460f4363fd9a877a885",
+      "reference_sha256": "4402338a460d05026beeab82a92258ea0b81145f43cf6460f4363fd9a877a885"
+    },
+    {
+      "source": "skills/golang-observability/SKILL.md",
+      "reference": "references/topics/golang-observability/guide.md",
+      "source_sha256": "539f7fc73370e01fad2cbe5a67a63a651bd40242bc00c920b3f1cbf781023185",
+      "reference_sha256": "31af54cbcd33aebad5825092c93a1afd9b29be6c3a68c0397ac49de799d77672"
+    },
+    {
+      "source": "skills/golang-observability/evals/evals.json",
+      "reference": "references/topics/golang-observability/evals/evals.json",
+      "source_sha256": "53fbb12e680eefb353b8c24087a16f4f437740e2b3e94cd2c517372025e6dc3e",
+      "reference_sha256": "53fbb12e680eefb353b8c24087a16f4f437740e2b3e94cd2c517372025e6dc3e"
+    },
+    {
+      "source": "skills/golang-observability/references/alerting.md",
+      "reference": "references/topics/golang-observability/references/alerting.md",
+      "source_sha256": "a1064b49a48f5bb0806ed134fcefa687cb8f401650114a0aa6120dcf21de8a46",
+      "reference_sha256": "a1064b49a48f5bb0806ed134fcefa687cb8f401650114a0aa6120dcf21de8a46"
+    },
+    {
+      "source": "skills/golang-observability/references/dashboards.md",
+      "reference": "references/topics/golang-observability/references/dashboards.md",
+      "source_sha256": "fac3c553d5b824db3c9a1f569a514248d556cffeebe22a61609090808eaa79f1",
+      "reference_sha256": "fac3c553d5b824db3c9a1f569a514248d556cffeebe22a61609090808eaa79f1"
+    },
+    {
+      "source": "skills/golang-observability/references/logging.md",
+      "reference": "references/topics/golang-observability/references/logging.md",
+      "source_sha256": "62c7fd0060f26eba487d40e0b34d619e626ed6c554236ede2281a40b11e281a5",
+      "reference_sha256": "62c7fd0060f26eba487d40e0b34d619e626ed6c554236ede2281a40b11e281a5"
+    },
+    {
+      "source": "skills/golang-observability/references/metrics.md",
+      "reference": "references/topics/golang-observability/references/metrics.md",
+      "source_sha256": "727045e1130ec75896ee5602115729edb0457667df7a7ad61ef46733da1743bb",
+      "reference_sha256": "727045e1130ec75896ee5602115729edb0457667df7a7ad61ef46733da1743bb"
+    },
+    {
+      "source": "skills/golang-observability/references/profiling.md",
+      "reference": "references/topics/golang-observability/references/profiling.md",
+      "source_sha256": "5d883af7efa90ffbd54a1e4f40d1b488a68cea123e5a55e536434b831fe86a17",
+      "reference_sha256": "5d883af7efa90ffbd54a1e4f40d1b488a68cea123e5a55e536434b831fe86a17"
+    },
+    {
+      "source": "skills/golang-observability/references/rum.md",
+      "reference": "references/topics/golang-observability/references/rum.md",
+      "source_sha256": "fb5ef8c33994f75ce8ca0fe6b20db0e0ef699e243e00d813e76328958b85d898",
+      "reference_sha256": "fb5ef8c33994f75ce8ca0fe6b20db0e0ef699e243e00d813e76328958b85d898"
+    },
+    {
+      "source": "skills/golang-observability/references/tracing.md",
+      "reference": "references/topics/golang-observability/references/tracing.md",
+      "source_sha256": "6caccbf8769b3621a6018f6a238797f39c16676464d3e5a339e4de713f64c5d6",
+      "reference_sha256": "6caccbf8769b3621a6018f6a238797f39c16676464d3e5a339e4de713f64c5d6"
+    },
+    {
+      "source": "skills/golang-performance/SKILL.md",
+      "reference": "references/topics/golang-performance/guide.md",
+      "source_sha256": "80a4e7aa3b343777fd24f6e28141bb1329b6daeb9aa4f69b163b02a4b2155c50",
+      "reference_sha256": "063d6c0194320c9256d148269d56d6b58429fc571a3df03d1223cffbb5f81e04"
+    },
+    {
+      "source": "skills/golang-performance/assets/prometheus-alerts.yml",
+      "reference": "references/topics/golang-performance/assets/prometheus-alerts.yml",
+      "source_sha256": "778e10629d29d25acceac196bbf58a88a6939ff6b5366752da9327a4aaa78637",
+      "reference_sha256": "778e10629d29d25acceac196bbf58a88a6939ff6b5366752da9327a4aaa78637"
+    },
+    {
+      "source": "skills/golang-performance/evals/evals.json",
+      "reference": "references/topics/golang-performance/evals/evals.json",
+      "source_sha256": "72ed06f9e29d4d3b84d8d368ccc69433fd7879d40b4a62201e0e9f804cef5793",
+      "reference_sha256": "72ed06f9e29d4d3b84d8d368ccc69433fd7879d40b4a62201e0e9f804cef5793"
+    },
+    {
+      "source": "skills/golang-performance/references/caching.md",
+      "reference": "references/topics/golang-performance/references/caching.md",
+      "source_sha256": "21a31011d07b0d99185b50b45690eba929bc5af450dc51e208fa759f8fd92a61",
+      "reference_sha256": "21a31011d07b0d99185b50b45690eba929bc5af450dc51e208fa759f8fd92a61"
+    },
+    {
+      "source": "skills/golang-performance/references/cpu.md",
+      "reference": "references/topics/golang-performance/references/cpu.md",
+      "source_sha256": "d3553dc0e37649fa41230095007abd0e727d0122e0a2594cba0dd296c16b98b3",
+      "reference_sha256": "d3553dc0e37649fa41230095007abd0e727d0122e0a2594cba0dd296c16b98b3"
+    },
+    {
+      "source": "skills/golang-performance/references/io-networking.md",
+      "reference": "references/topics/golang-performance/references/io-networking.md",
+      "source_sha256": "11c3fa80885b5745a9db7c77d72bcd02b36af169bfb9762213fb9421b4237827",
+      "reference_sha256": "11c3fa80885b5745a9db7c77d72bcd02b36af169bfb9762213fb9421b4237827"
+    },
+    {
+      "source": "skills/golang-performance/references/memory.md",
+      "reference": "references/topics/golang-performance/references/memory.md",
+      "source_sha256": "ffad35427a22817c090a0f6765b012f55c58630c9df6edc6f0ed613fe2b9e08d",
+      "reference_sha256": "ffad35427a22817c090a0f6765b012f55c58630c9df6edc6f0ed613fe2b9e08d"
+    },
+    {
+      "source": "skills/golang-performance/references/observability.md",
+      "reference": "references/topics/golang-performance/references/observability.md",
+      "source_sha256": "f3382851dbf07fad60934d5f66cdab8a310d2f336a5b0b6a9928eafc17862922",
+      "reference_sha256": "15c902001d3d77206633dce18fc32ef5c11dec7aec9651f56ed99babd86b0a82"
+    },
+    {
+      "source": "skills/golang-performance/references/runtime.md",
+      "reference": "references/topics/golang-performance/references/runtime.md",
+      "source_sha256": "9e2d912c6e43bec70e809a1b5e6eee4866f9ac5d30540a2897b7d731808b60f2",
+      "reference_sha256": "685818121a221830a0a27e6476e071e85ecf124a3db08129213eb90cddcf7596"
+    },
+    {
+      "source": "skills/golang-pkg-go-dev/SKILL.md",
+      "reference": "references/topics/golang-pkg-go-dev/guide.md",
+      "source_sha256": "74d399d4662247d471dec02715bcfd8db644e3bc3157ed306c3f32e30a0a244e",
+      "reference_sha256": "afd3a90ba88c0504aea65fcc4f99f8663b308e69f377a1913b6422a8fee0614b"
+    },
+    {
+      "source": "skills/golang-pkg-go-dev/references/sample-output.md",
+      "reference": "references/topics/golang-pkg-go-dev/references/sample-output.md",
+      "source_sha256": "a1ed7ecb40646bc197b3a57a9dbc9705b198f1dc2cc69ab5dcee9babf7cb8516",
+      "reference_sha256": "a1ed7ecb40646bc197b3a57a9dbc9705b198f1dc2cc69ab5dcee9babf7cb8516"
+    },
+    {
+      "source": "skills/golang-popular-libraries/SKILL.md",
+      "reference": "references/topics/golang-popular-libraries/guide.md",
+      "source_sha256": "b39895a329c1f0af944d93b513272f4e3190844b41d0075c9ac011bcf063ec31",
+      "reference_sha256": "e9e6c29abd26695ae7fe1e25f68b3c792a5da4ffeb4eaa6db7099edf48bd1f42"
+    },
+    {
+      "source": "skills/golang-popular-libraries/evals/evals.json",
+      "reference": "references/topics/golang-popular-libraries/evals/evals.json",
+      "source_sha256": "9d417e2e9a55e5e8dbdead8ce2f0baaa70c2fa21d4837c0aa4e6588cafb60b99",
+      "reference_sha256": "9d417e2e9a55e5e8dbdead8ce2f0baaa70c2fa21d4837c0aa4e6588cafb60b99"
+    },
+    {
+      "source": "skills/golang-popular-libraries/references/libraries.md",
+      "reference": "references/topics/golang-popular-libraries/references/libraries.md",
+      "source_sha256": "f823b24642f32930caa9fac15090f601d60895b5079271b2ffc17839a3f79e03",
+      "reference_sha256": "f823b24642f32930caa9fac15090f601d60895b5079271b2ffc17839a3f79e03"
+    },
+    {
+      "source": "skills/golang-popular-libraries/references/stdlib.md",
+      "reference": "references/topics/golang-popular-libraries/references/stdlib.md",
+      "source_sha256": "232c73ff6121bf628d6f72268d6dcdb4c6313ac66c002b68dd96f20007bcbcef",
+      "reference_sha256": "232c73ff6121bf628d6f72268d6dcdb4c6313ac66c002b68dd96f20007bcbcef"
+    },
+    {
+      "source": "skills/golang-popular-libraries/references/tools.md",
+      "reference": "references/topics/golang-popular-libraries/references/tools.md",
+      "source_sha256": "0260ab480e26b87811ce9115eccf1570433775e55dd83a160c41cdfb7144e3c4",
+      "reference_sha256": "0260ab480e26b87811ce9115eccf1570433775e55dd83a160c41cdfb7144e3c4"
+    },
+    {
+      "source": "skills/golang-project-layout/SKILL.md",
+      "reference": "references/topics/golang-project-layout/guide.md",
+      "source_sha256": "d23c793c974a868906a95e5ac53fd077ba9630410bb7352d323697a29156c20a",
+      "reference_sha256": "03af95f9711d30a25e27a344aba5a9395f8fa1cc180b4979bda0ea94e314653f"
+    },
+    {
+      "source": "skills/golang-project-layout/assets/.gitignore",
+      "reference": "references/topics/golang-project-layout/assets/.gitignore",
+      "source_sha256": "e4c2672f86a9d58a16813d8e81db033ed7d29c9b89493c4f6b9b137f686cb78a",
+      "reference_sha256": "e4c2672f86a9d58a16813d8e81db033ed7d29c9b89493c4f6b9b137f686cb78a"
+    },
+    {
+      "source": "skills/golang-project-layout/assets/Makefile",
+      "reference": "references/topics/golang-project-layout/assets/Makefile",
+      "source_sha256": "27d41a1b5f8b7ff5451f5dfca7e934185df5754f834d86d8b5dec7ce08e0f9ea",
+      "reference_sha256": "27d41a1b5f8b7ff5451f5dfca7e934185df5754f834d86d8b5dec7ce08e0f9ea"
+    },
+    {
+      "source": "skills/golang-project-layout/evals/evals.json",
+      "reference": "references/topics/golang-project-layout/evals/evals.json",
+      "source_sha256": "d27071f04918e4e7808e72117c6ffb3d9e130e257273ecdd52f5d4080d043752",
+      "reference_sha256": "d27071f04918e4e7808e72117c6ffb3d9e130e257273ecdd52f5d4080d043752"
+    },
+    {
+      "source": "skills/golang-project-layout/references/config.md",
+      "reference": "references/topics/golang-project-layout/references/config.md",
+      "source_sha256": "4e0d6440110bba5a77434dd19ffc69f7b4ff3da2bec2a06e06bb100fe34003c1",
+      "reference_sha256": "4e0d6440110bba5a77434dd19ffc69f7b4ff3da2bec2a06e06bb100fe34003c1"
+    },
+    {
+      "source": "skills/golang-project-layout/references/directory-layouts.md",
+      "reference": "references/topics/golang-project-layout/references/directory-layouts.md",
+      "source_sha256": "fc36907c26eedaa5ca38105764bc76256d077c6a9bf0eb6e9fda440ec0b33bb5",
+      "reference_sha256": "fc36907c26eedaa5ca38105764bc76256d077c6a9bf0eb6e9fda440ec0b33bb5"
+    },
+    {
+      "source": "skills/golang-project-layout/references/testing-layout.md",
+      "reference": "references/topics/golang-project-layout/references/testing-layout.md",
+      "source_sha256": "e94120a0fea89aa5ede1f41a2bcfe33b1ae06309568b7ab608388579c3f7c80a",
+      "reference_sha256": "e94120a0fea89aa5ede1f41a2bcfe33b1ae06309568b7ab608388579c3f7c80a"
+    },
+    {
+      "source": "skills/golang-project-layout/references/workspaces.md",
+      "reference": "references/topics/golang-project-layout/references/workspaces.md",
+      "source_sha256": "f65f5b1b88bffb48843f754ef25e5a7ade23991481a9183c9005bb66e01af68f",
+      "reference_sha256": "f65f5b1b88bffb48843f754ef25e5a7ade23991481a9183c9005bb66e01af68f"
+    },
+    {
+      "source": "skills/golang-refactoring/SKILL.md",
+      "reference": "references/topics/golang-refactoring/guide.md",
+      "source_sha256": "4b297f823861d6620a5034a3a26b2d4875b1153ab123f2c5059f7ddb73939355",
+      "reference_sha256": "cc0fa51c93dbeb2946b472605866ceb5bf251f374f29e228c27410a0830948bb"
+    },
+    {
+      "source": "skills/golang-refactoring/references/catalog.md",
+      "reference": "references/topics/golang-refactoring/references/catalog.md",
+      "source_sha256": "79412f57d36f884530e0312018110a7cbca989c4a83ebe3142239e7815626dc4",
+      "reference_sha256": "05e9b4fb6a56b7f9e9edd5f5d3c59c87a437cb4192db512d3dace506b2011d2d"
+    },
+    {
+      "source": "skills/golang-refactoring/references/go-tooling.md",
+      "reference": "references/topics/golang-refactoring/references/go-tooling.md",
+      "source_sha256": "1e6756d85ecff0ef18c5998d71bad0e1de8d36cafc9b1d30fa8533919f28ce27",
+      "reference_sha256": "0c7f10692f7934db7c9f5dbcbda3e723b3a203347d84ef415228bfbc3b8dc1f0"
+    },
+    {
+      "source": "skills/golang-refactoring/references/safety-net.md",
+      "reference": "references/topics/golang-refactoring/references/safety-net.md",
+      "source_sha256": "6a19cf4d801a786501d485abb9b3850eafe46e4675518fc685ef7127ca03c066",
+      "reference_sha256": "877dc3a8a0d4067283847c969f3243ea940dd7e3697fbf89509efe44bd43e076"
+    },
+    {
+      "source": "skills/golang-refactoring/references/structural.md",
+      "reference": "references/topics/golang-refactoring/references/structural.md",
+      "source_sha256": "73bb125f15602bf5a7fce0b92116829c8ccdfdf606218e9573eae474eac7c6db",
+      "reference_sha256": "73bb125f15602bf5a7fce0b92116829c8ccdfdf606218e9573eae474eac7c6db"
+    },
+    {
+      "source": "skills/golang-refactoring/references/workflow.md",
+      "reference": "references/topics/golang-refactoring/references/workflow.md",
+      "source_sha256": "1944c778e93d63dc3789dda67b5e07e79ac067eb2116843be691b11121ca6fe8",
+      "reference_sha256": "1944c778e93d63dc3789dda67b5e07e79ac067eb2116843be691b11121ca6fe8"
+    },
+    {
+      "source": "skills/golang-safety/SKILL.md",
+      "reference": "references/topics/golang-safety/guide.md",
+      "source_sha256": "a9bce4568ba98ae804505d6b1d6fbe0376fe7afdc9f30051bfc03f898e26d50e",
+      "reference_sha256": "931166f238f9cbdd68120d3b5f4d8cd8c1fbfb9879e6f483c6d8117148451266"
+    },
+    {
+      "source": "skills/golang-safety/evals/evals.json",
+      "reference": "references/topics/golang-safety/evals/evals.json",
+      "source_sha256": "8db07dd44d2c2b4cca7eba15f135bc6858fbbe91c3f805e6c9a8602e06f0e17c",
+      "reference_sha256": "8db07dd44d2c2b4cca7eba15f135bc6858fbbe91c3f805e6c9a8602e06f0e17c"
+    },
+    {
+      "source": "skills/golang-safety/references/nil-safety.md",
+      "reference": "references/topics/golang-safety/references/nil-safety.md",
+      "source_sha256": "2f0bcabb4184c1b88e36bab8a3f90e57887d3a95a15f66a2123445025c91dec7",
+      "reference_sha256": "2f0bcabb4184c1b88e36bab8a3f90e57887d3a95a15f66a2123445025c91dec7"
+    },
+    {
+      "source": "skills/golang-safety/references/slice-map-safety.md",
+      "reference": "references/topics/golang-safety/references/slice-map-safety.md",
+      "source_sha256": "9b048bc51d5153bd554eed7eab6685423b9ad7159462313b0fd6a1294596d86d",
+      "reference_sha256": "9b048bc51d5153bd554eed7eab6685423b9ad7159462313b0fd6a1294596d86d"
+    },
+    {
+      "source": "skills/golang-samber-do/SKILL.md",
+      "reference": "references/topics/golang-samber-do/guide.md",
+      "source_sha256": "1cb03d08b0222156cdab90b961f3774db54b4af02901103b769f858f88a8e5d2",
+      "reference_sha256": "616274ff750e8caf9761efaa827f6c1fa96ab826796c76559c4464aa014ff87e"
+    },
+    {
+      "source": "skills/golang-samber-do/evals/evals.json",
+      "reference": "references/topics/golang-samber-do/evals/evals.json",
+      "source_sha256": "0c93ac8caf98425421a75f1a4aa9e3df0d9e3b2a4ddcb7d7549b5f74267ff5e4",
+      "reference_sha256": "0c93ac8caf98425421a75f1a4aa9e3df0d9e3b2a4ddcb7d7549b5f74267ff5e4"
+    },
+    {
+      "source": "skills/golang-samber-do/references/advanced.md",
+      "reference": "references/topics/golang-samber-do/references/advanced.md",
+      "source_sha256": "05729736cff15d6a44fc822a706c4be7042ec9ed54f8b73414aadce2f0887ed9",
+      "reference_sha256": "05729736cff15d6a44fc822a706c4be7042ec9ed54f8b73414aadce2f0887ed9"
+    },
+    {
+      "source": "skills/golang-samber-do/references/testing.md",
+      "reference": "references/topics/golang-samber-do/references/testing.md",
+      "source_sha256": "84984c7ad4ffabf97e336b4eac5c6ab48a790e03ab559743b84c621c8212b250",
+      "reference_sha256": "84984c7ad4ffabf97e336b4eac5c6ab48a790e03ab559743b84c621c8212b250"
+    },
+    {
+      "source": "skills/golang-samber-hot/SKILL.md",
+      "reference": "references/topics/golang-samber-hot/guide.md",
+      "source_sha256": "96f8bdb1affbc84e1701608bc54cb8ac76e3432c089d2b9d3a7fe63fa187f916",
+      "reference_sha256": "24696a77a05c667639ea732b98d15b85e7694383b6c0670a5529064ee89f7d7d"
+    },
+    {
+      "source": "skills/golang-samber-hot/evals/evals.json",
+      "reference": "references/topics/golang-samber-hot/evals/evals.json",
+      "source_sha256": "9835adf20c32939d5a58d2384e3e5a0578e3ae458927c9396b81664528d09d84",
+      "reference_sha256": "9835adf20c32939d5a58d2384e3e5a0578e3ae458927c9396b81664528d09d84"
+    },
+    {
+      "source": "skills/golang-samber-hot/references/algorithm-guide.md",
+      "reference": "references/topics/golang-samber-hot/references/algorithm-guide.md",
+      "source_sha256": "6028b460a289f09a2fa29fb448e7d73f95ce898d8719e7309c4cd20979a4c920",
+      "reference_sha256": "6028b460a289f09a2fa29fb448e7d73f95ce898d8719e7309c4cd20979a4c920"
+    },
+    {
+      "source": "skills/golang-samber-hot/references/api-reference.md",
+      "reference": "references/topics/golang-samber-hot/references/api-reference.md",
+      "source_sha256": "1dcd2b4c4cac2b538fb04119e3c7a54ed315bc9e44fa4551c7b8cda0533681ae",
+      "reference_sha256": "1dcd2b4c4cac2b538fb04119e3c7a54ed315bc9e44fa4551c7b8cda0533681ae"
+    },
+    {
+      "source": "skills/golang-samber-hot/references/production-patterns.md",
+      "reference": "references/topics/golang-samber-hot/references/production-patterns.md",
+      "source_sha256": "d0e2e2cf5bcbf27d9cfe49325f2ae6292f875e3ffd21a74d9cdf269de3ed2af3",
+      "reference_sha256": "d0e2e2cf5bcbf27d9cfe49325f2ae6292f875e3ffd21a74d9cdf269de3ed2af3"
+    },
+    {
+      "source": "skills/golang-samber-lo/SKILL.md",
+      "reference": "references/topics/golang-samber-lo/guide.md",
+      "source_sha256": "1388c16bd1116ece044f83c44ae5908252609400a0f9b9d28523068b9ffa4319",
+      "reference_sha256": "7f9271d2610a79ac5f4f9f37eab39821bd7356e0089e907d4f4e51100933105b"
+    },
+    {
+      "source": "skills/golang-samber-lo/evals/evals.json",
+      "reference": "references/topics/golang-samber-lo/evals/evals.json",
+      "source_sha256": "925a11785964ee0ee8031bb0670cb5bc2ede3f3652efb0c040e5df003bec499c",
+      "reference_sha256": "925a11785964ee0ee8031bb0670cb5bc2ede3f3652efb0c040e5df003bec499c"
+    },
+    {
+      "source": "skills/golang-samber-lo/references/advanced-patterns.md",
+      "reference": "references/topics/golang-samber-lo/references/advanced-patterns.md",
+      "source_sha256": "74e82c1c9764744b133b11144cfc98b6bc5f71fe2a3aa617213e278555bb13fb",
+      "reference_sha256": "74e82c1c9764744b133b11144cfc98b6bc5f71fe2a3aa617213e278555bb13fb"
+    },
+    {
+      "source": "skills/golang-samber-lo/references/api-reference.md",
+      "reference": "references/topics/golang-samber-lo/references/api-reference.md",
+      "source_sha256": "ead9dd9bca691ec26bb131de0467264d1b5bae56ed62de07b2c853d1ac2d8d9d",
+      "reference_sha256": "ead9dd9bca691ec26bb131de0467264d1b5bae56ed62de07b2c853d1ac2d8d9d"
+    },
+    {
+      "source": "skills/golang-samber-lo/references/package-guide.md",
+      "reference": "references/topics/golang-samber-lo/references/package-guide.md",
+      "source_sha256": "33dbf20d1dd6b3eb079e2fd308bd3336d90642c867df7b24720ead4c632aa1e0",
+      "reference_sha256": "33dbf20d1dd6b3eb079e2fd308bd3336d90642c867df7b24720ead4c632aa1e0"
+    },
+    {
+      "source": "skills/golang-samber-mo/SKILL.md",
+      "reference": "references/topics/golang-samber-mo/guide.md",
+      "source_sha256": "552843bc00e43d778386548d611f6d3a484e0a4b3dd7eb7fd0b5d4f23210c789",
+      "reference_sha256": "5e76dfe59c7a863f6da17648484c5d850571ffdf4c6cf032c143ecec3f294413"
+    },
+    {
+      "source": "skills/golang-samber-mo/evals/evals.json",
+      "reference": "references/topics/golang-samber-mo/evals/evals.json",
+      "source_sha256": "905353a189d36b4fb5aa045c03ba4a147e2bd23c5e97203324af688e615823b7",
+      "reference_sha256": "905353a189d36b4fb5aa045c03ba4a147e2bd23c5e97203324af688e615823b7"
+    },
+    {
+      "source": "skills/golang-samber-mo/references/advanced-types.md",
+      "reference": "references/topics/golang-samber-mo/references/advanced-types.md",
+      "source_sha256": "6f6736bf76d39d9400c0fabf37c1f1ac8d0a8a37b06c939257038bbdf448196a",
+      "reference_sha256": "6f6736bf76d39d9400c0fabf37c1f1ac8d0a8a37b06c939257038bbdf448196a"
+    },
+    {
+      "source": "skills/golang-samber-mo/references/either.md",
+      "reference": "references/topics/golang-samber-mo/references/either.md",
+      "source_sha256": "22b9eb4518ecad473dfa35aa02bbd9005f9403d61ab1e19fa4297ea291752bcb",
+      "reference_sha256": "9a5dd52902a702f5184ffbefb4b01dec25f47882f56d172fe22235943b29387f"
+    },
+    {
+      "source": "skills/golang-samber-mo/references/monads-guide.md",
+      "reference": "references/topics/golang-samber-mo/references/monads-guide.md",
+      "source_sha256": "4d208b8ca861ab4810da4e0c81111cd032d2194338c71db0952a2049182e24e6",
+      "reference_sha256": "4d208b8ca861ab4810da4e0c81111cd032d2194338c71db0952a2049182e24e6"
+    },
+    {
+      "source": "skills/golang-samber-mo/references/option.md",
+      "reference": "references/topics/golang-samber-mo/references/option.md",
+      "source_sha256": "7de1dfba5c273343d26895e16624dc594a4076370ca3e5a82d430a0a0812b020",
+      "reference_sha256": "85b5fa20be933bc0316c9bb03e53b2888cb89fa740836c475fd64c094e9f3d2f"
+    },
+    {
+      "source": "skills/golang-samber-mo/references/pipelines.md",
+      "reference": "references/topics/golang-samber-mo/references/pipelines.md",
+      "source_sha256": "e0282140e571b7965db35d27441bf292cbb8df076215c6ffed439c4663e11bce",
+      "reference_sha256": "e0282140e571b7965db35d27441bf292cbb8df076215c6ffed439c4663e11bce"
+    },
+    {
+      "source": "skills/golang-samber-mo/references/result.md",
+      "reference": "references/topics/golang-samber-mo/references/result.md",
+      "source_sha256": "19c3a80ac1b0f65b3222e4816a465ae6dc0ce6a527ce2481d65a4bbcd3f1d5f3",
+      "reference_sha256": "7f97ca8c2a76e9b888bb7dbfc9fe7c4b8936b499fa559e33fc5cce6c79e5b84d"
+    },
+    {
+      "source": "skills/golang-samber-oops/SKILL.md",
+      "reference": "references/topics/golang-samber-oops/guide.md",
+      "source_sha256": "7eec5d648467953ac7a5a0187810c0485f4fea6ae54ff284c3aed2ac090adddd",
+      "reference_sha256": "07e5c4f9651778183efb36a1b9179e72e6f4fa4913343d136f1f3490bfa91683"
+    },
+    {
+      "source": "skills/golang-samber-oops/evals/evals.json",
+      "reference": "references/topics/golang-samber-oops/evals/evals.json",
+      "source_sha256": "02dd0b2e6948b4cfc07e70f6cda8b93c8e4adcc7983dec8be4b6689520931e62",
+      "reference_sha256": "02dd0b2e6948b4cfc07e70f6cda8b93c8e4adcc7983dec8be4b6689520931e62"
+    },
+    {
+      "source": "skills/golang-samber-oops/references/advanced.md",
+      "reference": "references/topics/golang-samber-oops/references/advanced.md",
+      "source_sha256": "d7e588ad5a294b76a06bb16223fe7a9dec5acf3ffdff6d2eaf4bab801ea42a0d",
+      "reference_sha256": "d7e588ad5a294b76a06bb16223fe7a9dec5acf3ffdff6d2eaf4bab801ea42a0d"
+    },
+    {
+      "source": "skills/golang-samber-ro/SKILL.md",
+      "reference": "references/topics/golang-samber-ro/guide.md",
+      "source_sha256": "28fb7b4db9ab6982354f7be39e8b0727e4a4b3dcd87c9c2add1046841d27122b",
+      "reference_sha256": "7a19afbebc38b144e87633b7a5ad7887dc8062d3ba2eebd51e395eee273075c9"
+    },
+    {
+      "source": "skills/golang-samber-ro/evals/evals.json",
+      "reference": "references/topics/golang-samber-ro/evals/evals.json",
+      "source_sha256": "72f84fd877c9a0ab3ec985381ee87fda2c5dbfc843835d85fe2b642a54e35f25",
+      "reference_sha256": "72f84fd877c9a0ab3ec985381ee87fda2c5dbfc843835d85fe2b642a54e35f25"
+    },
+    {
+      "source": "skills/golang-samber-ro/references/operators-guide.md",
+      "reference": "references/topics/golang-samber-ro/references/operators-guide.md",
+      "source_sha256": "e4495c54b9b218e4cb64ad0405590f5bdd4e89cf65fbdf6a66d869df525024d9",
+      "reference_sha256": "e4495c54b9b218e4cb64ad0405590f5bdd4e89cf65fbdf6a66d869df525024d9"
+    },
+    {
+      "source": "skills/golang-samber-ro/references/patterns.md",
+      "reference": "references/topics/golang-samber-ro/references/patterns.md",
+      "source_sha256": "e25246223f1dabf437475ae6ddba13fdc9e9e4da316db37ed4149dd3a20e5eee",
+      "reference_sha256": "1ebb3a7f22c64a4fb01311da94b7a69492b7065eefba6e441e706be0b94dcf30"
+    },
+    {
+      "source": "skills/golang-samber-ro/references/plugin-ecosystem.md",
+      "reference": "references/topics/golang-samber-ro/references/plugin-ecosystem.md",
+      "source_sha256": "86c9b4cc852847399abb107679955856f2ad6f2b7f8ab1e9343e185bee3e19da",
+      "reference_sha256": "86c9b4cc852847399abb107679955856f2ad6f2b7f8ab1e9343e185bee3e19da"
+    },
+    {
+      "source": "skills/golang-samber-ro/references/subjects-guide.md",
+      "reference": "references/topics/golang-samber-ro/references/subjects-guide.md",
+      "source_sha256": "4cc43e0f73c816088516fceaf86e7d47c4ffe2ac60fdc8c7e3b7f23e6c2df86e",
+      "reference_sha256": "4cc43e0f73c816088516fceaf86e7d47c4ffe2ac60fdc8c7e3b7f23e6c2df86e"
+    },
+    {
+      "source": "skills/golang-samber-slog/SKILL.md",
+      "reference": "references/topics/golang-samber-slog/guide.md",
+      "source_sha256": "54235bd7bc6dc9005d79eab614211939c6e686de00bf05d10343a03a92a97fd8",
+      "reference_sha256": "6e1da980b57aa65a4fdf4dcb8ffa1a585869941cd927803619e41509dd39c868"
+    },
+    {
+      "source": "skills/golang-samber-slog/evals/evals.json",
+      "reference": "references/topics/golang-samber-slog/evals/evals.json",
+      "source_sha256": "e6c745fe905b0664a96369f2484ffa662104c11a5ec4d71bf5ab4743bdb02759",
+      "reference_sha256": "e6c745fe905b0664a96369f2484ffa662104c11a5ec4d71bf5ab4743bdb02759"
+    },
+    {
+      "source": "skills/golang-samber-slog/references/backend-handlers.md",
+      "reference": "references/topics/golang-samber-slog/references/backend-handlers.md",
+      "source_sha256": "018b4c12ee81ca269e3ca4947e1ff06013b0999f2b7d71e93f242800b90f9b2e",
+      "reference_sha256": "018b4c12ee81ca269e3ca4947e1ff06013b0999f2b7d71e93f242800b90f9b2e"
+    },
+    {
+      "source": "skills/golang-samber-slog/references/http-middlewares.md",
+      "reference": "references/topics/golang-samber-slog/references/http-middlewares.md",
+      "source_sha256": "e645b269a2342a4c1c03ab350c6bcc008f063b883a6f2d5032bc3a0623484892",
+      "reference_sha256": "e645b269a2342a4c1c03ab350c6bcc008f063b883a6f2d5032bc3a0623484892"
+    },
+    {
+      "source": "skills/golang-samber-slog/references/pipeline-patterns.md",
+      "reference": "references/topics/golang-samber-slog/references/pipeline-patterns.md",
+      "source_sha256": "c47df13e3ffc16b4356e55c2c9ef15919d775d5d5ad813dccda4e34f3f22e08a",
+      "reference_sha256": "c47df13e3ffc16b4356e55c2c9ef15919d775d5d5ad813dccda4e34f3f22e08a"
+    },
+    {
+      "source": "skills/golang-samber-slog/references/sampling-strategies.md",
+      "reference": "references/topics/golang-samber-slog/references/sampling-strategies.md",
+      "source_sha256": "27e2d5fab4f9662b3b89588f08c959d648dad4894acf841c96ac9a3fd2232cb6",
+      "reference_sha256": "27e2d5fab4f9662b3b89588f08c959d648dad4894acf841c96ac9a3fd2232cb6"
+    },
+    {
+      "source": "skills/golang-security/SKILL.md",
+      "reference": "references/topics/golang-security/guide.md",
+      "source_sha256": "8bcc0f7ff7d196aa498e0305b81c28f60c6e50a358626360f526c0cacc760bc4",
+      "reference_sha256": "9ace92733549268a8f8b193ce6509d8bd3ae084a6d36faa8a86968921e5ee787"
+    },
+    {
+      "source": "skills/golang-security/evals/evals.json",
+      "reference": "references/topics/golang-security/evals/evals.json",
+      "source_sha256": "88d584c25e5c8b9548ceac5e68d12f270a31dd9f9752554bfc9ed382eaee879f",
+      "reference_sha256": "88d584c25e5c8b9548ceac5e68d12f270a31dd9f9752554bfc9ed382eaee879f"
+    },
+    {
+      "source": "skills/golang-security/references/architecture.md",
+      "reference": "references/topics/golang-security/references/architecture.md",
+      "source_sha256": "0596335d458de12b3e74704119b8d6deb6fdb36e2ca2e628c4e7acd8587b3d70",
+      "reference_sha256": "22138052626ce1f65145c75d04c1462153fc95f4baf8bd3c17c1458295b04ce4"
+    },
+    {
+      "source": "skills/golang-security/references/checklist.md",
+      "reference": "references/topics/golang-security/references/checklist.md",
+      "source_sha256": "4c73996ad4c4e70756f1319c261e01d10977d26c0050ebbee6e19ca513ed1fdb",
+      "reference_sha256": "4c73996ad4c4e70756f1319c261e01d10977d26c0050ebbee6e19ca513ed1fdb"
+    },
+    {
+      "source": "skills/golang-security/references/cookies.md",
+      "reference": "references/topics/golang-security/references/cookies.md",
+      "source_sha256": "c9e837265926da8bf2adfac6fa9198f57a2140c6e4a83a037b1345f00f35bf31",
+      "reference_sha256": "c9e837265926da8bf2adfac6fa9198f57a2140c6e4a83a037b1345f00f35bf31"
+    },
+    {
+      "source": "skills/golang-security/references/cryptography.md",
+      "reference": "references/topics/golang-security/references/cryptography.md",
+      "source_sha256": "5f9c2f1356189db66f948077467ac397b43b201f4f44b65669b24fdc86436fdb",
+      "reference_sha256": "97eab3e1aa2a167028b6173856abe38075c780879bf2feeec755f15825d7fc59"
+    },
+    {
+      "source": "skills/golang-security/references/filesystem.md",
+      "reference": "references/topics/golang-security/references/filesystem.md",
+      "source_sha256": "9b7fb420c288bdccb4af2c9ba052429916dc139f14dce2f5cea0d2d1961c1180",
+      "reference_sha256": "9b7fb420c288bdccb4af2c9ba052429916dc139f14dce2f5cea0d2d1961c1180"
+    },
+    {
+      "source": "skills/golang-security/references/injection.md",
+      "reference": "references/topics/golang-security/references/injection.md",
+      "source_sha256": "041f2942b7e530ead2b098c5383abbe092469752a19fefe8840ecb0ca29f90a3",
+      "reference_sha256": "041f2942b7e530ead2b098c5383abbe092469752a19fefe8840ecb0ca29f90a3"
+    },
+    {
+      "source": "skills/golang-security/references/logging.md",
+      "reference": "references/topics/golang-security/references/logging.md",
+      "source_sha256": "86ba80ebcbf521822d388db0229fb0d82645baf41ac1eafa6294132718eab5a8",
+      "reference_sha256": "86ba80ebcbf521822d388db0229fb0d82645baf41ac1eafa6294132718eab5a8"
+    },
+    {
+      "source": "skills/golang-security/references/memory-safety.md",
+      "reference": "references/topics/golang-security/references/memory-safety.md",
+      "source_sha256": "13d13a8207b28a7127fce6e291cf7bb6cbb4f0bf972ee9e951c060c887d236e8",
+      "reference_sha256": "13d13a8207b28a7127fce6e291cf7bb6cbb4f0bf972ee9e951c060c887d236e8"
+    },
+    {
+      "source": "skills/golang-security/references/network.md",
+      "reference": "references/topics/golang-security/references/network.md",
+      "source_sha256": "7971416f2eb50ecd187dabd8121b619abdb38dea825f4f41379a6079dbb12dd0",
+      "reference_sha256": "7971416f2eb50ecd187dabd8121b619abdb38dea825f4f41379a6079dbb12dd0"
+    },
+    {
+      "source": "skills/golang-security/references/secrets.md",
+      "reference": "references/topics/golang-security/references/secrets.md",
+      "source_sha256": "81b1600445f73b24e68a916f3f38ddb80816ce63fc246c24af985d39d00a1249",
+      "reference_sha256": "81b1600445f73b24e68a916f3f38ddb80816ce63fc246c24af985d39d00a1249"
+    },
+    {
+      "source": "skills/golang-security/references/third-party.md",
+      "reference": "references/topics/golang-security/references/third-party.md",
+      "source_sha256": "7c17628923152a646870f10fac0ab679709fe7cc98031fd1b31cd94dafba0cd2",
+      "reference_sha256": "7c17628923152a646870f10fac0ab679709fe7cc98031fd1b31cd94dafba0cd2"
+    },
+    {
+      "source": "skills/golang-security/references/threat-modeling.md",
+      "reference": "references/topics/golang-security/references/threat-modeling.md",
+      "source_sha256": "e249413bd7ac9ed356d57333abada6dae2975242049dc55ef07a54bda1346326",
+      "reference_sha256": "e249413bd7ac9ed356d57333abada6dae2975242049dc55ef07a54bda1346326"
+    },
+    {
+      "source": "skills/golang-spf13-cobra/SKILL.md",
+      "reference": "references/topics/golang-spf13-cobra/guide.md",
+      "source_sha256": "f77b93e6f14c3c0f4b168bb97c617d2866064964c2909c2cd817181190fe51ff",
+      "reference_sha256": "b1ec0e637543b69631acbbbbb1e22875fa4687809302c471f55486c6ab3a1dae"
+    },
+    {
+      "source": "skills/golang-spf13-cobra/evals/evals.json",
+      "reference": "references/topics/golang-spf13-cobra/evals/evals.json",
+      "source_sha256": "6ba662758249b83bcfc9f66adfaa780651c7913400aef51839b2f0afaf00b38c",
+      "reference_sha256": "6ba662758249b83bcfc9f66adfaa780651c7913400aef51839b2f0afaf00b38c"
+    },
+    {
+      "source": "skills/golang-spf13-cobra/references/commands-and-args.md",
+      "reference": "references/topics/golang-spf13-cobra/references/commands-and-args.md",
+      "source_sha256": "9c26741d541b348e7bc55924ca19b6bc731dc35933382c84a0540399264e6e15",
+      "reference_sha256": "9c26741d541b348e7bc55924ca19b6bc731dc35933382c84a0540399264e6e15"
+    },
+    {
+      "source": "skills/golang-spf13-cobra/references/completions.md",
+      "reference": "references/topics/golang-spf13-cobra/references/completions.md",
+      "source_sha256": "e8bcf042bfe2d42a35f64641002067662d5bb23c3df7f7122b29cf49ed413ad9",
+      "reference_sha256": "e8bcf042bfe2d42a35f64641002067662d5bb23c3df7f7122b29cf49ed413ad9"
+    },
+    {
+      "source": "skills/golang-spf13-cobra/references/flags.md",
+      "reference": "references/topics/golang-spf13-cobra/references/flags.md",
+      "source_sha256": "fe46534071b49143b4322987b78d7e791fcf12fbb4d0b31fa5c3323e6df4757a",
+      "reference_sha256": "fe46534071b49143b4322987b78d7e791fcf12fbb4d0b31fa5c3323e6df4757a"
+    },
+    {
+      "source": "skills/golang-spf13-cobra/references/generators.md",
+      "reference": "references/topics/golang-spf13-cobra/references/generators.md",
+      "source_sha256": "73cfbec7069ee03e0da19c157753633ceae816a49191c775586b4366c6199b58",
+      "reference_sha256": "73cfbec7069ee03e0da19c157753633ceae816a49191c775586b4366c6199b58"
+    },
+    {
+      "source": "skills/golang-spf13-cobra/references/testing.md",
+      "reference": "references/topics/golang-spf13-cobra/references/testing.md",
+      "source_sha256": "059ca04ad1b772daa41eb4f0446a17e3c65d1b2db54789bbd0d6dabcd8681f50",
+      "reference_sha256": "059ca04ad1b772daa41eb4f0446a17e3c65d1b2db54789bbd0d6dabcd8681f50"
+    },
+    {
+      "source": "skills/golang-spf13-viper/SKILL.md",
+      "reference": "references/topics/golang-spf13-viper/guide.md",
+      "source_sha256": "d2f42c2c44457b391070865e154df3dd87509479536872fdf892ab0cd629dba4",
+      "reference_sha256": "e67f82cfb3703b6497c268d690bcd98682a5408dd7ab1ca3126667cc51ee896a"
+    },
+    {
+      "source": "skills/golang-spf13-viper/evals/evals.json",
+      "reference": "references/topics/golang-spf13-viper/evals/evals.json",
+      "source_sha256": "532025535b51320907aa2283dd67075fb26ddf4086b3fbeb5a4e467df5747938",
+      "reference_sha256": "532025535b51320907aa2283dd67075fb26ddf4086b3fbeb5a4e467df5747938"
+    },
+    {
+      "source": "skills/golang-spf13-viper/references/binding-and-env.md",
+      "reference": "references/topics/golang-spf13-viper/references/binding-and-env.md",
+      "source_sha256": "48d5f27f1e1a611e75c9444cf11f57cc63539d760ce5b9bd10c72c2d4be3a160",
+      "reference_sha256": "48d5f27f1e1a611e75c9444cf11f57cc63539d760ce5b9bd10c72c2d4be3a160"
+    },
+    {
+      "source": "skills/golang-spf13-viper/references/sources-and-formats.md",
+      "reference": "references/topics/golang-spf13-viper/references/sources-and-formats.md",
+      "source_sha256": "a5edbd34f1ff4a14ef9caa30a6c77196176b815203db25c64b83e10dce704526",
+      "reference_sha256": "a5edbd34f1ff4a14ef9caa30a6c77196176b815203db25c64b83e10dce704526"
+    },
+    {
+      "source": "skills/golang-spf13-viper/references/testing-and-isolation.md",
+      "reference": "references/topics/golang-spf13-viper/references/testing-and-isolation.md",
+      "source_sha256": "6cddd548df352ba3462243d7e62ca3f816932ee773aef1527b5f81c20a070508",
+      "reference_sha256": "6cddd548df352ba3462243d7e62ca3f816932ee773aef1527b5f81c20a070508"
+    },
+    {
+      "source": "skills/golang-spf13-viper/references/unmarshal.md",
+      "reference": "references/topics/golang-spf13-viper/references/unmarshal.md",
+      "source_sha256": "a0358031f3d72f22ce316a3339854e4c1bf0d0c7abffba4e96bb0337e00235b4",
+      "reference_sha256": "a0358031f3d72f22ce316a3339854e4c1bf0d0c7abffba4e96bb0337e00235b4"
+    },
+    {
+      "source": "skills/golang-spf13-viper/references/watch-and-reload.md",
+      "reference": "references/topics/golang-spf13-viper/references/watch-and-reload.md",
+      "source_sha256": "67be32df9aa12388b6401773f410c01893bc2e7126526eacc56c5718529f430e",
+      "reference_sha256": "67be32df9aa12388b6401773f410c01893bc2e7126526eacc56c5718529f430e"
+    },
+    {
+      "source": "skills/golang-stay-updated/SKILL.md",
+      "reference": "references/topics/golang-stay-updated/guide.md",
+      "source_sha256": "a348fe3d83f5e09c4970f26d8c4ee978df58ee7d2bb06b16124fa833562fb42e",
+      "reference_sha256": "6a0983070776b0955b4cf38c19caf4168d7407b3a37568b8fdb6b896274bfc9e"
+    },
+    {
+      "source": "skills/golang-stay-updated/evals/evals.json",
+      "reference": "references/topics/golang-stay-updated/evals/evals.json",
+      "source_sha256": "82cb3b25893eae33b70383e8c8faf71a5654cdfaa5b0bf52d661bbdd0cbc0c52",
+      "reference_sha256": "82cb3b25893eae33b70383e8c8faf71a5654cdfaa5b0bf52d661bbdd0cbc0c52"
+    },
+    {
+      "source": "skills/golang-stretchr-testify/SKILL.md",
+      "reference": "references/topics/golang-stretchr-testify/guide.md",
+      "source_sha256": "e0e681bafd39acc6edb6c9d06c53add7b42e10d93a7f0dd546dde67a23d3f1bf",
+      "reference_sha256": "bccc5e4b777310e214f6c555d7f93ce0421cbe001cee2717e05733b1e0e27ce2"
+    },
+    {
+      "source": "skills/golang-stretchr-testify/evals/evals.json",
+      "reference": "references/topics/golang-stretchr-testify/evals/evals.json",
+      "source_sha256": "eea26cc911271559fdd0e2f518335a66d38134bac8e69e8e60028699189f912d",
+      "reference_sha256": "eea26cc911271559fdd0e2f518335a66d38134bac8e69e8e60028699189f912d"
+    },
+    {
+      "source": "skills/golang-stretchr-testify/references/mock.md",
+      "reference": "references/topics/golang-stretchr-testify/references/mock.md",
+      "source_sha256": "8082a5ace0d7872fc76c51c23aa8205bf18a51b0ca2530ebec21d5dd896f42db",
+      "reference_sha256": "8082a5ace0d7872fc76c51c23aa8205bf18a51b0ca2530ebec21d5dd896f42db"
+    },
+    {
+      "source": "skills/golang-structs-interfaces/SKILL.md",
+      "reference": "references/topics/golang-structs-interfaces/guide.md",
+      "source_sha256": "0bc93e1e86c3cf24571205b6fdd773a23df1b34366e7f639a9530d6984117601",
+      "reference_sha256": "23cc3ad8e2511168ad2810d2296bfba179e09dfc967820db32b0eeecc4c79a1b"
+    },
+    {
+      "source": "skills/golang-structs-interfaces/evals/evals.json",
+      "reference": "references/topics/golang-structs-interfaces/evals/evals.json",
+      "source_sha256": "34958c0025acf30e85256db718638c03c76dedd3070e56e7c81608c946390219",
+      "reference_sha256": "34958c0025acf30e85256db718638c03c76dedd3070e56e7c81608c946390219"
+    },
+    {
+      "source": "skills/golang-structs-interfaces/references/struct-fields.md",
+      "reference": "references/topics/golang-structs-interfaces/references/struct-fields.md",
+      "source_sha256": "fc40bb1979f11cd8f9d20361d524a26a233447fa94b6ec3ccad71a5cebfaec2a",
+      "reference_sha256": "fc40bb1979f11cd8f9d20361d524a26a233447fa94b6ec3ccad71a5cebfaec2a"
+    },
+    {
+      "source": "skills/golang-structs-interfaces/references/type-assertions.md",
+      "reference": "references/topics/golang-structs-interfaces/references/type-assertions.md",
+      "source_sha256": "02860e00115d6b1256c4accedea33b6544746bc6b1429c2a5fc8ed735692b48e",
+      "reference_sha256": "02860e00115d6b1256c4accedea33b6544746bc6b1429c2a5fc8ed735692b48e"
+    },
+    {
+      "source": "skills/golang-swagger/SKILL.md",
+      "reference": "references/topics/golang-swagger/guide.md",
+      "source_sha256": "537126ccf09bf25f4edae6e0fac2bbb7d4ffbd157edadf17e7a6d2e03d19a93e",
+      "reference_sha256": "1e5dc3a1f5fb8b048b5df6f22e7bfae61df98658aae17d465e65bc7d04a98a9f"
+    },
+    {
+      "source": "skills/golang-swagger/evals/evals.json",
+      "reference": "references/topics/golang-swagger/evals/evals.json",
+      "source_sha256": "f50b02b6fc4d4525b955a290e26a7a936ada921b4ee6004d8287119f3886ba73",
+      "reference_sha256": "f50b02b6fc4d4525b955a290e26a7a936ada921b4ee6004d8287119f3886ba73"
+    },
+    {
+      "source": "skills/golang-swagger/references/swag-cli.md",
+      "reference": "references/topics/golang-swagger/references/swag-cli.md",
+      "source_sha256": "85cb78c7378da39e88347c1c251aac9a67537cfa7100cf399d5b14a9cbfd0b60",
+      "reference_sha256": "85cb78c7378da39e88347c1c251aac9a67537cfa7100cf399d5b14a9cbfd0b60"
+    },
+    {
+      "source": "skills/golang-testing/SKILL.md",
+      "reference": "references/topics/golang-testing/guide.md",
+      "source_sha256": "55eea3ed4536df0c95fc1247382d3027d45b1d1af0a94fc9de653debae5df0f2",
+      "reference_sha256": "955c340c3bad585628e447b2ed28d88efbb9adcce37546c1c90013fddbd20aee"
+    },
+    {
+      "source": "skills/golang-testing/evals/evals.json",
+      "reference": "references/topics/golang-testing/evals/evals.json",
+      "source_sha256": "bc083e8d62ff1c23d9cd734f274a5733cfc0d30bb6356e03668dd3c67ff7c92e",
+      "reference_sha256": "bc083e8d62ff1c23d9cd734f274a5733cfc0d30bb6356e03668dd3c67ff7c92e"
+    },
+    {
+      "source": "skills/golang-testing/references/benchmarks.md",
+      "reference": "references/topics/golang-testing/references/benchmarks.md",
+      "source_sha256": "f9de0e2e50cbb8e28684da1f99ff15fa84779150b4a8deefdf97ea3345c871f1",
+      "reference_sha256": "f9de0e2e50cbb8e28684da1f99ff15fa84779150b4a8deefdf97ea3345c871f1"
+    },
+    {
+      "source": "skills/golang-testing/references/coverage.md",
+      "reference": "references/topics/golang-testing/references/coverage.md",
+      "source_sha256": "b2f7af52412b084cf353ff493941ad43276cae9d197470db2287b5d2c5a1aebf",
+      "reference_sha256": "b2f7af52412b084cf353ff493941ad43276cae9d197470db2287b5d2c5a1aebf"
+    },
+    {
+      "source": "skills/golang-testing/references/examples.md",
+      "reference": "references/topics/golang-testing/references/examples.md",
+      "source_sha256": "40c070f0a83898edbc0c87c034fc2281d9c2b04e0514c94aa1ff07b802b575c5",
+      "reference_sha256": "40c070f0a83898edbc0c87c034fc2281d9c2b04e0514c94aa1ff07b802b575c5"
+    },
+    {
+      "source": "skills/golang-testing/references/helpers.md",
+      "reference": "references/topics/golang-testing/references/helpers.md",
+      "source_sha256": "8c71d253a246e66b8249022c96d7e8892f5bfc2156b02a36673c321db2c843f4",
+      "reference_sha256": "8c71d253a246e66b8249022c96d7e8892f5bfc2156b02a36673c321db2c843f4"
+    },
+    {
+      "source": "skills/golang-testing/references/http-testing.md",
+      "reference": "references/topics/golang-testing/references/http-testing.md",
+      "source_sha256": "39381274d7887651b86bde513085835f52860aa0832eb6f945f79c008f240e0f",
+      "reference_sha256": "39381274d7887651b86bde513085835f52860aa0832eb6f945f79c008f240e0f"
+    },
+    {
+      "source": "skills/golang-testing/references/integration-testing.md",
+      "reference": "references/topics/golang-testing/references/integration-testing.md",
+      "source_sha256": "a29e725c58a1c2feaf16470db7eb4f8394aa36a476df92a792ac026c950d0b85",
+      "reference_sha256": "a29e725c58a1c2feaf16470db7eb4f8394aa36a476df92a792ac026c950d0b85"
+    },
+    {
+      "source": "skills/golang-testing/references/mocking.md",
+      "reference": "references/topics/golang-testing/references/mocking.md",
+      "source_sha256": "65558f907dea483831aea4aca50b1d6f1b64f92803bc2446f6a550a6d6c5c33a",
+      "reference_sha256": "65558f907dea483831aea4aca50b1d6f1b64f92803bc2446f6a550a6d6c5c33a"
+    },
+    {
+      "source": "skills/golang-troubleshooting/SKILL.md",
+      "reference": "references/topics/golang-troubleshooting/guide.md",
+      "source_sha256": "a94def5ae84dd581536e5fdd64b1c22bd7f9683f3173d638830edb60697aa8e8",
+      "reference_sha256": "5b74356afd436b36cf2aceafe5418a737eb0efa154bcf392fe3a6ea5ee7adf93"
+    },
+    {
+      "source": "skills/golang-troubleshooting/evals/evals.json",
+      "reference": "references/topics/golang-troubleshooting/evals/evals.json",
+      "source_sha256": "a15b4ce5f5f0d4d2fe0590ba2207e13e2f23bba4e11d1743bd89ddda87146dde",
+      "reference_sha256": "a15b4ce5f5f0d4d2fe0590ba2207e13e2f23bba4e11d1743bd89ddda87146dde"
+    },
+    {
+      "source": "skills/golang-troubleshooting/references/code-review-flags.md",
+      "reference": "references/topics/golang-troubleshooting/references/code-review-flags.md",
+      "source_sha256": "577b683e055c3880fa7233e24f19cddbd4aa65731be72d50211d873e202bfc43",
+      "reference_sha256": "577b683e055c3880fa7233e24f19cddbd4aa65731be72d50211d873e202bfc43"
+    },
+    {
+      "source": "skills/golang-troubleshooting/references/common-go-bugs.md",
+      "reference": "references/topics/golang-troubleshooting/references/common-go-bugs.md",
+      "source_sha256": "311375f50e79bfc63d48e06565b784fba060609a0bc787f6e106eb1f48fa6fbc",
+      "reference_sha256": "311375f50e79bfc63d48e06565b784fba060609a0bc787f6e106eb1f48fa6fbc"
+    },
+    {
+      "source": "skills/golang-troubleshooting/references/compilation.md",
+      "reference": "references/topics/golang-troubleshooting/references/compilation.md",
+      "source_sha256": "b6ecaf7c6f4e2f4635e3c90d02d2cd55fe150c9826f77061a70a03e39ea669ec",
+      "reference_sha256": "b6ecaf7c6f4e2f4635e3c90d02d2cd55fe150c9826f77061a70a03e39ea669ec"
+    },
+    {
+      "source": "skills/golang-troubleshooting/references/concurrency-debug.md",
+      "reference": "references/topics/golang-troubleshooting/references/concurrency-debug.md",
+      "source_sha256": "7fef337f937d182314200c3f40b38b3954214df190b1b9dccbdd129f22986d2f",
+      "reference_sha256": "828e312750e37ef97b20c9910ee85cdb4e530e0deccff6467a3d585ad6ed1f6c"
+    },
+    {
+      "source": "skills/golang-troubleshooting/references/diagnostic-tools.md",
+      "reference": "references/topics/golang-troubleshooting/references/diagnostic-tools.md",
+      "source_sha256": "36169dd6972e2e7230d55e8bbf760a6d51f93cc36811d9d80ab94539746d38df",
+      "reference_sha256": "36169dd6972e2e7230d55e8bbf760a6d51f93cc36811d9d80ab94539746d38df"
+    },
+    {
+      "source": "skills/golang-troubleshooting/references/methodology.md",
+      "reference": "references/topics/golang-troubleshooting/references/methodology.md",
+      "source_sha256": "2e90eb15812661d06f3c90d5f9c697a3ca292a6667e574a07479626b90c9d48e",
+      "reference_sha256": "e24fa1fe3f64a1f803593c0f9b75bdb1747a8d2dc4a6985a63779c91ba2e5f12"
+    },
+    {
+      "source": "skills/golang-troubleshooting/references/performance-debug.md",
+      "reference": "references/topics/golang-troubleshooting/references/performance-debug.md",
+      "source_sha256": "c26e03f1985b156876f31bad0f7541da13d6968b622a24c26bb7565b30305e62",
+      "reference_sha256": "52de7d6e8031a2f37a345992fdab7a6464f22805e969aecb7326bd2a7379480e"
+    },
+    {
+      "source": "skills/golang-troubleshooting/references/pprof.md",
+      "reference": "references/topics/golang-troubleshooting/references/pprof.md",
+      "source_sha256": "039fa03a054737439e69e59d4ebf62c87e711e47c2698941c30bd73890aec5bf",
+      "reference_sha256": "039fa03a054737439e69e59d4ebf62c87e711e47c2698941c30bd73890aec5bf"
+    },
+    {
+      "source": "skills/golang-troubleshooting/references/production-debug.md",
+      "reference": "references/topics/golang-troubleshooting/references/production-debug.md",
+      "source_sha256": "6bbb0e2f3f249bd9a350f6c1f50b48a4d3d93fee9b1de9f2fb4f6ba8bf739f03",
+      "reference_sha256": "f573f02d18e548515ee2f68141228619e073f9ce0dfd793281f18f4c67f63d8e"
+    },
+    {
+      "source": "skills/golang-troubleshooting/references/testing-debug.md",
+      "reference": "references/topics/golang-troubleshooting/references/testing-debug.md",
+      "source_sha256": "6e499a4f8a96eddb9314ec396e1cb8bf98457085845acb6ab327c49e39f9d34a",
+      "reference_sha256": "6e499a4f8a96eddb9314ec396e1cb8bf98457085845acb6ab327c49e39f9d34a"
+    },
+    {
+      "source": "skills/golang-uber-dig/SKILL.md",
+      "reference": "references/topics/golang-uber-dig/guide.md",
+      "source_sha256": "6dd33a3826275f6adaa7cf62a87c481ceb9253466f9cf71a5f02ceb5e357c1af",
+      "reference_sha256": "0983b69bfb2f5164b9957c56fee629ba4bcd01a8efe4d9645ae66fbb5d7eacca"
+    },
+    {
+      "source": "skills/golang-uber-dig/evals/evals.json",
+      "reference": "references/topics/golang-uber-dig/evals/evals.json",
+      "source_sha256": "c4ff574e38317bcc0765e7dd10904d15522cb8cb1206ab47fc1b291b0ad2e629",
+      "reference_sha256": "c4ff574e38317bcc0765e7dd10904d15522cb8cb1206ab47fc1b291b0ad2e629"
+    },
+    {
+      "source": "skills/golang-uber-dig/references/advanced.md",
+      "reference": "references/topics/golang-uber-dig/references/advanced.md",
+      "source_sha256": "4df59fd721542b548b503f1f081a2753880ab027a5e77fab57adc5f7fe0ab725",
+      "reference_sha256": "4df59fd721542b548b503f1f081a2753880ab027a5e77fab57adc5f7fe0ab725"
+    },
+    {
+      "source": "skills/golang-uber-dig/references/recipes.md",
+      "reference": "references/topics/golang-uber-dig/references/recipes.md",
+      "source_sha256": "63de55b1ad4a687696209d46a96a6068cca072166eae471e9ee5bc16f7c4b301",
+      "reference_sha256": "63de55b1ad4a687696209d46a96a6068cca072166eae471e9ee5bc16f7c4b301"
+    },
+    {
+      "source": "skills/golang-uber-dig/references/testing.md",
+      "reference": "references/topics/golang-uber-dig/references/testing.md",
+      "source_sha256": "654b54a6bb76368b3c5a562fac374b677381b411e82958dfc8af374e09c35682",
+      "reference_sha256": "654b54a6bb76368b3c5a562fac374b677381b411e82958dfc8af374e09c35682"
+    },
+    {
+      "source": "skills/golang-uber-fx/SKILL.md",
+      "reference": "references/topics/golang-uber-fx/guide.md",
+      "source_sha256": "9de3192cc61f8407e2121f582005b0c589ede70951761f43176f4312c41ae259",
+      "reference_sha256": "940537d1024324aaae865beb10c8e4a1ccb35bf78d002b37c758d0bf9cde3474"
+    },
+    {
+      "source": "skills/golang-uber-fx/evals/evals.json",
+      "reference": "references/topics/golang-uber-fx/evals/evals.json",
+      "source_sha256": "a5e784e74302dc0ce78320f04857a8c1d3e931ebf22ea05d5053c5b1088b63fd",
+      "reference_sha256": "a5e784e74302dc0ce78320f04857a8c1d3e931ebf22ea05d5053c5b1088b63fd"
+    },
+    {
+      "source": "skills/golang-uber-fx/references/advanced.md",
+      "reference": "references/topics/golang-uber-fx/references/advanced.md",
+      "source_sha256": "0b4276f89e9e0bb3e211d6dec1706f01ad11d5f92c1591ce88711b467ba7a75c",
+      "reference_sha256": "0b4276f89e9e0bb3e211d6dec1706f01ad11d5f92c1591ce88711b467ba7a75c"
+    },
+    {
+      "source": "skills/golang-uber-fx/references/recipes.md",
+      "reference": "references/topics/golang-uber-fx/references/recipes.md",
+      "source_sha256": "a99d535cd58a3303e6429a3ceb8bbaea2714a36bf9196126a485be4e8bcdb3ae",
+      "reference_sha256": "a99d535cd58a3303e6429a3ceb8bbaea2714a36bf9196126a485be4e8bcdb3ae"
+    },
+    {
+      "source": "skills/golang-uber-fx/references/testing.md",
+      "reference": "references/topics/golang-uber-fx/references/testing.md",
+      "source_sha256": "287edd90ff67f03c69dc334ec18e50d764f15af4e58ccdf62ffa060f9eb43caf",
+      "reference_sha256": "287edd90ff67f03c69dc334ec18e50d764f15af4e58ccdf62ffa060f9eb43caf"
+    }
+  ]
+}

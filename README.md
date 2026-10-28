@@ -7,6 +7,7 @@
 - `.system/`：Codex 随程序提供的内置 skills，可能随 Codex 更新而变化。
 - 其他一级目录：本机安装或维护的自定义 skills。
 - `orz-gpt-bigman/`：独立仓库 [skynit/orz-gpt-bigman](https://github.com/skynit/orz-gpt-bigman) 的安装副本。
+- `goland-guide/`：显示名称为“goland指南”的 Go 开发统一入口，将 `cc-skills-golang` 的 46 个专题保存为按需读取的引用资料。
 - 凭据不写入仓库；需要外部服务的 skill 必须通过环境变量或运行环境提供凭据。
 
 ## 内置 Skills
@@ -36,6 +37,7 @@
 | [`diagram-design`](diagram-design/) | 创建带品牌风格的架构图、流程图、时序图、ER 图、状态图、数据图表等 HTML/SVG/PNG。 | 需要从描述、Draw.io 或 Mermaid 生成高质量可交付图示时使用。 |
 | [`executing-plans`](executing-plans/) | 按已有书面实现计划分阶段执行任务，并在检查点复核结果。 | 已有明确实施计划，需要在独立会话中逐项实现和验证时使用。 |
 | [`finishing-a-development-branch`](finishing-a-development-branch/) | 在实现和测试完成后，核对环境并选择合并、PR、保留或清理分支。 | 开发分支已经完成，需要决定如何集成和收尾时使用。 |
+| [`goland指南`（goland-guide）](goland-guide/SKILL.md) | 统一使用 `cc-skills-golang` 的全部 46 个专题，按任务读取相关引用资料。 | Go 编码、审查、调试、架构、测试、性能分析、依赖管理和工程配置时使用。 |
 | [`grill-me-codex`](grill-me-codex/) | 先通过逐问访谈锁定需求，再让 Codex 对计划进行只读对抗审查。 | 高风险设计尚有模糊决策，需要先澄清需求再做跨模型计划评审时使用。 |
 | [`grill-with-docs-codex`](grill-with-docs-codex/) | 在访谈中同步校准 `CONTEXT.md`、术语和 ADR，然后让 Codex 审查最终计划。 | 项目已有领域文档，希望需求、文档和高风险实现计划一起收敛时使用。 |
 | [`iso-recreate`](iso-recreate/) | 通过完整构建路径重新生成 CWNAS Ubuntu 安装 ISO，包括全新的目标 RootFS。 | 安装器、系统包、服务、内核、initrd、启动流程或构建脚本有变化时使用。 |
@@ -71,6 +73,21 @@
 | [`ui-ux-pro-max`](ui-ux-pro-max/) | 基于本地 UI/UX 数据库提供风格、配色、字体、布局、动效、图表和技术栈建议。 | 设计、实现或审查 Web/移动端页面、组件、响应式布局、可访问性和交互体验时使用。 |
 | [`using-git-worktrees`](using-git-worktrees/) | 检测现有隔离环境，并通过平台能力或 Git worktree 创建独立工作区。 | 开始需要隔离的功能开发或执行实现计划前使用。 |
 | [`verification-before-completion`](verification-before-completion/) | 要求在声称完成、修复或通过前运行最新验证并读取完整结果。 | 提交、创建 PR、交付任务或作出任何成功结论前使用。 |
+
+## goland指南
+
+[`goland指南`](goland-guide/SKILL.md) 的技能标识为 `goland-guide`，在 Codex 对话中用 `$goland-guide 具体任务` 调用，也支持根据 Go 开发任务自动选择。
+
+这个 skill 将 `samber/cc-skills-golang` **2.0.1** 的全部 **46 个专题**整合到一个入口。引用资料是由入口按任务读取的普通文档，不会分别注册为独立 skill 或工具。完整目录见[专题索引](goland-guide/references/catalog.md)；例如代码风格指导保存在[代码风格引用](goland-guide/references/topics/golang-code-style/guide.md)。
+
+```text
+$goland-guide 审查当前 Go 包的代码风格和错误处理，只给建议，不修改源码。
+$goland-guide 排查当前包中任务取消后仍继续运行的问题，先说明原因，再提出修复方案。
+```
+
+入口先选择与任务直接相关的专题，需要时再补充读取，避免一次加载全部资料。引用中的修改、测试和工具建议必须服从用户授权及项目规范；当前包的任务不会因为上游示例而自动扩大为全仓测试。
+
+本机原 `cc-skills-golang` 插件已禁用，单独安装的 `golang-code-style` skill 已删除；代码风格等指导统一通过本入口读取。引用资料是随本 skill 保存的固定版本副本，使用时不依赖插件缓存，也不会自动跟随上游升级。来源和校验记录见 [source.json](goland-guide/references/source.json)，上游 MIT 许可证见 [LICENSE](goland-guide/references/LICENSE)。安装或迁移时应保留完整的 `goland-guide/` 目录。
 
 ## SAST 使用顺序
 
