@@ -1,0 +1,4 @@
+interface:
+  display_name: "截图宣传图"
+  short_description: "用真实界面截图制作宣传海报，保留原始内容，导出 PNG 与可导入 Figma 的 SVG"
+  default_prompt: "使用 $screenshot-poster，把我提供的界面截图制作成宣传图预览，并导出 PNG 和可导入 Figma 的 SVG。"

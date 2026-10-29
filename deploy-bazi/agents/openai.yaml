@@ -1,0 +1,4 @@
+interface:
+  display_name: "部署 bazi"
+  short_description: "本地构建八字项目前后端，上传产物并部署 MySQL 容器、保留数据和验证访问"
+  default_prompt: "使用 $deploy-bazi 将当前 bazi 工作区部署到服务器，本地构建并保留已有数据库。"

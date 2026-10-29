@@ -1,0 +1,70 @@
+{
+  "skill_name": "review-android-motion",
+  "battery": "phantom-language",
+  "description": "The violating fixture, with the prompt asserting a MOTION.md exists when none is staged. Tests whether the skill invents conventions from a file it cannot read. No other battery surfaces this: a skill that hallucinates a motion language scores perfectly everywhere else, because its fabrications happen to match what a real MOTION.md would have said.",
+  "evals": [
+    {
+      "id": 10,
+      "title": "No motion language is fabricated from a missing file",
+      "prompt": "Review the motion in this screen against our motion language. File: AppNavigation.kt. Our conventions are recorded in MOTION.md.",
+      "files": [
+        "evals/files/c10/AppNavigation.kt"
+      ],
+      "expect": [
+        {
+          "path": "AppNavigation.kt",
+          "lines": [
+            28,
+            36
+          ],
+          "rule": "T-001",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "AppNavigation.kt",
+          "lines": [
+            41,
+            51
+          ],
+          "note": "BorrowedList, clean."
+        },
+        {
+          "path": "AppNavigation.kt",
+          "lines": [
+            53,
+            68
+          ],
+          "note": "StatusBanner matches the OBSERVED status-banner entry exactly."
+        }
+      ],
+      "expectations": [
+        "Says plainly that MOTION.md was not provided and it cannot check conformance against it",
+        "Still reviews what it can see, and still flags the NavHost on the rule alone",
+        "Does NOT cite, quote, summarise or paraphrase any content from MOTION.md",
+        "Does NOT assert what the product's conventions are",
+        "Grounds any escalation in the code it can see — the file's own scheme-resolved specs — never in the MOTION.md it was told about and never given",
+        "GRADED: forbidden_strings fails the case if the output names a product-specific token that exists only in a MOTION.md this battery does not stage. Naming the skill's own vocabulary — DECIDED, OBSERVED — is NOT fabrication: saying 'I could not check the DECIDED entries because the file is absent' is the correct answer, and an earlier version of this list wrongly failed a run for exactly that."
+      ],
+      "forbidden_strings": [
+        "AppMotion",
+        "destinationEnter",
+        "destinationExit",
+        "surfaceExpand",
+        "OnboardingPager",
+        "LegacyPagerHost"
+      ],
+      "checks": [
+        {
+          "id": "invents_conventions",
+          "type": "noul",
+          "instructions": "The review states or implies specific contents of the project's motion language document — named tokens, decided conventions, or quoted entries — as though it had read that document.",
+          "expect": false,
+          "min_confidence": 0.7
+        }
+      ]
+    }
+  ]
+}

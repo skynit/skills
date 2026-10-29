@@ -1,0 +1,4 @@
+interface:
+  display_name: "CWNAS Web 部署"
+  short_description: "Safely deploy and verify CWNAS Web releases"
+  default_prompt: "Use $deploy-cwnas-web to replace the official CWNAS Web client package and verify the live deployment."

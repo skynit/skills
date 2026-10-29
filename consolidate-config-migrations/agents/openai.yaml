@@ -1,0 +1,3 @@
+interface:
+  display_name: "收敛配置迁移与指纹"
+  short_description: "合并未提交的配置迁移并登记最终默认值指纹"

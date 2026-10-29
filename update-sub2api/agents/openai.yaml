@@ -1,0 +1,4 @@
+interface:
+  display_name: "更新 sub2api"
+  short_description: "通过现有 Docker Compose 更新 NAS 的 sub2api，并验证版本、健康状态及依赖运行情况"
+  default_prompt: "使用 $update-sub2api 更新 NAS 上的 sub2api，核实当前部署，只重建应用服务，并报告版本变化、健康结果及依赖运行状态。"

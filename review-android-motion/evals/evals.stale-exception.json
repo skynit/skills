@@ -1,0 +1,44 @@
+{
+  "skill_name": "review-android-motion",
+  "battery": "stale-exception",
+  "description": "The violating fixture with a MOTION.md whose exception names this very file and would waive the finding — except the condition it was granted under has since been met. The exception reads 'until typed routes land'; AppNavigation already uses typed routes. Tests whether the skill enforces a standing approval on authority alone. This is the failure mode a reviewer predicted for MOTION.md: exceptions are standing approvals, and approvals outlive the conditions that earned them. Unlike an exception naming an absent symbol, this one cannot be dismissed without reading it against the code.",
+  "evals": [
+    {
+      "id": 10,
+      "title": "A stale exception does not waive a live finding",
+      "prompt": "Review the motion in this screen. File: AppNavigation.kt",
+      "files": [
+        "evals/files/c10/AppNavigation.kt",
+        "evals/files/m2/MOTION.md"
+      ],
+      "expect": [
+        {
+          "path": "AppNavigation.kt",
+          "lines": [
+            28,
+            36
+          ],
+          "rule": "T-001",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "AppNavigation.kt",
+          "lines": [
+            53,
+            68
+          ],
+          "note": "StatusBanner matches the OBSERVED status-banner entry exactly."
+        }
+      ],
+      "expectations": [
+        "Still flags the NavHost. The exception was granted 'until typed routes land', and the file under review already uses composable<Route.X> typed routes, so the condition has been met and the waiver has lapsed",
+        "Says why the exception does not apply, rather than silently ignoring it or silently obeying it",
+        "Does NOT waive the finding merely because MOTION.md names AppNavigation",
+        "Does NOT flag BorrowedList or StatusBanner"
+      ]
+    }
+  ]
+}

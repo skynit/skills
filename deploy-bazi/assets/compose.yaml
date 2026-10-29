@@ -1,0 +1,64 @@
+# Fresh deployments only. Preserve existing compose, credentials and volumes on updates.
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS:?DB_ROOT_PASS is required}
+      MYSQL_DATABASE: ${DB_NAME:-bazi}
+      MYSQL_USER: ${DB_USER:-bazi}
+      MYSQL_PASSWORD: ${DB_PASS:?DB_PASS is required}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+    networks: [bazi-network]
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8080:8088"
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_USER: ${DB_USER:-bazi}
+      DB_PASS: ${DB_PASS:?DB_PASS is required}
+      DB_NAME: ${DB_NAME:-bazi}
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required}
+      SERVER_PORT: "8088"
+      GIN_MODE: release
+      ELEMENT_ASSET_DIR: /app/data/element-assets
+      RAG_ENABLED: "false"
+    volumes:
+      - element_assets:/app/data/element-assets
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8088/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 20s
+    networks: [bazi-network]
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT:-80}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks: [bazi-network]
+volumes:
+  mysql_data:
+  element_assets:
+networks:
+  bazi-network:
+    driver: bridge

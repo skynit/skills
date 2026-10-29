@@ -1,0 +1,4 @@
+interface:
+  display_name: "Android 模拟器"
+  short_description: "管理本机 Android 虚拟设备、安装 APK，并通过 scrcpy 操作和检查界面"
+  default_prompt: "使用 $android-emulator 检查本机虚拟设备，复用或启动合适的模拟器，并按当前任务安装和验证 APK。"

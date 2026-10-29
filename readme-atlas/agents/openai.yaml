@@ -1,0 +1,4 @@
+interface:
+  display_name: "README Atlas"
+  short_description: "Create accurate, visually polished project READMEs"
+  default_prompt: "Use $readme-atlas to inspect this repository and write a visually polished README with a clear path to first use."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "部署 BE213 驱动"
+  short_description: "上传并安装 BE213 离线驱动工具包到目标 Linux 机器"
+  default_prompt: "Use $deploy-be213-driver to upload and install the BE213 offline driver bundle on my target machine."

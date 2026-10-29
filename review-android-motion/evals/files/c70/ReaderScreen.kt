@@ -1,0 +1,83 @@
+package com.example.catalogue.ui.reader
+
+import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.EditNote
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.TransformOrigin
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+
+@Composable
+fun ReaderHost(modifier: Modifier = Modifier) {
+    val navController = rememberNavController()
+
+    Scaffold(
+        modifier = modifier,
+        bottomBar = { ReaderNavigationBar(navController) },
+    ) { padding ->
+        NavHost(
+            navController = navController,
+            startDestination = Route.Shelf,
+            modifier = Modifier.padding(padding),
+            enterTransition = { fadeIn(AppMotion.destinationEnter) },
+            exitTransition = { fadeOut(AppMotion.destinationExit) },
+            popEnterTransition = { fadeIn(AppMotion.destinationEnter) },
+            popExitTransition = { fadeOut(AppMotion.destinationExit) },
+        ) {
+            composable<Route.Shelf> { ShelfScreen() }
+            composable<Route.Reading> { ReadingScreen() }
+            composable<Route.Settings> { SettingsScreen() }
+        }
+    }
+}
+
+@Composable
+private fun ReadingScreen() {
+    var notesOpen by remember { mutableStateOf(false) }
+
+    BackHandler(enabled = notesOpen) {
+        notesOpen = false
+    }
+
+    Box(Modifier.fillMaxSize()) {
+        Text("\u2026page content\u2026", style = MaterialTheme.typography.bodyLarge)
+
+        Column {
+            IconButton(onClick = { notesOpen = true }) {
+                Icon(Icons.Outlined.EditNote, contentDescription = "Notes")
+            }
+
+            AnimatedVisibility(
+                visible = notesOpen,
+                enter = scaleIn(
+                    AppMotion.popupEnter,
+                    initialScale = 0.8f,
+                    transformOrigin = TransformOrigin(0f, 0f),
+                ) + fadeIn(AppMotion.popupFade),
+                exit = fadeOut(AppMotion.popupFade),
+            ) {
+                NotesPopup(onClose = { notesOpen = false })
+            }
+        }
+    }
+}

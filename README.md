@@ -1,6 +1,6 @@
 # Codex Skills
 
-本仓库保存本机 Codex 使用的 skills。当前收录 53 个 skill，其中 6 个为 Codex 内置 skill，47 个为本机安装或维护的自定义 skill。每个 skill 都以目录内的 `SKILL.md` 作为正式契约，Codex 会根据任务语义自动选择合适的 skill，也可以由用户明确点名调用。
+本目录保存本机 Codex 使用的 skills，包括 Codex 内置 skill 和本机安装或维护的自定义 skill。每个 skill 的具体流程以目录内的 `SKILL.md` 为准；支持自动调用的 skill 可由 Codex 根据任务语义选择，也可以由用户明确点名调用。
 
 ## 目录说明
 
@@ -8,6 +8,7 @@
 - 其他一级目录：本机安装或维护的自定义 skills。
 - `orz-gpt-bigman/`：独立仓库 [skynit/orz-gpt-bigman](https://github.com/skynit/orz-gpt-bigman) 的安装副本。
 - `goland-guide/`：显示名称为“goland指南”的 Go 开发统一入口，将 `cc-skills-golang` 的 46 个专题保存为按需读取的引用资料。
+- Emil 的 14 个 UI、动画和 Swift skills：来自 [emilkowalski/skills](https://github.com/emilkowalski/skills)，用法见下方专节。
 - 凭据不写入仓库；需要外部服务的 skill 必须通过环境变量或运行环境提供凭据。
 
 ## 内置 Skills
@@ -89,6 +90,38 @@ $goland-guide 排查当前包中任务取消后仍继续运行的问题，先说
 
 本机原 `cc-skills-golang` 插件已禁用，单独安装的 `golang-code-style` skill 已删除；代码风格等指导统一通过本入口读取。引用资料是随本 skill 保存的固定版本副本，使用时不依赖插件缓存，也不会自动跟随上游升级。来源和校验记录见 [source.json](goland-guide/references/source.json)，上游 MIT 许可证见 [LICENSE](goland-guide/references/LICENSE)。安装或迁移时应保留完整的 `goland-guide/` 目录。
 
+## Emil UI、动画与 Swift Skills
+
+这 14 个 skill 安装在本目录的同名子目录中。在 Codex 对话输入框中输入 `$技能名`，并在同一条消息中写明任务、目标文件或组件、技术栈和限制。下面的示例是对话提示词，不是终端命令。
+
+| Skill | 用途 | 中文调用示例 |
+|---|---|---|
+| [`emil-design-eng`](emil-design-eng/SKILL.md) | 设计或审查 UI 细节，包括组件、排版、交互反馈和动画取舍。 | `$emil-design-eng 审查 src/components/Toolbar.tsx 的视觉和交互细节，只给建议，不修改代码。` |
+| [`animate`](animate/SKILL.md) | 实现 Web 动画，选择属性、缓动、时长，并处理打断、退出和减少动态效果偏好。 | `$animate 给 src/components/Menu.tsx 添加打开和关闭动画，保持键盘操作即时响应。` |
+| [`animate-expo`](animate-expo/SKILL.md) | 实现 React Native / Expo 的手势、弹簧、页面切换和触觉反馈。 | `$animate-expo 为 Expo 应用的 BottomSheet 添加拖拽关闭和速度衔接，使用现有 Reanimated。` |
+| [`review-animations`](review-animations/SKILL.md) | 审查指定动画代码或差异，指出时长、缓动、性能和可访问性问题。 | `$review-animations 审查当前未提交的动画改动，列出问题和修改建议，不修改源码。` |
+| [`improve-animations`](improve-animations/SKILL.md) | 审计代码库中的现有动画，输出按优先级排序的问题和可执行计划；源码只读。 | `$improve-animations 审计 src/components 中的现有动画，按影响排序并为前三项生成实施计划。` |
+| [`find-animation-opportunities`](find-animation-opportunities/SKILL.md) | 寻找值得添加动画的交互，给出具体参数和不宜添加动画的位置；源码只读。 | `$find-animation-opportunities 检查设置页哪些状态变化适合加动画，只输出建议。` |
+| [`animation-vocabulary`](animation-vocabulary/SKILL.md) | 将模糊的动效描述转换为准确术语。 | `$animation-vocabulary 列表项逐个延迟出现的动效叫什么？给出英文术语和中文解释。` |
+| [`apple-design`](apple-design/SKILL.md) | 将 Apple 的流畅交互原则用于 Web 手势、弹簧、惯性、层次和可打断过渡。 | `$apple-design 改进 Web 抽屉的拖拽交互，让手势保留惯性并允许中途反向拖动。` |
+| [`write-swift`](write-swift/SKILL.md) | 编写、审查或迁移 Swift，处理值类型、并发、协议、内存和性能问题。 | `$write-swift 检查 Sources/Store.swift 的并发隔离问题，按项目 Swift 版本提出修复建议。` |
+| [`pick-ui-library`](pick-ui-library/SKILL.md) | 根据任务和已有依赖，从作者维护的列表中推荐 UI 库；需要显式调用。 | `$pick-ui-library 项目需要支持键盘操作的命令菜单，先检查 package.json，再推荐一个库。` |
+| [`prototype`](prototype/SKILL.md) | 构建多个方向不同的组件原型，通过可视化选择器比较和选定；需要显式调用。 | `$prototype 为文件上传组件实现三个布局不同的方案，用切换器比较，沿用现有设计系统。` |
+| [`mobile-native`](mobile-native/SKILL.md) | 改进移动 Web 的触摸、滚动、视口、安全区域和输入体验。 | `$mobile-native 修复移动端页面的 100vh、输入框缩放和底部安全区域问题。` |
+| [`break-ui`](break-ui/SKILL.md) | 用真实极端数据检验 UI，添加演示数据与极端数据切换，并报告问题和修复建议。 | `$break-ui 给成员列表添加正常与极端数据切换，覆盖长邮箱、空列表和大计数，报告布局问题。` |
+| [`ask-sonner`](ask-sonner/SKILL.md) | 配置、使用和排查 Sonner，包括异步提示、主题、样式和重复通知。 | `$ask-sonner 检查保存成功通知为什么出现两次，定位 Toaster 挂载和 toast 调用。` |
+
+`pick-ui-library`、`prototype` 和 `review-animations` 的 `SKILL.md` 禁用了自动模型调用，使用时应明确点名。其余 skill 可根据任务自动选择；显式点名能更清楚地指定所需工作流。
+
+这组 skill 在只收到技能名、没有具体问题时，会先返回准备提示并等待任务。把具体要求与技能名一起发送即可开始工作。`improve-animations` 和 `find-animation-opportunities` 不修改源码；`prototype`、`break-ui` 和动画实现类 skill 的任务可能涉及代码修改，需要在提示词中明确范围。只想审查时，应写明“只给建议，不修改代码”。
+
+常见任务可以分步进行：
+
+1. 不知道该加哪些动画：先用 `find-animation-opportunities` 提建议，再用 `animate` 实现选中的 Web 动画。
+2. 已有动画需要改进：用 `review-animations` 审查指定改动，或用 `improve-animations` 审计并生成计划，再明确要求实施。
+3. 组件方案未定：用 `prototype` 比较不同设计，再用 `break-ui` 检验极端数据下的布局。
+4. 面向手机：移动 Web 使用 `mobile-native`，React Native / Expo 动画使用 `animate-expo`。
+
 ## SAST 使用顺序
 
 安全专项 skill 依赖统一的架构上下文，推荐按以下顺序执行：
@@ -107,7 +140,14 @@ Skills 默认安装在：
 ${CODEX_HOME:-$HOME/.codex}/skills/<skill-name>/SKILL.md
 ```
 
-通常直接描述任务即可触发对应 skill。`setup-matt-pocock-skills` 和 `to-spec` 禁用了自动模型调用，需要用户明确点名。具体流程、权限边界和依赖始终以各目录中的 `SKILL.md` 为准。
+在 Codex 对话中，可以用 `$skill-name 具体任务` 明确调用，也可以直接描述任务，让 Codex 选择支持自动调用的 skill。例如：
+
+```text
+$animate 给 src/components/Dialog.tsx 添加进入和退出动画，沿用现有依赖。
+$review-animations 审查 src/components/Dialog.tsx 的动画，只给建议。
+```
+
+`setup-matt-pocock-skills`、`to-spec`、`pick-ui-library`、`prototype` 和 `review-animations` 禁用了自动模型调用，需要用户明确点名。具体流程、权限边界和依赖始终以各目录中的 `SKILL.md` 为准。
 
 ## 维护说明
 

@@ -1,0 +1,1467 @@
+{
+  "skill_name": "review-android-motion",
+  "battery": "no-motion-language",
+  "description": "Every eval class that does not need a MOTION.md staged. One exemplar rule per class from TAXONOMY.md, so each harness shape is proven before the remaining rules are filled in behind it.",
+  "evals": [
+    {
+      "id": 10,
+      "title": "B \u00b7 T-001 detection with no motion language",
+      "class": "B. Context-dependent severity",
+      "prompt": "Review the motion in this screen. File: AppNavigation.kt",
+      "files": [
+        "evals/files/c10/AppNavigation.kt"
+      ],
+      "expect": [
+        {
+          "path": "AppNavigation.kt",
+          "lines": [
+            28,
+            36
+          ],
+          "rule": "T-001",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "AppNavigation.kt",
+          "lines": [
+            41,
+            51
+          ],
+          "note": "BorrowedList keys items by identity and animates placement with animateItem. Clean under F-003 and T-021."
+        },
+        {
+          "path": "AppNavigation.kt",
+          "lines": [
+            53,
+            68
+          ],
+          "note": "StatusBanner shows and hides with AnimatedVisibility: its slot expands while it fades in, and fades out while the slot collapses on the fast tier, so hidden means gone from layout and from TalkBack. Specs resolve to the scheme. It reports being offline, not work in progress, so it is neither a loading indicator nor background work's outcome. It used to fade alpha to 0 and stay composed \u2014 invisible, still announced, still holding its space \u2014 which baseline models reported repeatedly on a span declared clean."
+        }
+      ],
+      "expectations": [
+        "Flags the NavHost as inheriting the 700ms default",
+        "Reports it as major: nothing is written down, but every other spec in the file resolves to the motion scheme, so the NavHost is the one place that departs from the code's own convention",
+        "Does NOT flag BorrowedList or StatusBanner"
+      ]
+    },
+    {
+      "id": 11,
+      "title": "B \u00b7 T-001 precision, transitions specified",
+      "class": "B. Context-dependent severity",
+      "prompt": "Review the motion in this screen. File: AppNavigation.kt",
+      "files": [
+        "evals/files/c11/AppNavigation.kt"
+      ],
+      "expect": [],
+      "negatives": [
+        {
+          "path": "AppNavigation.kt",
+          "lines": [
+            28,
+            42
+          ],
+          "note": "All four transitions bound to product tokens, between three top-level destinations with no ordering between them. The compliant form under T-001 and T-011."
+        },
+        {
+          "path": "AppNavigation.kt",
+          "lines": [
+            44,
+            55
+          ],
+          "note": "BorrowedList, as above."
+        },
+        {
+          "path": "AppNavigation.kt",
+          "lines": [
+            57,
+            72
+          ],
+          "note": "StatusBanner, as above."
+        }
+      ],
+      "expectations": [
+        "Produces no T-001 finding",
+        "Does not object to the cross-fade itself \u2014 three top-level destinations with no ordering between them cross-fade correctly under T-011"
+      ]
+    },
+    {
+      "id": 12,
+      "title": "B \u00b7 T-001 with no convention anywhere: severity stays minor",
+      "class": "B. Context-dependent severity",
+      "prompt": "Review the motion in this screen. File: Kiosk.kt",
+      "files": [
+        "evals/files/c12/Kiosk.kt"
+      ],
+      "expect": [
+        {
+          "path": "Kiosk.kt",
+          "lines": [
+            40,
+            44
+          ],
+          "rule": "T-001",
+          "class": "taste",
+          "severity": "minor"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "Kiosk.kt",
+          "lines": [
+            52,
+            57
+          ],
+          "note": "SectionPage has no motion of its own."
+        }
+      ],
+      "expectations": [
+        "Flags the NavHost as inheriting the 700ms default",
+        "Reports it as minor: no MOTION.md, and nothing else in the file resolves a spec to tokens or the scheme, so there is no convention for it to depart from",
+        "Does NOT object to the cross-fade pattern itself: bottom-bar sections are unordered, so a cross-fade is the right pattern and only its 700ms default is at fault",
+        "Does NOT invent a motion convention the file does not show"
+      ]
+    },
+    {
+      "id": 20,
+      "title": "A \u00b7 F-001 static twin, one line apart",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: FilterBar.kt",
+      "files": [
+        "evals/files/c20/FilterBar.kt"
+      ],
+      "expect": [
+        {
+          "path": "FilterBar.kt",
+          "lines": [
+            27,
+            31
+          ],
+          "rule": "F-001",
+          "class": "floor",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "FilterBar.kt",
+          "lines": [
+            34,
+            48
+          ],
+          "note": "FilterSummary animates the identical value through offset { } \u2014 the lambda form, read in layout. The fix, fifteen lines below the defect."
+        },
+        {
+          "path": "FilterBar.kt",
+          "lines": [
+            50,
+            73
+          ],
+          "note": "FilterCount reads its animated alpha in graphicsLayer and its colour in drawBehind. Both correct."
+        }
+      ],
+      "expectations": [
+        "Flags FilterHandle's Modifier.offset(x = slide) as reading a frame-rate value during composition",
+        "Does NOT flag FilterSummary, which animates the same value correctly through offset { }",
+        "Does NOT flag FilterCount's graphicsLayer or drawBehind reads",
+        "Names offset { IntOffset(...) } as the fix, not 'use a lambda' generically"
+      ],
+      "checks": [
+        {
+          "id": "names_lambda_offset",
+          "type": "noul",
+          "instructions": "The review names the lambda form of the offset modifier \u2014 offset { IntOffset(...) } \u2014 as the specific fix, rather than only advising in general terms to use a lambda or to defer the read.",
+          "expect": true,
+          "min_confidence": 0.7
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "title": "A \u00b7 F-003 missing key, keyed twin below",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: LoanHistory.kt",
+      "files": [
+        "evals/files/c21/LoanHistory.kt"
+      ],
+      "expect": [
+        {
+          "path": "LoanHistory.kt",
+          "lines": [
+            14,
+            20
+          ],
+          "rule": "F-003",
+          "class": "floor",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "LoanHistory.kt",
+          "lines": [
+            25,
+            36
+          ],
+          "note": "Holds keys each item by its id, so animateItem() has an identity to animate. The same construct as LoanHistory with the key present."
+        }
+      ],
+      "expectations": [
+        "Flags LoanHistory's items() with animateItem() and no key",
+        "Names a key derived from the loan's identity as the fix",
+        "Does NOT flag Holds, which is keyed by id"
+      ]
+    },
+    {
+      "id": 22,
+      "title": "A \u00b7 T-021 positional key, identity-keyed twin below",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: ReadingQueue.kt",
+      "files": [
+        "evals/files/c22/ReadingQueue.kt"
+      ],
+      "expect": [
+        {
+          "path": "ReadingQueue.kt",
+          "lines": [
+            14,
+            20
+          ],
+          "rule": "T-021",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "ReadingQueue.kt",
+          "lines": [
+            25,
+            36
+          ],
+          "note": "FinishedThisYear uses itemsIndexed too, and shows the index, but keys by the book's id. Using the index for display is fine; using it as the key is the defect."
+        }
+      ],
+      "expectations": [
+        "Flags UpNext's key = { index, _ -> index }: stable, present, and derived from position",
+        "Explains that inserting one book shifts every later key, so the whole list re-animates",
+        "Does NOT flag FinishedThisYear, which displays the index but keys by id",
+        "Does NOT report the positional key as a missing key"
+      ]
+    },
+    {
+      "id": 23,
+      "title": "A \u00b7 T-017 entrance replays on return, remembered twin below",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: Artwork.kt",
+      "files": [
+        "evals/files/c23/Artwork.kt"
+      ],
+      "expect": [
+        {
+          "path": "Artwork.kt",
+          "lines": [
+            21,
+            25
+          ],
+          "rule": "T-017",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "Artwork.kt",
+          "lines": [
+            35,
+            53
+          ],
+          "note": "AuthorPortrait keeps whether it has introduced itself in rememberSaveable, which the back stack restores, so returning to the author screen does not replay the fade."
+        }
+      ],
+      "expectations": [
+        "Flags BookCover's LaunchedEffect(Unit): it re-runs whenever the composable re-enters composition, so the fade replays on every return from a detail screen",
+        "Names a flag in rememberSaveable or the screen's state holder as the fix",
+        "Does NOT flag AuthorPortrait, which already does exactly that"
+      ]
+    },
+    {
+      "id": 24,
+      "title": "A \u00b7 T-002 literal spec at a call site, token twin below",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: ShelfMotion.kt",
+      "files": [
+        "evals/files/c24/ShelfMotion.kt"
+      ],
+      "expect": [
+        {
+          "path": "ShelfMotion.kt",
+          "lines": [
+            24,
+            28
+          ],
+          "rule": "T-002",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "ShelfMotion.kt",
+          "lines": [
+            17,
+            19
+          ],
+          "note": "A literal tween inside a token definition is where literals belong. Flagging the token is the precision failure this case exists to catch."
+        },
+        {
+          "path": "ShelfMotion.kt",
+          "lines": [
+            37,
+            51
+          ],
+          "note": "NowReadingLabel resolves its spec through ShelfMotion.spineSlide(). It is on a different screen from BookSpine, so the two are not one event."
+        }
+      ],
+      "expectations": [
+        "Flags BookSpine's literal tween(...) at the call site",
+        "Names ShelfMotion.spineSlide(), the token the file already defines with the same values, as the fix",
+        "Does NOT flag the tween inside the ShelfMotion object",
+        "Does NOT flag NowReadingLabel"
+      ]
+    },
+    {
+      "id": 25,
+      "title": "A \u00b7 T-022 layout jumps on a keyboard boolean, inset-tracking twin below",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: ReviewEditors.kt",
+      "files": [
+        "evals/files/c25/ReviewEditors.kt"
+      ],
+      "expect": [
+        {
+          "path": "ReviewEditors.kt",
+          "lines": [
+            22,
+            35
+          ],
+          "rule": "T-022",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "ReviewEditors.kt",
+          "lines": [
+            40,
+            52
+          ],
+          "note": "ReplyEditor applies imePadding(), which follows the animated WindowInsets.ime value, so the button rises with the keyboard frame by frame."
+        }
+      ],
+      "expectations": [
+        "Flags ReviewEditor's padding switched on WindowInsets.isImeVisible: a boolean, so the button jumps to its final place while the keyboard is still animating",
+        "Names imePadding() or the animated WindowInsets.ime value as the fix",
+        "Does NOT flag ReplyEditor, which already uses imePadding()"
+      ]
+    },
+    {
+      "id": 26,
+      "title": "A \u00b7 F-008 animated padding, lambda-offset twin below",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: ShelfCard.kt",
+      "files": [
+        "evals/files/c26/ShelfCard.kt"
+      ],
+      "expect": [
+        {
+          "path": "ShelfCard.kt",
+          "lines": [
+            18,
+            30
+          ],
+          "rule": "F-008",
+          "class": "floor",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "ShelfCard.kt",
+          "lines": [
+            33,
+            49
+          ],
+          "note": "ReadingListRow animates the same nudge through offset { }, read in layout; its padding is static."
+        }
+      ],
+      "expectations": [
+        "Flags ShelfCard's animated padding: Modifier.padding has no lambda form, so it remeasures every frame",
+        "Names offset { } or graphicsLayer as the fix, since the intent is positional",
+        "Does NOT flag ReadingListRow",
+        "Does NOT report it as F-001: padding has no lambda form to switch to"
+      ]
+    },
+    {
+      "id": 27,
+      "title": "A \u00b7 F-004 shared element into a bottom sheet, full-screen twin below",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: CoverTransition.kt",
+      "files": [
+        "evals/files/c27/CoverTransition.kt"
+      ],
+      "expect": [
+        {
+          "path": "CoverTransition.kt",
+          "lines": [
+            23,
+            31
+          ],
+          "rule": "F-004",
+          "class": "floor",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "CoverTransition.kt",
+          "lines": [
+            34,
+            49
+          ],
+          "note": "CoverDetailsScreen shares the cover into a Compose screen, which works."
+        }
+      ],
+      "expectations": [
+        "Flags the sharedElement inside ModalBottomSheet: shared elements do not cross a View-backed container such as ModalBottomSheet or Dialog",
+        "Suggests restructuring (a Compose-hosted sheet or a full screen) or dropping the continuity",
+        "Does NOT flag CoverDetailsScreen"
+      ]
+    },
+    {
+      "id": 28,
+      "title": "A \u00b7 T-016 unanchored centre scale, anchored menu twin below",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: Welcome.kt",
+      "files": [
+        "evals/files/c28/Welcome.kt"
+      ],
+      "expect": [
+        {
+          "path": "Welcome.kt",
+          "lines": [
+            23,
+            32
+          ],
+          "rule": "T-016",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "Welcome.kt",
+          "lines": [
+            35,
+            55
+          ],
+          "note": "SortMenu scales from its top-left corner, under the button that opens it: anchored to its origin, which is how a menu enters."
+        }
+      ],
+      "expectations": [
+        "Flags BranchAnnouncement scaling up from its own centre with no anchor, which reads as flying toward the viewer",
+        "Suggests expanding on an axis or fading instead",
+        "Does NOT flag SortMenu, whose scale is anchored to its trigger",
+        "Reports it as minor: the anchored menu is a different situation, not the same construct done right, so the file holds no convention it departs from"
+      ]
+    },
+    {
+      "id": 29,
+      "title": "A \u00b7 F-002 swipe discards release velocity, Animatable twin below",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: LoanCards.kt",
+      "files": [
+        "evals/files/c29/LoanCards.kt"
+      ],
+      "expect": [
+        {
+          "path": "LoanCards.kt",
+          "lines": [
+            29,
+            56
+          ],
+          "rule": "F-002",
+          "class": "floor",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "LoanCards.kt",
+          "lines": [
+            58,
+            90
+          ],
+          "note": "HoldCard follows the finger with snapTo and hands the release velocity to animateTo."
+        }
+      ],
+      "expectations": [
+        "Flags LoanCard: the finger drives an animateFloatAsState target, so the card lags behind the drag and the release velocity is thrown away",
+        "Names Animatable with snapTo while dragging and initialVelocity on release as the fix",
+        "Does NOT flag HoldCard"
+      ]
+    },
+    {
+      "id": 30,
+      "title": "C \u00b7 O-002 absence, with a twin that is legitimately exempt",
+      "class": "C. Absence",
+      "prompt": "Review the motion in this screen. Files: SyncStatus.kt, sync_complete.json",
+      "files": [
+        "evals/files/c30/SyncStatus.kt",
+        "evals/files/c30/sync_complete.json"
+      ],
+      "expect": [
+        {
+          "path": "SyncStatus.kt",
+          "lines": [
+            17,
+            30
+          ],
+          "rule": "O-002",
+          "class": "obligation",
+          "severity": "major",
+          "also_at": [
+            {
+              "path": "sync_complete.json",
+              "lines": [
+                1,
+                54
+              ]
+            }
+          ]
+        }
+      ],
+      "negatives": [
+        {
+          "path": "SyncStatus.kt",
+          "lines": [
+            32,
+            51
+          ],
+          "note": "empty_box.json's last frame is its resting state \u2014 the carton settled and fully opaque \u2014 so seeking there with animations off shows the intended image and no marker is needed. O-002's own 'needs no marker' branch. Demanding one here is the failure this span exists to catch."
+        }
+      ],
+      "expectations": [
+        "Notices sync_complete.json has no marker named 'reduced motion' among its markers",
+        "Connects that to the outro at frames 120-150 fading the tick to zero opacity, so the last frame \u2014 where Lottie seeks when animations are off \u2014 is empty",
+        "Identifies SyncComplete as the problem: with the animation disabled the composable renders nothing at all",
+        "Does NOT demand a marker on NoResults, whose composition already rests on a readable final frame",
+        "Does not confuse the Lottie marker with the Android 'Remove animations' setting",
+        "Either location is accepted: the composable that plays it, or sync_complete.json itself."
+      ]
+    },
+    {
+      "id": 31,
+      "title": "A \u00b7 T-012 input gated on an animation, ungated twin below",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: PageTurn.kt",
+      "files": [
+        "evals/files/c31/PageTurn.kt"
+      ],
+      "expect": [
+        {
+          "path": "PageTurn.kt",
+          "lines": [
+            18,
+            40
+          ],
+          "rule": "T-012",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "PageTurn.kt",
+          "lines": [
+            42,
+            60
+          ],
+          "note": "ChapterControls runs the same nudge but never disables the button; a second tap retargets the Animatable from wherever it is."
+        }
+      ],
+      "expectations": [
+        "Flags PageControls' enabled = !turning: the Next button ignores taps until the nudge finishes",
+        "Names removing the guard as the fix, letting animateTo retarget from the current value",
+        "Does NOT flag ChapterControls",
+        "Reports it as major: the chapter controls in the same file do the same thing without gating"
+      ]
+    },
+    {
+      "id": 32,
+      "title": "A \u00b7 T-024 back fades out a screen that slid in, reversing twin below",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: BookGraph.kt",
+      "files": [
+        "evals/files/c32/BookGraph.kt"
+      ],
+      "expect": [
+        {
+          "path": "BookGraph.kt",
+          "lines": [
+            9,
+            20
+          ],
+          "rule": "T-024",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "BookGraph.kt",
+          "lines": [
+            22,
+            36
+          ],
+          "note": "The author page slides in from the end and, on back, slides out toward it: back plays the inverse of forward."
+        }
+      ],
+      "expectations": [
+        "Flags book details: it slides in from the end but back only fades it out, so back is not the inverse of forward",
+        "Names a popExitTransition that slides toward the end as the fix",
+        "Does NOT flag the author page",
+        "Reports it as major: the author page in the same file reverses its entrance"
+      ]
+    },
+    {
+      "id": 33,
+      "title": "C \u00b7 T-019 indicator with no delay or minimum, twin that has both",
+      "class": "C. Absence",
+      "prompt": "Review the motion in this screen. File: Loading.kt",
+      "files": [
+        "evals/files/c33/Loading.kt"
+      ],
+      "expect": [
+        {
+          "path": "Loading.kt",
+          "lines": [
+            20,
+            34
+          ],
+          "rule": "T-019",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "Loading.kt",
+          "lines": [
+            36,
+            70
+          ],
+          "note": "BranchHours waits 150ms before showing the indicator and, once shown, keeps it until 400ms have passed since it appeared \u2014 the delay and minimum T-019 asks for. It used to wait a flat 400ms after loading ended, which a baseline run caught as lingering."
+        }
+      ],
+      "expectations": [
+        "Flags SearchResults: the indicator appears the moment loading starts and leaves the moment it ends, so a fast query flashes it",
+        "Names a delay before showing and a minimum visible duration as the fix",
+        "Does NOT flag BranchHours, which already has both",
+        "Reports it as major: the same file does it right one function away"
+      ]
+    },
+    {
+      "id": 34,
+      "title": "F \u00b7 T-011 the same lateral slide on unordered sections and on ordered steps",
+      "class": "F. Legitimate twin",
+      "prompt": "Review the motion in this screen. File: Navigation.kt",
+      "files": [
+        "evals/files/c34/Navigation.kt"
+      ],
+      "expect": [
+        {
+          "path": "Navigation.kt",
+          "lines": [
+            11,
+            27
+          ],
+          "rule": "T-011",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "Navigation.kt",
+          "lines": [
+            29,
+            49
+          ],
+          "note": "The join steps are ordered \u2014 name, then branch, then card, moved between with Next and Back \u2014 so a lateral slide states that order correctly."
+        }
+      ],
+      "expectations": [
+        "Flags the bottom-bar sections sliding sideways: they have no order, so a directional slide asserts one that does not exist",
+        "Names the top-level cross-fade as the pattern for them",
+        "Does NOT flag the join steps, which are ordered and correctly slide",
+        "Reports it as minor: the correct slide on the join steps is a different relationship, not the same construct done right"
+      ]
+    },
+    {
+      "id": 35,
+      "title": "A \u00b7 T-023 motion waits for the response, twin that starts on the tap",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: Holds.kt",
+      "files": [
+        "evals/files/c35/Holds.kt"
+      ],
+      "expect": [
+        {
+          "path": "Holds.kt",
+          "lines": [
+            19,
+            45
+          ],
+          "rule": "T-023",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "Holds.kt",
+          "lines": [
+            47,
+            77
+          ],
+          "note": "RenewButton moves to its in-progress state on the tap, before the network call, resolves when the response lands, and a failed renewal stays visible in the control instead of silently reverting."
+        }
+      ],
+      "expectations": [
+        "Flags PlaceHoldButton: nothing changes on the tap; the button holds still until placeHold() returns, so a fast system feels slow",
+        "Names moving to the in-progress state on the tap, before the request, as the fix",
+        "Does NOT flag RenewButton",
+        "Reports it as major: RenewButton in the same file starts its motion on the tap"
+      ]
+    },
+    {
+      "id": 36,
+      "title": "C \u00b7 O-001 due-soon told only by a pulse, twin with a label",
+      "class": "C. Absence",
+      "prompt": "Review the motion in this screen. File: BookRows.kt",
+      "files": [
+        "evals/files/c36/BookRows.kt"
+      ],
+      "expect": [
+        {
+          "path": "BookRows.kt",
+          "lines": [
+            12,
+            25
+          ],
+          "rule": "O-001",
+          "class": "obligation",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "BookRows.kt",
+          "lines": [
+            27,
+            41
+          ],
+          "note": "LoanedBook pulses and also says 'Due soon' in text, so the meaning survives with animations off."
+        }
+      ],
+      "expectations": [
+        "Flags QueuedBook: the only sign that a book has become due soon is a pulse, and with Remove animations on the row looks unchanged",
+        "Names a static carrier \u2014 text, an icon, a colour at rest \u2014 as the fix, not a gentler animation",
+        "Does NOT flag LoanedBook, which labels the state"
+      ]
+    },
+    {
+      "id": 37,
+      "title": "F \u00b7 T-018 overscroll off app-wide, and off for one looping pager",
+      "class": "F. Legitimate twin",
+      "prompt": "Review the motion in this screen. File: CatalogueApp.kt",
+      "files": [
+        "evals/files/c37/CatalogueApp.kt"
+      ],
+      "expect": [
+        {
+          "path": "CatalogueApp.kt",
+          "lines": [
+            11,
+            19
+          ],
+          "rule": "T-018",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "CatalogueApp.kt",
+          "lines": [
+            21,
+            35
+          ],
+          "note": "A carousel that wraps around endlessly has no edge to stretch against, so turning overscroll off for it is correct without a comment."
+        }
+      ],
+      "expectations": [
+        "Flags CatalogueApp: providing LocalOverscrollFactory as null removes the platform stretch from every scrolling surface in the app",
+        "Says a product-wide change belongs in MOTION.md as a decision, if it is intended",
+        "Does NOT flag the carousel's overscrollEffect = null",
+        "Distinguishes the two by scope \u2014 the whole app versus one component with no edge to stretch against"
+      ]
+    },
+    {
+      "id": 38,
+      "title": "A \u00b7 F-010 sharedElement on text whose style changes, image twin below",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: BookShared.kt",
+      "files": [
+        "evals/files/c38/BookShared.kt"
+      ],
+      "expect": [
+        {
+          "path": "BookShared.kt",
+          "lines": [
+            13,
+            28
+          ],
+          "rule": "F-010",
+          "class": "floor",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "BookShared.kt",
+          "lines": [
+            30,
+            43
+          ],
+          "note": "BookCover shares the same image on both sides, which is what sharedElement expects."
+        }
+      ],
+      "expectations": [
+        "Flags BookTitle: its text style changes from bodyLarge to headlineMedium between the two screens, so sharedElement cross-fades two different renderings",
+        "Names sharedBounds as the fix for content that differs between the two sides",
+        "Does NOT flag BookCover"
+      ]
+    },
+    {
+      "id": 39,
+      "title": "A \u00b7 F-005 frame loop ignores the animator scale, twin that reads it",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: Tickers.kt",
+      "files": [
+        "evals/files/c39/Tickers.kt"
+      ],
+      "expect": [
+        {
+          "path": "Tickers.kt",
+          "lines": [
+            28,
+            67
+          ],
+          "rule": "F-005",
+          "class": "floor",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "Tickers.kt",
+          "lines": [
+            69,
+            117
+          ],
+          "note": "EventsTicker reads the MotionDurationScale its effect carries on every frame, so it stops when animations are switched off, even mid-scroll, and shows the events wrapped in full. Its pause control is the same as NewsTicker's."
+        }
+      ],
+      "expectations": [
+        "Flags NewsTicker: its withFrameNanos loop advances on its own clock, so it keeps scrolling after the user has turned animations off",
+        "Names reading the animator duration scale \u2014 the effect's MotionDurationScale, or ANIMATOR_DURATION_SCALE \u2014 and resting at a static end state as the fix",
+        "Does NOT flag EventsTicker, which already does that",
+        "Does NOT claim Compose's animation APIs need the same treatment"
+      ]
+    },
+    {
+      "id": 40,
+      "title": "D \u00b7 T-009 asks rather than asserts",
+      "class": "D. Not in the source at all",
+      "prompt": "Review the motion in this screen. File: RatingControl.kt",
+      "files": [
+        "evals/files/c40/RatingControl.kt"
+      ],
+      "expect": [],
+      "negatives": [
+        {
+          "path": "RatingControl.kt",
+          "lines": [
+            32,
+            62
+          ],
+          "note": "Whether this spring exceeds the frequency ceiling depends on how often readers rate books, which is not in this file and is not staged. Asserting a T-009 verdict here is the failure; asking, or scoping the claim to a stated assumption, is the pass. The span covers the whole control, which is otherwise correct under every rule: only newly lit stars pulse, in turn, within the stagger budget, keyed so a second tap cancels the rest; lowering the rating moves nothing beyond a frame in which a stranded star snaps home without a spring; the scale is read in graphicsLayer and returns to 1."
+        }
+      ],
+      "expectations": [
+        "Recognises that whether this exceeds the frequency ceiling depends on how often readers rate books, which is not in the source",
+        "ASKS how often this is used, or states the assumption it is reasoning from, rather than asserting a verdict",
+        "If it does raise T-009, it scopes the claim \u2014 'if this is a high-frequency surface, then\u2026' \u2014 rather than declaring a violation",
+        "Does NOT assert a usage frequency it cannot know",
+        "Does NOT flag the spring itself: fastSpatialSpec on a rare, deliberate interaction is correct",
+        "Does NOT flag the sequence or the plain retraction: only newly lit stars pulse, in turn, keyed so a second tap cancels the rest, and lowering the rating moves nothing.",
+        "GRADED: only the negative is scored here \u2014 an unscoped assertion lands on it as a false positive. Whether the reviewer actually ASKS is not machine-checked; read the transcript for that."
+      ],
+      "checks": [
+        {
+          "id": "frequency_disposition",
+          "type": "choice",
+          "instructions": "How does this review treat the question of how often the rating control is used?",
+          "criteria": {
+            "asks": "It asks the reader how often the control is used, or says it cannot judge without knowing",
+            "scopes": "It gives a conditional verdict that names the assumption, such as 'if this is high-frequency, then'",
+            "asserts": "It states a verdict about the animation being too much or fine, without asking and without naming an assumption",
+            "silent": "It does not raise the frequency or repetition of this interaction at all"
+          },
+          "expect": [
+            "asks",
+            "scopes"
+          ],
+          "min_confidence": 0.6
+        }
+      ]
+    },
+    {
+      "id": 41,
+      "title": "A \u00b7 F-007 dragged position lost on rotation, saveable twin",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: Docking.kt",
+      "files": [
+        "evals/files/c41/Docking.kt"
+      ],
+      "expect": [
+        {
+          "path": "Docking.kt",
+          "lines": [
+            30,
+            61
+          ],
+          "rule": "F-007",
+          "class": "floor",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "Docking.kt",
+          "lines": [
+            63,
+            95
+          ],
+          "note": "DownloadChip keeps the side the user docked it to in rememberSaveable and rebuilds its Animatable from it, so rotation leaves it where it was put."
+        }
+      ],
+      "expectations": [
+        "Flags NowPlayingChip: the docked side lives only in a remembered Animatable, so rotating the device snaps the chip back to the start edge",
+        "Names rememberSaveable, or equivalent saved state, as the fix",
+        "Does NOT flag DownloadChip, which already saves the docked side"
+      ]
+    },
+    {
+      "id": 42,
+      "title": "A \u00b7 T-004 Expressive spatial spring on chart bars, Standard twin",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: ReadingStats.kt",
+      "files": [
+        "evals/files/c42/ReadingStats.kt"
+      ],
+      "expect": [
+        {
+          "path": "ReadingStats.kt",
+          "lines": [
+            38,
+            51
+          ],
+          "rule": "T-004",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "ReadingStats.kt",
+          "lines": [
+            53,
+            66
+          ],
+          "note": "YearChart's bars settle on the Standard scheme's spatial spring, which does not overshoot the value it shows."
+        },
+        {
+          "path": "ReadingStats.kt",
+          "lines": [
+            68,
+            87
+          ],
+          "note": "The card's year section enters with spatial and effects on the default tier and exits with effects only on the fast tier, as T-010 asks; the charts own their own specs."
+        }
+      ],
+      "expectations": [
+        "Flags WeekChart: under the Expressive scheme its bars overshoot, briefly showing values that are not the data",
+        "Does NOT flag YearChart's bars or the card's size change"
+      ]
+    },
+    {
+      "id": 43,
+      "title": "A \u00b7 T-010 badge exits with the scale it entered with, fade-only twin",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: Badges.kt",
+      "files": [
+        "evals/files/c43/Badges.kt"
+      ],
+      "expect": [
+        {
+          "path": "Badges.kt",
+          "lines": [
+            17,
+            36
+          ],
+          "rule": "T-010",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "Badges.kt",
+          "lines": [
+            38,
+            56
+          ],
+          "note": "LoansIcon's badge enters with scale and fade and leaves with a fade only."
+        }
+      ],
+      "expectations": [
+        "Flags HoldsIcon: the badge appears in place, so its exit should drop the scale and only fade",
+        "Does NOT flag LoansIcon"
+      ]
+    },
+    {
+      "id": 44,
+      "title": "A \u00b7 T-013 stagger grows with the list, capped twin",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: Chips.kt",
+      "files": [
+        "evals/files/c44/Chips.kt"
+      ],
+      "expect": [
+        {
+          "path": "Chips.kt",
+          "lines": [
+            24,
+            35
+          ],
+          "rule": "T-013",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "Chips.kt",
+          "lines": [
+            37,
+            52
+          ],
+          "note": "AuthorChips caps the stagger at the seventh chip, so the last chip starts 300ms after the first however many there are."
+        }
+      ],
+      "expectations": [
+        "Flags GenreChips: the delay grows with the index and has no cap, so a long genre list keeps chips arriving for seconds",
+        "Names capping the count, or a total budget, as the fix rather than a smaller per-item gap",
+        "Does NOT flag AuthorChips"
+      ]
+    },
+    {
+      "id": 45,
+      "title": "A \u00b7 T-027 favourite pops when cleared as well as set, twin that pops only on save",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: Toggles.kt",
+      "files": [
+        "evals/files/c45/Toggles.kt"
+      ],
+      "expect": [
+        {
+          "path": "Toggles.kt",
+          "lines": [
+            19,
+            46
+          ],
+          "rule": "T-027",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "Toggles.kt",
+          "lines": [
+            48,
+            77
+          ],
+          "note": "SaveToggle pops when the book is saved and changes its icon plainly when it is removed."
+        }
+      ],
+      "expectations": [
+        "Flags FavouriteToggle: removing a favourite gets the same pop as adding one",
+        "Does NOT flag SaveToggle, whose plainer removal is the fix",
+        "Does NOT ask for the pop to be removed from adding a favourite"
+      ]
+    },
+    {
+      "id": 46,
+      "title": "A \u00b7 T-028 banner for a background sync, snackbar for a manual one",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: SyncNotices.kt",
+      "files": [
+        "evals/files/c46/SyncNotices.kt"
+      ],
+      "expect": [
+        {
+          "path": "SyncNotices.kt",
+          "lines": [
+            24,
+            52
+          ],
+          "rule": "T-028",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "SyncNotices.kt",
+          "lines": [
+            54,
+            61
+          ],
+          "note": "ManualSyncNotice confirms a sync the reader started with a snackbar, which T-028 permits."
+        }
+      ],
+      "expectations": [
+        "Flags ScheduledSyncNotice: a sync the app ran on its own schedule opens a banner above the shelf when it succeeds",
+        "Names removing the success banner as the fix, leaving any running indicator and any failure reporting",
+        "Does NOT flag ManualSyncNotice"
+      ]
+    },
+    {
+      "id": 47,
+      "title": "A \u00b7 T-025 hand-rolled sheet that only opens and closes, twin that drags",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: Panels.kt",
+      "files": [
+        "evals/files/c47/Panels.kt"
+      ],
+      "expect": [
+        {
+          "path": "Panels.kt",
+          "lines": [
+            29,
+            55
+          ],
+          "rule": "T-025",
+          "class": "taste",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "Panels.kt",
+          "lines": [
+            57,
+            103
+          ],
+          "note": "SortPanel follows the finger and settles with the release velocity, as a bottom sheet does."
+        }
+      ],
+      "expectations": [
+        "Flags FiltersPanel: it stands in for a bottom sheet but can only be opened and closed, never dragged",
+        "Names a drag that follows the finger and carries its release velocity as the fix",
+        "Does NOT flag SortPanel"
+      ]
+    },
+    {
+      "id": 48,
+      "title": "A \u00b7 O-003 endless marquee with no way to stop it, twin that pauses on a tap",
+      "class": "A. Static twin",
+      "prompt": "Review the motion in this screen. File: BranchBanners.kt",
+      "files": [
+        "evals/files/c48/BranchBanners.kt"
+      ],
+      "expect": [
+        {
+          "path": "BranchBanners.kt",
+          "lines": [
+            33,
+            48
+          ],
+          "rule": "O-003",
+          "class": "obligation",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "BranchBanners.kt",
+          "lines": [
+            50,
+            73
+          ],
+          "note": "ClosuresBanner runs the same endless marquee and shows the same wrapped text when animations are off, but the marquee itself is clickable with an onClickLabel of Pause or Resume. Tapping it pauses the marquee and shows the closures wrapped in full; tapping again resumes from the start, as basicMarquee always does."
+        }
+      ],
+      "expectations": [
+        "Flags HoursBanner: its marquee starts by itself, never stops, shares the screen with the catalogue, and offers no way on the screen to pause, stop or hide it; going still when animations are off does not count",
+        "Names a pause or stop control, or static text in place of the marquee, as the fix; a lower `iterations` count is not a fix",
+        "Does NOT claim basicMarquee itself honours Remove animations",
+        "Does NOT treat honouring Remove animations as satisfying O-003",
+        "Does NOT flag ClosuresBanner, which pauses and resumes on a tap with an onClickLabel"
+      ]
+    },
+    {
+      "id": 50,
+      "title": "E \u00b7 T-026 composite defect, every part correct",
+      "class": "E. Composite-only",
+      "prompt": "Review the motion in this screen. File: CheckoutSummary.kt",
+      "files": [
+        "evals/files/c50/CheckoutSummary.kt"
+      ],
+      "expect": [
+        {
+          "path": "CheckoutSummary.kt",
+          "lines": [
+            28,
+            38
+          ],
+          "rule": "T-026",
+          "class": "taste",
+          "severity": "minor"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "CheckoutSummary.kt",
+          "lines": [
+            40,
+            46
+          ],
+          "note": "TotalRow: the price changes text in place \u2014 no positional emphasis on a figure read as data."
+        },
+        {
+          "path": "CheckoutSummary.kt",
+          "lines": [
+            48,
+            59
+          ],
+          "note": "SavingsBadge: AnimatedVisibility that animates its own SIZE as well as its opacity, so the three siblings below are pushed down on the same clock as their own springs rather than jumping in one frame. Spatial+effects in, effects-plus-a-faster-shrink out. An earlier version specified enter/exit without a size animation, which silently overrode AnimatedVisibility's default expandIn and left an untimed reflow in the middle of a timed event \u2014 a real T-020 defect inside a fixture whose entire premise is that every part is individually clean. A model found it before we did."
+        },
+        {
+          "path": "CheckoutSummary.kt",
+          "lines": [
+            61,
+            73
+          ],
+          "note": "PostageNote: its text changes with the discount (postage now charged), so it is a part of the event, not an unchanged element moving. Token spec, lambda offset."
+        },
+        {
+          "path": "CheckoutSummary.kt",
+          "lines": [
+            75,
+            87
+          ],
+          "note": "LoyaltyPoints: the points earned change with the discount. Effects spec, graphicsLayer read."
+        },
+        {
+          "path": "CheckoutSummary.kt",
+          "lines": [
+            89,
+            110
+          ],
+          "note": "CheckoutButton: effects spec, colour only, read in drawBehind, clipped to its shape. It was a Card with the tint drawn behind it, which never showed: Surface paints its opaque container over the caller's drawBehind, so the one element meant to show a draw-phase read animated nothing, and baseline models said so. A clipped Box has no container to hide it."
+        }
+      ],
+      "expectations": [
+        "Identifies that five elements animate on one event and none of them leads",
+        "Reports it against the screen or CheckoutSummary itself, not against any individual composable",
+        "Treats every child as changed: the total, badge, postage, points and button colour all carry new information, so the defect is that nothing leads, not that unchanged elements move",
+        "Does NOT report the five children as five separate findings \u2014 every one of them is individually correct",
+        "Suggests choosing what the event is about, rather than tuning any single spec",
+        "Does NOT report the badge's appearance as reflowing its siblings instantly: the size change is animated on the same tier as the movement around it."
+      ],
+      "checks": [
+        {
+          "id": "composite_not_parts",
+          "type": "noul",
+          "instructions": "The review's main criticism is about the screen as a whole \u2014 several elements animating together on one event \u2014 rather than a defect in any one of the individual child composables.",
+          "expect": true,
+          "min_confidence": 0.7
+        }
+      ]
+    },
+    {
+      "id": 51,
+      "title": "E \u00b7 T-020 panel and its content on different tiers",
+      "class": "E. Composite-only",
+      "prompt": "Review the motion in this screen. File: FilterPanel.kt",
+      "files": [
+        "evals/files/c51/FilterPanel.kt"
+      ],
+      "expect": [
+        {
+          "path": "FilterPanel.kt",
+          "lines": [
+            21,
+            54
+          ],
+          "rule": "T-020",
+          "class": "taste",
+          "severity": "minor"
+        }
+      ],
+      "negatives": [],
+      "expectations": [
+        "Identifies that opening the panel is one event, and the panel expands on the slow tier while its options slide and fade in on the fast tier",
+        "Recommends one tier for the event \u2014 the options on the panel's tier, or the panel on theirs",
+        "Does NOT flag the panel's fast-tier, effects-first exit against its slow entrance: an exit is compared with other exits, not with the entrance it mirrors",
+        "Does NOT treat either animation as wrong on its own: each spec is a scheme token"
+      ]
+    },
+    {
+      "id": 60,
+      "title": "F \u00b7 F-006 legitimate twin, same construct both ways",
+      "class": "F. Legitimate twin",
+      "prompt": "Review the motion in this screen. File: ExpandableRow.kt",
+      "files": [
+        "evals/files/c60/ExpandableRow.kt"
+      ],
+      "expect": [
+        {
+          "path": "ExpandableRow.kt",
+          "lines": [
+            20,
+            40
+          ],
+          "rule": "F-006",
+          "class": "floor",
+          "severity": "major"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "ExpandableRow.kt",
+          "lines": [
+            42,
+            54
+          ],
+          "note": "CollapsibleBlurb clips deliberately: clipToBounds is explicit and a height cap bounds it, with animateContentSize ahead of both so the collapse still animates. Asserting a defect here is the failure this span exists to catch."
+        }
+      ],
+      "expectations": [
+        "Flags BookRow, whose Card draws a 6.dp elevation shadow inside an animateContentSize clip that will cut it",
+        "Does NOT assert a defect on CollapsibleBlurb, where clipping is explicit and intended",
+        "If it mentions CollapsibleBlurb at all, it asks whether the clipping is intended rather than declaring it wrong",
+        "Distinguishes the two by the surrounding signal \u2014 an elevated container versus an explicit clipToBounds with a height cap"
+      ]
+    },
+    {
+      "id": 70,
+      "title": "G \u00b7 T-008 framework path clean, defect in the hand-rolled twin",
+      "class": "G. Framework-correct (hybrid: framework path must be silent, app path must be flagged)",
+      "prompt": "Review the motion in this screen. File: ReaderScreen.kt",
+      "files": [
+        "evals/files/c70/ReaderScreen.kt"
+      ],
+      "expect": [
+        {
+          "path": "ReaderScreen.kt",
+          "lines": [
+            58,
+            60
+          ],
+          "rule": "T-008",
+          "class": "taste",
+          "severity": "minor"
+        }
+      ],
+      "negatives": [
+        {
+          "path": "ReaderScreen.kt",
+          "lines": [
+            38,
+            51
+          ],
+          "note": "NavHost already installs its own predictive-back handler and seeks with SeekableTransitionState. Zero app code is required, and flagging it is the failure this span exists to catch."
+        },
+        {
+          "path": "ReaderScreen.kt",
+          "lines": [
+            70,
+            80
+          ],
+          "note": "The notes popup grows from the button that opens it and leaves on a fade: a component appearing in place, anchored to its trigger, which is how a menu enters and exits. Two earlier versions were each a defect of their own: a panel sliding up from the bottom read as a bottom sheet with no drag, and in one version left on a fade instead of the way it came. Declared clean so a regression toward either is caught rather than tolerated."
+        }
+      ],
+      "expectations": [
+        "Does NOT flag the NavHost \u2014 the framework already seeks predictive back correctly",
+        "Flags the BackHandler closing the notes popup, which fires on commit and cannot follow the finger",
+        "Names PredictiveBackHandler with a seekable progress value as the fix",
+        "Scopes the finding to the hand-rolled popup, not to back handling in general",
+        "Does NOT flag the popup's enter/exit pair: it grows from its anchor and fades out, as a menu does, and has no edge or path to return along."
+      ],
+      "checks": [
+        {
+          "id": "flags_framework_path",
+          "type": "noul",
+          "instructions": "The review reports a defect, or asks for a change, in how the NavHost itself handles the back gesture.",
+          "expect": false,
+          "min_confidence": 0.7
+        }
+      ]
+    },
+    {
+      "id": 80,
+      "title": "G \u00b7 nothing to find: all motion is framework-owned",
+      "class": "G. Framework-correct (pure: any finding is a failure)",
+      "prompt": "Review the motion in this screen. File: SyncSettings.kt",
+      "files": [
+        "evals/files/c80/SyncSettings.kt"
+      ],
+      "expect": [],
+      "negatives": [
+        {
+          "path": "SyncSettings.kt",
+          "lines": [
+            17,
+            52
+          ],
+          "note": "Every moving thing here belongs to Material: the Switch thumb and track, the Slider thumb and its discrete ticks, and the Button's state layer and ripple. The app authors no animation at all, specifies no spec, and should not. There is nothing to report. The settings are the caller's state: they were held in remember, which rotation resets, until a model reported it."
+        }
+      ],
+      "expectations": [
+        "Produces no findings whatsoever",
+        "Does NOT ask for motion tokens on the Switch, Slider or Button \u2014 their motion is the framework's, already specified against the theme",
+        "Does NOT propose animating the Slider value, the Switch toggle or the Button press",
+        "Does NOT treat the absence of any animate*AsState call as an omission"
+      ]
+    }
+  ]
+}

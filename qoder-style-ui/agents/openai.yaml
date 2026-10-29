@@ -1,0 +1,7 @@
+interface:
+  display_name: "Qoder 风格 UI"
+  short_description: "把 Qoder 式视觉语言应用到任意现有界面，不改变产品功能"
+  brand_color: "#3F7EDB"
+  default_prompt: "使用 $qoder-style-ui 将现有界面改造成接近 Qoder 桌面端的视觉风格，保留原有功能和信息架构。"
+policy:
+  allow_implicit_invocation: true

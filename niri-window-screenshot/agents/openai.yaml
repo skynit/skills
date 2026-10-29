@@ -1,0 +1,3 @@
+interface:
+  display_name: "niri 窗口截图"
+  short_description: "按窗口 ID 直接截取 niri 应用窗口，无需切换焦点或调整窗口布局"

@@ -1,0 +1,63 @@
+{
+  "description": "Checks applied to every transcript in every battery, regardless of which case it answers or which arm produced it. Nothing here refers to a rule id, to STANDARDS.md, or to the existence of a skill: these ask whether a review is a sensible piece of work on its own terms. That matters for the measurement — a question phrased in our private vocabulary can only be answered well by an arm that shares it, which measures vocabulary again. It also matters practically, since these are the failures that make a reviewer worth switching off, and none of them are visible to span-matching. Every state is prefixed with the materials the reviewer was given, so questions about invention are answerable rather than guesswork.",
+  "universal": [
+    {
+      "id": "remedy_quality",
+      "type": "choice",
+      "instructions": "When this review reports a problem, how specific is the remedy it offers?",
+      "criteria": {
+        "specific": "It names a concrete change — a particular call, value, or construct to use instead",
+        "generic": "It names problems but only gives general advice, such as to use a different approach or follow best practice",
+        "none_needed": "It reports no problems at all, so there is no remedy to give"
+      },
+      "expect": [
+        "specific",
+        "none_needed"
+      ],
+      "min_confidence": 0.6
+    },
+    {
+      "id": "separates_seen_from_assumed",
+      "type": "noul",
+      "instructions": "Every claim in this review is either supported by what it was shown, or is flagged by the review itself as an assumption. Answer true if it makes no unsupported claims, or labels the ones it makes.",
+      "expect": true,
+      "min_confidence": 0.6
+    },
+    {
+      "id": "internally_consistent",
+      "type": "noul",
+      "instructions": "The review's prose and its summary list of findings agree: the list contains the problems the prose raised, and does not add problems the prose never mentioned.",
+      "expect": true,
+      "min_confidence": 0.6
+    },
+    {
+      "id": "stays_on_topic",
+      "type": "noul",
+      "instructions": "The review confines itself to what it was asked about — motion, animation and transitions — rather than branching into unrelated matters such as naming, architecture, or general code style.",
+      "expect": true,
+      "min_confidence": 0.6
+    },
+    {
+      "id": "conformance_claim",
+      "type": "choice",
+      "instructions": "What does this review say about whether the code follows the project's own conventions or standards?",
+      "criteria": {
+        "cannot_tell": "It says the project's conventions were not among the materials it was given, so it cannot judge whether the code follows them",
+        "asserts": "It concludes that the code does or does not follow the project's conventions without pointing to anything it was given that shows them",
+        "observed_in_code": "It points to the same thing done differently elsewhere in the code it was given, and judges this code against that, not against conventions it was never shown",
+        "not_discussed": "It does not raise project conventions at all, reviewing only on general grounds",
+        "general_standards": "It judges the code against general or framework-level guidance, such as platform or design-system best practice, without claiming to know this project's own conventions"
+      },
+      "expect": [
+        "cannot_tell",
+        "not_discussed",
+        "general_standards",
+        "observed_in_code"
+      ],
+      "min_confidence": 0.6,
+      "skip_when_staged": "MOTION.md",
+      "_skip_note": "Only meaningful when the reviewer was NOT given the conventions. With a MOTION.md staged, concluding the code does or does not follow it is the job, and this check failed every such review for doing it."
+    }
+  ],
+  "_withdrawn_note": "fabricates_input was withdrawn after it failed its own calibration reproducibly. It asked whether a review stated the contents of a document it was not given. Three wordings were tried, and the materials the reviewer was handed were added to the state so the question was answerable in principle. It still answers 'fabrication' whenever a review describes a document's contents, whether or not that document was provided: the decisive calibration pair is the SAME review judged against different materials, and it returns the same answer to both. At seven samples the same three items fail every run, so this is a stable limitation and not noise. Adding the materials list did measurably help real transcripts — with-skill failures fell from three to one and baseline confident-correct answers rose from seven to eleven — but helping is not the same as being right, and a graded check that cannot pass its own calibration should not produce numbers. Deterministic fabrication detection still exists where it matters most, as forbidden_strings on the phantom battery, and conformance_claim covers adjacent ground and calibrates cleanly."
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "CWNAS APK 打包"
+  short_description: "构建并验收用于扫码绑定的 CWNAS Android APK"
+  default_prompt: "使用 $build-cwnas-apk 为 filesharing.asia 构建一个扫码测试 APK。"
