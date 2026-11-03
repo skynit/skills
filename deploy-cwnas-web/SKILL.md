@@ -1,9 +1,9 @@
 ---
 name: deploy-cwnas-web
-description: Safely replace and verify the official CWNAS Web client on cwnas.net or another CWNAS host. Use when the user asks to upload, replace, or redeploy a packaged CWNAS Web build; do not use for backend binary deployments.
+description: "部署或替换已打包的 CWNAS 官方穿透平台前端静态资源，并验证线上页面与资源。用于用户明确要求发布官方穿透平台前端或上传其 Web 发布包时；不部署知识库 Vue 前端、模型后端或穿透测试平台。"
 ---
 
-# Deploy CWNAS Web
+# CWNAS 官方穿透平台前端部署
 
 Deploy only the packaged Web resources. Do not replace the `cwnas` binary, change server configuration, run `cwnas install`, or restart the service unless the user separately requests it.
 

@@ -1,0 +1,3 @@
+interface:
+  display_name: "kotlin指南"
+  short_description: "统一使用 Kotlin 官方技能专题，按任务读取构建、迁移与后端引用"

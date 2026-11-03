@@ -1,6 +1,6 @@
 ---
 name: code-review-and-quality
-description: Conducts multi-axis code review. Use before merging any change. Use when reviewing code written by yourself, another agent, or a human. Use when you need to assess code quality across multiple dimensions before it enters the main branch. Use when asked to review a diff or a pull request, even when the diff is pasted inline.
+description: Review code changes for correctness, readability, architecture, security, and performance. Use for uncommitted work, commits, branches, PRs, or an independent review of completed implementation. Prepare scoped reviewer context when delegation is appropriate; plan review belongs to review-code-plan.
 ---
 
 # Code Review and Quality
@@ -18,6 +18,14 @@ Multi-dimensional code review with quality gates. Every change gets reviewed bef
 - When another agent or model produced code you need to evaluate
 - When refactoring existing code
 - After any bug fix (review both the fix and the regression test)
+
+## 审查范围与授权
+
+- 默认只读，不修改源码、测试、配置、索引、HEAD 或分支状态；只有任务已明确授权修复时，才在该范围内实施修复。审查意见本身不扩大授权。
+- 未指定基线时，以最终工作区为准，覆盖已暂存、未暂存及未跟踪源码。`git diff HEAD` 不含未跟踪文件，须单独读取；明确指定提交或分支时核对用户实际要审查的比较范围。
+- 先读适用的 `AGENTS.md`，再按需要读取调用方、契约和测试。验证遵守项目允许的最小范围；只读限制下不能执行的实验明确列为未验证项。
+- 需要独立视角时，使用可用的子代理工具派发一次审查，按 [独立审查模板](references/reviewer-prompt.md) 提供需求、目标、准确的差异命令、项目规则和验证证据。已作为审查者执行时直接审查，不递归派发审查。
+- 先报告有证据的问题及影响，再说明验证范围与剩余风险；无实质问题时明确说明。
 
 ## The Five-Axis Review
 
@@ -161,7 +169,7 @@ Tests reveal intent and coverage:
 - Would the tests catch a regression if the code changed?
 ```
 
-Answer the last question by experiment, not by reading. Invert one condition the change adds (drop a negation, swap `&&` for `||`), run the suite, then restore the file from a copy. A mutation that stays green is a finding: name the test case that is missing. For a project-wide mutation score, see `constraint-driven-development`.
+Trace each changed behavior to a test assertion that would detect its regression. A read-only review must not invert conditions or edit tests in the checkout. When mutation testing is explicitly authorized, run it in a permitted isolated copy and use only targeted checks. Otherwise report the specific missing case or verification gap from source evidence. Project-wide mutation scores and thresholds belong in the project's existing quality configuration and authorized CI workflow; this review does not set up a separate constraints system.
 
 ### Step 3: Review the Implementation
 
@@ -204,49 +212,15 @@ Check the author's verification story:
 - Is there a before/after comparison?
 ```
 
-## Multi-Model Review Pattern
+## Independent Review
 
-Use different models for different review perspectives:
+For a major implementation, a complex fix, or a pre-merge review that benefits from independent scrutiny, give one fresh reviewer the context in [references/reviewer-prompt.md](references/reviewer-prompt.md). Supply requirements and artifacts instead of the entire session history or the author's desired verdict. Use the available reviewer capability; when delegation is unavailable, perform the same scoped review directly and state that limitation.
 
-```
-Model A writes the code
-    │
-    ▼
-Model B reviews for correctness and architecture
-    │
-    ▼
-Model A addresses the feedback
-    │
-    ▼
-Human makes the final call
-```
-
-This catches issues that a single model might miss — different models have different blind spots.
-
-**Example prompt for a review agent:**
-```
-Review this code change for correctness, security, and adherence to
-our project conventions. The spec says [X]. The change should [Y].
-Flag any issues as Critical, Required, Optional, or Nit.
-```
+Evaluate findings against the source and task contract. Apply fixes only within existing authorization, then verify the affected behavior. Report unresolved findings and justified disagreements without treating stylistic preferences as defects.
 
 ## Dead Code Hygiene
 
-After any refactoring or implementation change, check for orphaned code:
-
-1. Identify code that is now unreachable or unused
-2. List it explicitly
-3. **Ask before deleting:** "Should I remove these now-unused elements: [list]?"
-
-Don't leave dead code lying around — it confuses future readers and agents. But don't silently delete things you're not sure about. When in doubt, ask.
-
-```
-DEAD CODE IDENTIFIED:
-- formatLegacyDate() in src/utils/date.ts — replaced by formatDate()
-- OldTaskCard component in src/components/ — replaced by TaskCard
-- LEGACY_API_URL constant in src/config.ts — no remaining references
-→ Safe to remove these?
-```
+Identify declarations made unreachable or unused by the change, verify their callers, and report the evidence and impact. In a read-only review, propose the smallest cleanup. When cleanup is already explicitly authorized, apply only that scope; ask only when the authority or behavioral effect is unresolved.
 
 ## Review Speed
 
@@ -388,11 +362,10 @@ For triaging `npm audit` findings and supply-chain risk (typosquatting, compromi
 
 After review is complete:
 
-- [ ] All Critical issues are resolved
-- [ ] All Required (no-prefix) changes are resolved or explicitly deferred with justification
-- [ ] Tests pass
-- [ ] Build succeeds
-- [ ] The verification story is documented (what changed, how it was verified)
+- [ ] Critical and Required findings are reported with evidence and their unresolved status
+- [ ] Any authorized fixes are checked against the affected behavior
+- [ ] Test and build evidence is recorded accurately; checks not run are explicitly marked
+- [ ] The verification story is documented (scope, evidence, and gaps)
 - [ ] Dependency upgrades were reviewed against their changelog, isolated per package, and verified by a green suite with the lockfile diff reviewed
 
 **Presumptive blockers:** surface and propose the simpler design for each of these; escalate to Required only when the change actively makes structure worse: a refactor that relocates complexity instead of reducing it; a change that pushes a file past the size boundary with no decomposition; feature logic added to a shared module; a near-duplicate of an existing canonical helper; a silent fallback that hides an unclear invariant.

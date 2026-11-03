@@ -1,6 +1,6 @@
 ---
 name: deploy-kb-frontend
-description: 打包并部署 CWNAS 知识库 Vue 前端：执行 npm run build、压缩 dist、通过 SSH 上传到 /var/ai，保留 html2 备份后切换 html 并校验线上资源。用于“部署知识库前端”“把 dist 上传到 ai.cwnas.com”等请求；不用于 Flutter 穿透平台或 Go 后端部署。
+description: "构建并部署 CWNAS 知识库 Vue 前端到 ai.cwnas.com 对应静态站点，保留旧目录并校验线上资源。用于部署知识库前端或上传其 dist 时；只要求打包时仅交付产物，不部署模型后端、网关或穿透平台。"
 ---
 
 # 部署知识库前端

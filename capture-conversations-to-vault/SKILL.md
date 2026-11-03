@@ -1,6 +1,6 @@
 ---
 name: capture-conversations-to-vault
-description: Distill the current Codex conversation and relevant side threads into the user's local Obsidian knowledge vault at /home/skynit/workspace/note. Use when the user asks to insert, archive, summarize, merge, organize, or write conversation knowledge into the local knowledge base, update an existing vault note from chat context, or consolidate related Codex side conversations into durable notes.
+description: "将当前对话或用户指定的相关会话整理为知识，写入本地 Obsidian 笔记库。用于用户要求把对话知识入库、归档、合并或更新笔记时；优先融入现有笔记，未请求入库时不因普通问答而写文件。"
 ---
 
 # Capture Conversations To Vault

@@ -1,0 +1,621 @@
+{
+  "repository": "https://github.com/Kotlin/kotlin-agent-skills",
+  "version": "1.0.0",
+  "commit": "c2f90697bf71966a117a13340d5fff787f004140",
+  "commit_date": "2026-09-11T16:29:21+02:00",
+  "imported_on": "2026-10-30",
+  "license": "Apache-2.0",
+  "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+  "upstream_notice_files": [],
+  "topic_count": 10,
+  "source_file_count": 51,
+  "topics": [
+    {
+      "name": "kotlin-backend-jpa-entity-mapping",
+      "description_zh": "Kotlin 后端的 JPA 实体、标识与相等性、唯一约束、关联关系和查询加载策略",
+      "upstream_frontmatter": {
+        "name": "kotlin-backend-jpa-entity-mapping",
+        "description": "Model Kotlin persistence code correctly for Spring Data JPA and Hibernate. Covers entity design, identity and equality, uniqueness constraints, relationships, fetch plans, and common ORM (Object-Relational Mapping) traps  specific to Kotlin. Use when creating or reviewing JPA (Java Persistence API)  entities, diagnosing N+1 or LazyInitializationException, placing indexes and  uniqueness rules, or preventing Kotlin-specific bugs such as data class  entities and broken equals/hashCode.\n",
+        "license": "Apache-2.0",
+        "metadata": {
+          "author": "JetBrains",
+          "version": "1.0.0"
+        }
+      }
+    },
+    {
+      "name": "kotlin-tooling-agp9-migration",
+      "description_zh": "Kotlin 多平台项目迁移到 Android Gradle Plugin 9，按模块类型选择拆分和配置迁移路径",
+      "upstream_frontmatter": {
+        "name": "kotlin-tooling-agp9-migration",
+        "description": "Migrates Kotlin Multiplatform (KMP) projects to Android Gradle Plugin 9.0+. Handles plugin replacement (com.android.kotlin.multiplatform.library), module splitting, DSL migration, and the new default project structure. Use when upgrading AGP, when build fails due to KMP+AGP incompatibility, or when the user mentions AGP 9.0, android multiplatform plugin, KMP migration, or com.android.kotlin.multiplatform.library.\n",
+        "license": "Apache-2.0",
+        "metadata": {
+          "author": "JetBrains",
+          "version": "1.0.0"
+        }
+      }
+    },
+    {
+      "name": "kotlin-tooling-cocoapods-spm-migration",
+      "description_zh": "多平台项目的 Apple 平台依赖从 CocoaPods 转到 Swift Package Manager",
+      "upstream_frontmatter": {
+        "name": "kotlin-tooling-cocoapods-spm-migration",
+        "description": "Migrate KMP projects from CocoaPods (kotlin(\"native.cocoapods\")) to Swift Package Manager (swiftPMDependencies DSL) — replaces pod() with swiftPackage(), transforms cocoapods.* imports to swiftPMImport.*, and reconfigures the Xcode project.",
+        "license": "Apache-2.0",
+        "metadata": {
+          "author": "JetBrains",
+          "version": "1.0.0"
+        }
+      }
+    },
+    {
+      "name": "kotlin-tooling-gradle-to-kotlin-toolchain-plugin",
+      "description_zh": "将单个已有 Gradle 插件的构建任务和配置迁移到 Kotlin Toolchain 本地插件",
+      "upstream_frontmatter": {
+        "name": "kotlin-tooling-gradle-to-kotlin-toolchain-plugin",
+        "description": "Load when porting, converting, or reimplementing a single Gradle plugin as a Kotlin Toolchain local plugin, or when mapping Gradle plugin concepts (Task, Extension, project.version, dependsOn, -P properties, afterEvaluate) to Toolchain analogs. Skip for migrating a whole Gradle project or authoring a plugin from scratch.\n",
+        "license": "Apache-2.0",
+        "metadata": {
+          "author": "github:@singleton11",
+          "version": "0.1.0"
+        }
+      }
+    },
+    {
+      "name": "kotlin-tooling-gradle-to-kotlin-toolchain-project",
+      "description_zh": "将整个 Gradle Kotlin 项目及其持续集成配置迁移到 Kotlin Toolchain",
+      "upstream_frontmatter": {
+        "name": "kotlin-tooling-gradle-to-kotlin-toolchain-project",
+        "description": "Load when migrating or converting an entire Gradle Kotlin project (build.gradle(.kts), wrapper, libs.versions.toml, buildSrc) to the Kotlin Toolchain, including rewriting CI and replacing Gradle plugins that have no native Toolchain equivalent. Skip for porting one Gradle plugin or general Toolchain work once Gradle is gone.\n",
+        "license": "Apache-2.0",
+        "metadata": {
+          "author": "github:@singleton11",
+          "version": "0.1.0"
+        }
+      }
+    },
+    {
+      "name": "kotlin-tooling-immutable-collections-0-5-x-migration",
+      "description_zh": "kotlinx.collections.immutable 升级到 0.5.x，依据编译提示迁移返回新集合的方法",
+      "upstream_frontmatter": {
+        "name": "kotlin-tooling-immutable-collections-0-5-x-migration",
+        "description": "Migrate Kotlin (and Java) code from kotlinx.collections.immutable 0.3.x / 0.4.x to the latest 0.5.x. The 0.5.x line renames every copy-returning method on PersistentList / PersistentMap / PersistentSet / PersistentCollection to a participial form per KEEP-0459 (add→adding, removeAt→removingAt, set→replacingAt, put→putting, clear→cleared, …) and deprecates the old names (WARNING, with ReplaceWith). Driven by the compiler: bump the version, recompile, and apply the rename each deprecation warning names. Use when the user mentions kotlinx.collections.immutable 0.5.x, PersistentList migration, \"Use adding() instead\", KEEP-0459, or sees deprecation warnings from kotlinx.collections.immutable.\n",
+        "license": "Apache-2.0",
+        "metadata": {
+          "author": "JetBrains",
+          "version": "2.4.0"
+        }
+      }
+    },
+    {
+      "name": "kotlin-tooling-java-to-kotlin",
+      "description_zh": "将 Java 转为 Kotlin，按 Spring、Hibernate、Jackson 等项目框架保留行为",
+      "upstream_frontmatter": {
+        "name": "kotlin-tooling-java-to-kotlin",
+        "description": "Use when converting Java source files to idiomatic Kotlin, when user mentions \"java to kotlin\", \"j2k\", \"convert java\", \"migrate java to kotlin\", or when working with .java files that need to become .kt files. Handles framework-aware conversion for Spring, Lombok, Hibernate, Jackson, Micronaut, Quarkus, Dagger/Hilt, RxJava, JUnit, Guice, Retrofit, and Mockito.\n",
+        "license": "Apache-2.0",
+        "metadata": {
+          "author": "JetBrains",
+          "version": "1.0.0"
+        }
+      }
+    },
+    {
+      "name": "kotlin-tooling-kotlin-toolchain",
+      "description_zh": "使用已选定的 Kotlin Toolchain 构建工具，处理项目配置、模块、构建和验证",
+      "upstream_frontmatter": {
+        "name": "kotlin-tooling-kotlin-toolchain",
+        "description": "Load when building, running, testing, packaging, linting, or configuring a Kotlin/Java project with the Kotlin Toolchain (JetBrains' unified CLI, formerly Amper), when scaffolding a new or greenfield Kotlin project, or when the repo has project.yaml, module.yaml, or a ./kotlin wrapper. Skip for existing Gradle/Maven projects.\n",
+        "license": "Apache-2.0",
+        "metadata": {
+          "author": "github:@singleton11",
+          "version": "0.1.0",
+          "provider": "anthropic",
+          "tested_models": "anthropic/claude-sonnet-5, anthropic/claude-opus-5",
+          "agent_version": "claude-code",
+          "last_eval": "2026-08-14"
+        }
+      }
+    },
+    {
+      "name": "kotlin-tooling-kotlin-toolchain-plugin-authoring",
+      "description_zh": "从零编写 Kotlin Toolchain 本地插件，扩展声明式配置无法表达的构建步骤",
+      "upstream_frontmatter": {
+        "name": "kotlin-tooling-kotlin-toolchain-plugin-authoring",
+        "description": "Load when authoring, writing, or designing a Kotlin Toolchain local plugin to extend the declarative build with code generation, build-time processing, custom verification, or packaging that module.yaml cannot express, or when referencing @TaskAction, @Configurable, plugin.yaml, or jvm/amper-plugin. Skip for porting an existing Gradle plugin.\n",
+        "license": "Apache-2.0",
+        "metadata": {
+          "author": "github:@singleton11",
+          "version": "0.1.0"
+        }
+      }
+    },
+    {
+      "name": "kotlin-tooling-native-build-performance",
+      "description_zh": "定位 Kotlin/Native 的 iOS 编译、链接、缓存、目标选择与生成代码成本",
+      "upstream_frontmatter": {
+        "name": "kotlin-tooling-native-build-performance",
+        "description": "Diagnoses and fixes slow Kotlin/Native compilation and linking in Kotlin Multiplatform projects that target iOS. Use when the user reports slow iOS or shared-framework builds, long linkDebug*/linkRelease* or XCFramework tasks, cold CI builds that re-download the Kotlin/Native toolchain, KSP or other generated code on the native path, transitiveExport usage, or asks for a local-development versus CI build performance plan.\n",
+        "license": "Apache-2.0",
+        "metadata": {
+          "author": "JetBrains",
+          "version": "1.0.0",
+          "tested_models": "openai/gpt-5.5, openai/gpt-5.4-mini",
+          "last_eval": "2026-07-06"
+        }
+      }
+    }
+  ],
+  "transformations": [
+    "Convert all SKILL.md files into guide.md references; retain original authors, versions and full YAML metadata in this manifest.",
+    "Preserve all companion references, assets, scripts and evaluation files with original file modes.",
+    "Adjust local Markdown links to imported document paths; include prominent local modification notices in changed Markdown files.",
+    "Keep Apache-2.0 license; do not install upstream plugin registration or expose independent topic skills."
+  ],
+  "modified_references": [
+    "references/topics/kotlin-backend-jpa-entity-mapping/guide.md",
+    "references/topics/kotlin-tooling-agp9-migration/guide.md",
+    "references/topics/kotlin-tooling-cocoapods-spm-migration/guide.md",
+    "references/topics/kotlin-tooling-gradle-to-kotlin-toolchain-plugin/guide.md",
+    "references/topics/kotlin-tooling-gradle-to-kotlin-toolchain-project/guide.md",
+    "references/topics/kotlin-tooling-immutable-collections-0-5-x-migration/guide.md",
+    "references/topics/kotlin-tooling-java-to-kotlin/guide.md",
+    "references/topics/kotlin-tooling-kotlin-toolchain/guide.md",
+    "references/topics/kotlin-tooling-kotlin-toolchain/references/examples.md",
+    "references/topics/kotlin-tooling-kotlin-toolchain-plugin-authoring/guide.md",
+    "references/topics/kotlin-tooling-native-build-performance/guide.md"
+  ],
+  "link_changes": [
+    {
+      "source": "skills/kotlin-tooling-gradle-to-kotlin-toolchain-plugin/SKILL.md",
+      "old": "../kotlin-tooling-kotlin-toolchain/SKILL.md#untrusted-project-input",
+      "new": "../kotlin-tooling-kotlin-toolchain/guide.md#untrusted-project-input"
+    },
+    {
+      "source": "skills/kotlin-tooling-gradle-to-kotlin-toolchain-project/SKILL.md",
+      "old": "../kotlin-tooling-kotlin-toolchain/SKILL.md#untrusted-project-input",
+      "new": "../kotlin-tooling-kotlin-toolchain/guide.md#untrusted-project-input"
+    },
+    {
+      "source": "skills/kotlin-tooling-gradle-to-kotlin-toolchain-project/SKILL.md",
+      "old": "../kotlin-tooling-gradle-to-kotlin-toolchain-plugin/SKILL.md#no--p-properties",
+      "new": "../kotlin-tooling-gradle-to-kotlin-toolchain-plugin/guide.md#no--p-properties"
+    },
+    {
+      "source": "skills/kotlin-tooling-gradle-to-kotlin-toolchain-project/SKILL.md",
+      "old": "../kotlin-tooling-kotlin-toolchain/SKILL.md#ios-apps",
+      "new": "../kotlin-tooling-kotlin-toolchain/guide.md#ios-apps"
+    },
+    {
+      "source": "skills/kotlin-tooling-kotlin-toolchain/SKILL.md",
+      "old": "../kotlin-tooling-gradle-to-kotlin-toolchain-project/SKILL.md#ios-kmp-a-migrated-infoplist-loses-its-cfbundle-keys",
+      "new": "../kotlin-tooling-gradle-to-kotlin-toolchain-project/guide.md#ios-kmp-a-migrated-infoplist-loses-its-cfbundle-keys"
+    },
+    {
+      "source": "skills/kotlin-tooling-kotlin-toolchain/SKILL.md",
+      "old": "../kotlin-tooling-gradle-to-kotlin-toolchain-plugin/SKILL.md",
+      "new": "../kotlin-tooling-gradle-to-kotlin-toolchain-plugin/guide.md"
+    },
+    {
+      "source": "skills/kotlin-tooling-kotlin-toolchain/references/examples.md",
+      "old": "../../kotlin-tooling-kotlin-toolchain-plugin-authoring/SKILL.md",
+      "new": "../../kotlin-tooling-kotlin-toolchain-plugin-authoring/guide.md"
+    },
+    {
+      "source": "skills/kotlin-tooling-kotlin-toolchain/references/examples.md",
+      "old": "../SKILL.md#templates",
+      "new": "../guide.md#templates"
+    }
+  ],
+  "files": [
+    {
+      "source": "skills/kotlin-backend-jpa-entity-mapping/SKILL.md",
+      "reference": "references/topics/kotlin-backend-jpa-entity-mapping/guide.md",
+      "source_sha256": "5d9c864a55c5ad29f54a807820672a9b5e0360ee33006c63a396a31bef0d8f4e",
+      "reference_sha256": "44357d87c293d76b282459a15bf5b12d4cabdecb948d7bc963d14f183f072ac4",
+      "modified": true,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-agp9-migration/SKILL.md",
+      "reference": "references/topics/kotlin-tooling-agp9-migration/guide.md",
+      "source_sha256": "eec4224102bdea5779f7a181a4f3dc946efee5b7398b207c1467f1f84aeaa0a6",
+      "reference_sha256": "2046438c2ebadd651deb8bd4e82accc64afdf5c8065e9df7030681dc71fa72b7",
+      "modified": true,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-agp9-migration/assets/checklist.md",
+      "reference": "references/topics/kotlin-tooling-agp9-migration/assets/checklist.md",
+      "source_sha256": "bccb1adb33a00368e09b94d4cce19b3f3b60da0dab6441664249c078d3dce31c",
+      "reference_sha256": "bccb1adb33a00368e09b94d4cce19b3f3b60da0dab6441664249c078d3dce31c",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-agp9-migration/references/DSL-REFERENCE.md",
+      "reference": "references/topics/kotlin-tooling-agp9-migration/references/DSL-REFERENCE.md",
+      "source_sha256": "aeeb39d3c4ce1d901e9e4d2b5be3b815b9e43169bb488e0c6661cba0ef5220d4",
+      "reference_sha256": "aeeb39d3c4ce1d901e9e4d2b5be3b815b9e43169bb488e0c6661cba0ef5220d4",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-agp9-migration/references/KNOWN-ISSUES.md",
+      "reference": "references/topics/kotlin-tooling-agp9-migration/references/KNOWN-ISSUES.md",
+      "source_sha256": "5b15e61f34e3821f40fb26d1a5a9cdce4c9cea1915b6be147df2d43ed883027f",
+      "reference_sha256": "5b15e61f34e3821f40fb26d1a5a9cdce4c9cea1915b6be147df2d43ed883027f",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-agp9-migration/references/MIGRATION-APP-SPLIT.md",
+      "reference": "references/topics/kotlin-tooling-agp9-migration/references/MIGRATION-APP-SPLIT.md",
+      "source_sha256": "77b614b62dd495d4954414cfbafdbd1ee4c888ead08ee8c4df20db64ad23f2bb",
+      "reference_sha256": "77b614b62dd495d4954414cfbafdbd1ee4c888ead08ee8c4df20db64ad23f2bb",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-agp9-migration/references/MIGRATION-FULL-RESTRUCTURE.md",
+      "reference": "references/topics/kotlin-tooling-agp9-migration/references/MIGRATION-FULL-RESTRUCTURE.md",
+      "source_sha256": "3cb0f06dd7c213603b39b086fe33685fa00d56d14bfbd59c53569a5faa1e21ef",
+      "reference_sha256": "3cb0f06dd7c213603b39b086fe33685fa00d56d14bfbd59c53569a5faa1e21ef",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-agp9-migration/references/MIGRATION-LIBRARY.md",
+      "reference": "references/topics/kotlin-tooling-agp9-migration/references/MIGRATION-LIBRARY.md",
+      "source_sha256": "381928ff702602d6384b3fc08402f74dc48f1b20a2085419202ce4191f8caaaf",
+      "reference_sha256": "381928ff702602d6384b3fc08402f74dc48f1b20a2085419202ce4191f8caaaf",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-agp9-migration/references/PLUGIN-COMPATIBILITY.md",
+      "reference": "references/topics/kotlin-tooling-agp9-migration/references/PLUGIN-COMPATIBILITY.md",
+      "source_sha256": "ec47b996d9459c435fb2ca0588bb35189bc81370c533fee8f38cec93755e92a8",
+      "reference_sha256": "ec47b996d9459c435fb2ca0588bb35189bc81370c533fee8f38cec93755e92a8",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-agp9-migration/references/VERSION-MATRIX.md",
+      "reference": "references/topics/kotlin-tooling-agp9-migration/references/VERSION-MATRIX.md",
+      "source_sha256": "81537c09a682c476beec70fe7b0075799b7393857f2227164709b66a2446c256",
+      "reference_sha256": "81537c09a682c476beec70fe7b0075799b7393857f2227164709b66a2446c256",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-agp9-migration/scripts/analyze-project.sh",
+      "reference": "references/topics/kotlin-tooling-agp9-migration/scripts/analyze-project.sh",
+      "source_sha256": "6f3929ae06341793e373f24bf868f4aa026efc3a0b819e03473e28c84da57f5d",
+      "reference_sha256": "6f3929ae06341793e373f24bf868f4aa026efc3a0b819e03473e28c84da57f5d",
+      "modified": false,
+      "mode": "0o755"
+    },
+    {
+      "source": "skills/kotlin-tooling-cocoapods-spm-migration/SKILL.md",
+      "reference": "references/topics/kotlin-tooling-cocoapods-spm-migration/guide.md",
+      "source_sha256": "06d75416ed876c18d950493a5aefe6ef5dd5cb955ec0c1d6c1c45cac8ab839ca",
+      "reference_sha256": "2aa53aa0e09812db3e16c76cdd27723104ca718594d70b36d5b417c874010ac7",
+      "modified": true,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-cocoapods-spm-migration/references/cocoapods-extras-patterns.md",
+      "reference": "references/topics/kotlin-tooling-cocoapods-spm-migration/references/cocoapods-extras-patterns.md",
+      "source_sha256": "38e9886bc1a3706b4b9fdfd51f38940ce47708e8d524276df160ca8af530f629",
+      "reference_sha256": "38e9886bc1a3706b4b9fdfd51f38940ce47708e8d524276df160ca8af530f629",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-cocoapods-spm-migration/references/common-pods-mapping.md",
+      "reference": "references/topics/kotlin-tooling-cocoapods-spm-migration/references/common-pods-mapping.md",
+      "source_sha256": "6f3cb5a2c2a0b096720ad4cb97a744e004e9598b3b4e26b5b8420633c14e5791",
+      "reference_sha256": "6f3cb5a2c2a0b096720ad4cb97a744e004e9598b3b4e26b5b8420633c14e5791",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-cocoapods-spm-migration/references/dsl-reference.md",
+      "reference": "references/topics/kotlin-tooling-cocoapods-spm-migration/references/dsl-reference.md",
+      "source_sha256": "67b05e2de0f117463f8d743e624a9241f6820bea0380292b5b026a58050b5145",
+      "reference_sha256": "67b05e2de0f117463f8d743e624a9241f6820bea0380292b5b026a58050b5145",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-cocoapods-spm-migration/references/migration-report-template.md",
+      "reference": "references/topics/kotlin-tooling-cocoapods-spm-migration/references/migration-report-template.md",
+      "source_sha256": "ea0d1fa2f4db039ad04f919a964f634ccd1b890336852574399eeaa74e84e7f5",
+      "reference_sha256": "ea0d1fa2f4db039ad04f919a964f634ccd1b890336852574399eeaa74e84e7f5",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-cocoapods-spm-migration/references/troubleshooting.md",
+      "reference": "references/topics/kotlin-tooling-cocoapods-spm-migration/references/troubleshooting.md",
+      "source_sha256": "aee1e42d1f4dd6e8fafba6de59896e1d6b667ada352de6d0e8c0bdc2971108da",
+      "reference_sha256": "aee1e42d1f4dd6e8fafba6de59896e1d6b667ada352de6d0e8c0bdc2971108da",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-gradle-to-kotlin-toolchain-plugin/SKILL.md",
+      "reference": "references/topics/kotlin-tooling-gradle-to-kotlin-toolchain-plugin/guide.md",
+      "source_sha256": "dd76f4da8ea636a3cead5a77726df0d7543ce020b45802fc97db48bc253b11d0",
+      "reference_sha256": "c4dd493ca3ed4e5175f3ab1a09061a5ba3fe1d869adb190db544fb8d19689ca6",
+      "modified": true,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-gradle-to-kotlin-toolchain-plugin/references/examples.md",
+      "reference": "references/topics/kotlin-tooling-gradle-to-kotlin-toolchain-plugin/references/examples.md",
+      "source_sha256": "e5e38dc31ea60cd2da058906d7f4ba32729c1db4dfb4f62f11e9286c9e1ed9b9",
+      "reference_sha256": "e5e38dc31ea60cd2da058906d7f4ba32729c1db4dfb4f62f11e9286c9e1ed9b9",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-gradle-to-kotlin-toolchain-project/SKILL.md",
+      "reference": "references/topics/kotlin-tooling-gradle-to-kotlin-toolchain-project/guide.md",
+      "source_sha256": "46e0412c3938d03da9311a50f3c29c30ce7f203ab14c2a76b1dd335219bf73b3",
+      "reference_sha256": "7164b369ef18270b66939b5c16d847e93096604f4c55c5543db1496b17c5acbe",
+      "modified": true,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-gradle-to-kotlin-toolchain-project/references/examples.md",
+      "reference": "references/topics/kotlin-tooling-gradle-to-kotlin-toolchain-project/references/examples.md",
+      "source_sha256": "1509ed330079ce1276e1c9ef3dba006eaaecedca7afafa71e066201423363c5e",
+      "reference_sha256": "1509ed330079ce1276e1c9ef3dba006eaaecedca7afafa71e066201423363c5e",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-immutable-collections-0-5-x-migration/SKILL.md",
+      "reference": "references/topics/kotlin-tooling-immutable-collections-0-5-x-migration/guide.md",
+      "source_sha256": "7b161da34a28fc5a6855b6e1b6c1749fbc754eaa29b911ec0cc8bb532b0c9d26",
+      "reference_sha256": "1925239805a5ce0e8d50e0db9970f98e2e3f40e8497a8ed1e564e0f791fea808",
+      "modified": true,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/SKILL.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/guide.md",
+      "source_sha256": "5b372715adac4df37e3261040ead2d0c937a5e06a55178fa5ff0fcc95adc1944",
+      "reference_sha256": "3c6e4b57d151d2e72984c98f66c7d9ccab61695a4f9683888dbd1c4fed84f5e7",
+      "modified": true,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/assets/checklist.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/assets/checklist.md",
+      "source_sha256": "b2cafa681d87c3d6b9ce730954943ccc306e0c3c5d96f3f7eb0d6726d108bb40",
+      "reference_sha256": "b2cafa681d87c3d6b9ce730954943ccc306e0c3c5d96f3f7eb0d6726d108bb40",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/references/CONVERSION-METHODOLOGY.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/references/CONVERSION-METHODOLOGY.md",
+      "source_sha256": "b83aaed4331d632065008872bb5db9898f4bb3c14a76b73e166b2509ab48f4ea",
+      "reference_sha256": "b83aaed4331d632065008872bb5db9898f4bb3c14a76b73e166b2509ab48f4ea",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/references/KNOWN-ISSUES.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/references/KNOWN-ISSUES.md",
+      "source_sha256": "581cce6cb0b8c353c2f573435c9b2ba36a0f3768aee755680c652dd4067e5e34",
+      "reference_sha256": "581cce6cb0b8c353c2f573435c9b2ba36a0f3768aee755680c652dd4067e5e34",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/references/frameworks/DAGGER-HILT.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/references/frameworks/DAGGER-HILT.md",
+      "source_sha256": "ed52d352e63f7675677fa2ffb5f37ef97554a34b5176c34861031839031ac4b9",
+      "reference_sha256": "ed52d352e63f7675677fa2ffb5f37ef97554a34b5176c34861031839031ac4b9",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/references/frameworks/GUICE.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/references/frameworks/GUICE.md",
+      "source_sha256": "7ca1991006f3e009a18f4bf5276a02873c87c75201b34ba69eb0cc5c2cdcf0f5",
+      "reference_sha256": "7ca1991006f3e009a18f4bf5276a02873c87c75201b34ba69eb0cc5c2cdcf0f5",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/references/frameworks/HIBERNATE.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/references/frameworks/HIBERNATE.md",
+      "source_sha256": "02cf14d4d56cba141682bd8bfd5154d2018822a3aca6f477d8fb48bb91e08277",
+      "reference_sha256": "02cf14d4d56cba141682bd8bfd5154d2018822a3aca6f477d8fb48bb91e08277",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/references/frameworks/JACKSON.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/references/frameworks/JACKSON.md",
+      "source_sha256": "c407201a3629f1af4117e3b6b99a0cbebb7f7b62ef14fb9c3bb7e55250ea86ef",
+      "reference_sha256": "c407201a3629f1af4117e3b6b99a0cbebb7f7b62ef14fb9c3bb7e55250ea86ef",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/references/frameworks/JUNIT.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/references/frameworks/JUNIT.md",
+      "source_sha256": "58141f5f63afe96944366bcd2e4d462f6ba4d55e2cfe5e8fd29e77ff51604c78",
+      "reference_sha256": "58141f5f63afe96944366bcd2e4d462f6ba4d55e2cfe5e8fd29e77ff51604c78",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/references/frameworks/LOMBOK.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/references/frameworks/LOMBOK.md",
+      "source_sha256": "b7f2e11b740261ebec3a9afcd2fa4a7a0c82f082433986c4ba1ba62c64b0bf25",
+      "reference_sha256": "b7f2e11b740261ebec3a9afcd2fa4a7a0c82f082433986c4ba1ba62c64b0bf25",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/references/frameworks/MICRONAUT.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/references/frameworks/MICRONAUT.md",
+      "source_sha256": "4d5f9ba64acc694cdade9d374e43548f083bacb40d2995ce424c4ff8c7836edd",
+      "reference_sha256": "4d5f9ba64acc694cdade9d374e43548f083bacb40d2995ce424c4ff8c7836edd",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/references/frameworks/MOCKITO.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/references/frameworks/MOCKITO.md",
+      "source_sha256": "221bdf1fae8def5ca083e84cf829b252baceea065eca10a42fa7279d6f8be23e",
+      "reference_sha256": "221bdf1fae8def5ca083e84cf829b252baceea065eca10a42fa7279d6f8be23e",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/references/frameworks/QUARKUS.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/references/frameworks/QUARKUS.md",
+      "source_sha256": "d0c708e5cf05598fa04760a1696bf2ad396f67933324ebaae51f475f4ec88d5a",
+      "reference_sha256": "d0c708e5cf05598fa04760a1696bf2ad396f67933324ebaae51f475f4ec88d5a",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/references/frameworks/RETROFIT.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/references/frameworks/RETROFIT.md",
+      "source_sha256": "b79fd49230bb9cf2b9a2b05ddb772de8ba4b5d80ddc00dc7b3a33550e2988f22",
+      "reference_sha256": "b79fd49230bb9cf2b9a2b05ddb772de8ba4b5d80ddc00dc7b3a33550e2988f22",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/references/frameworks/RXJAVA.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/references/frameworks/RXJAVA.md",
+      "source_sha256": "87cad42db77a79c9c2a8bc24d051f0526300fb0682de239e30bbd88748608b82",
+      "reference_sha256": "87cad42db77a79c9c2a8bc24d051f0526300fb0682de239e30bbd88748608b82",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-java-to-kotlin/references/frameworks/SPRING.md",
+      "reference": "references/topics/kotlin-tooling-java-to-kotlin/references/frameworks/SPRING.md",
+      "source_sha256": "b07412f7dbcd9cb7d543370e69e6e9d0faf4f4bd74608a0586fa0be93c881ae8",
+      "reference_sha256": "b07412f7dbcd9cb7d543370e69e6e9d0faf4f4bd74608a0586fa0be93c881ae8",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-kotlin-toolchain/SKILL.md",
+      "reference": "references/topics/kotlin-tooling-kotlin-toolchain/guide.md",
+      "source_sha256": "2cec94b6eb346999c7d4d74079131ce12d1ae944c20cf95b8119fac604dd3dfe",
+      "reference_sha256": "c10bd6f8a764ce3633e3783e1b2b74be0c879869b1aecaa14a899fdf1bd22f2f",
+      "modified": true,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-kotlin-toolchain/evals/EVALUATION.md",
+      "reference": "references/topics/kotlin-tooling-kotlin-toolchain/evals/EVALUATION.md",
+      "source_sha256": "28b476aa482974bddf537da334544cfe59d1de3779bbd2b8d140d057f9ac7107",
+      "reference_sha256": "28b476aa482974bddf537da334544cfe59d1de3779bbd2b8d140d057f9ac7107",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-kotlin-toolchain/evals/evals.json",
+      "reference": "references/topics/kotlin-tooling-kotlin-toolchain/evals/evals.json",
+      "source_sha256": "5028e04c72a6f477ad5da26a052203f7fd8a94ecfc94bcc1d6de30c55597b894",
+      "reference_sha256": "5028e04c72a6f477ad5da26a052203f7fd8a94ecfc94bcc1d6de30c55597b894",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-kotlin-toolchain/references/examples.md",
+      "reference": "references/topics/kotlin-tooling-kotlin-toolchain/references/examples.md",
+      "source_sha256": "378a08fb82223251d23c47fb03b4c5bcb54203e90c600f48b529529e732e6c51",
+      "reference_sha256": "e63f48347e3f0c3d15e02b4126a2b7ab0967ea4b5923ff55b8d9a40678a805a9",
+      "modified": true,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-kotlin-toolchain-plugin-authoring/SKILL.md",
+      "reference": "references/topics/kotlin-tooling-kotlin-toolchain-plugin-authoring/guide.md",
+      "source_sha256": "ff5cf4de344a0643ecca5679f4462431faf8d98436fbe16a885807cb46e773ef",
+      "reference_sha256": "7718b3d74e0c10393a99ae3e22c0a39778398ddda114f24f0fc3b59b5c373316",
+      "modified": true,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-kotlin-toolchain-plugin-authoring/references/examples.md",
+      "reference": "references/topics/kotlin-tooling-kotlin-toolchain-plugin-authoring/references/examples.md",
+      "source_sha256": "fbadc3b768150d8dbcc3cf7484d07853b516ae2d71cfff3e21574175de40635f",
+      "reference_sha256": "fbadc3b768150d8dbcc3cf7484d07853b516ae2d71cfff3e21574175de40635f",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-native-build-performance/SKILL.md",
+      "reference": "references/topics/kotlin-tooling-native-build-performance/guide.md",
+      "source_sha256": "948fcecafa9fd0dcd447682e1fef7046b542be710ee27c2f25eade31c182455e",
+      "reference_sha256": "45e0d99996723a3220bd9891f24fe8aea345cc26f64b2ef3f73a9254205f2ae1",
+      "modified": true,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-native-build-performance/evals/EVALUATION.md",
+      "reference": "references/topics/kotlin-tooling-native-build-performance/evals/EVALUATION.md",
+      "source_sha256": "f7f4a9c7412e6e40e9b9fc66f4654fbc35c790c8a89a4ec77e1f3eeaf0219e7c",
+      "reference_sha256": "f7f4a9c7412e6e40e9b9fc66f4654fbc35c790c8a89a4ec77e1f3eeaf0219e7c",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-native-build-performance/references/artifacts-and-targets.md",
+      "reference": "references/topics/kotlin-tooling-native-build-performance/references/artifacts-and-targets.md",
+      "source_sha256": "5dceccd55aa6b517b1f2e48b76b585958244ee66818ecbb4cfa056c0f8cc66ff",
+      "reference_sha256": "5dceccd55aa6b517b1f2e48b76b585958244ee66818ecbb4cfa056c0f8cc66ff",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-native-build-performance/references/caching-and-gradle.md",
+      "reference": "references/topics/kotlin-tooling-native-build-performance/references/caching-and-gradle.md",
+      "source_sha256": "2f7f316e62d3b79adc9b80348b0f25b1ded3d9871d3a528dd1db3af3ecd792cf",
+      "reference_sha256": "2f7f316e62d3b79adc9b80348b0f25b1ded3d9871d3a528dd1db3af3ecd792cf",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-native-build-performance/references/experimental.md",
+      "reference": "references/topics/kotlin-tooling-native-build-performance/references/experimental.md",
+      "source_sha256": "e0e83e36ebdd41f393082680ed06ff396077540544c5723cace80a2058a5eb1f",
+      "reference_sha256": "e0e83e36ebdd41f393082680ed06ff396077540544c5723cace80a2058a5eb1f",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-native-build-performance/references/exports-and-generated-code.md",
+      "reference": "references/topics/kotlin-tooling-native-build-performance/references/exports-and-generated-code.md",
+      "source_sha256": "76d94b9a08e933f09eaae66e8a613f79726dbabc65f765e2130fabf93c0f87d3",
+      "reference_sha256": "76d94b9a08e933f09eaae66e8a613f79726dbabc65f765e2130fabf93c0f87d3",
+      "modified": false,
+      "mode": "0o644"
+    },
+    {
+      "source": "skills/kotlin-tooling-native-build-performance/scripts/audit-native-build.sh",
+      "reference": "references/topics/kotlin-tooling-native-build-performance/scripts/audit-native-build.sh",
+      "source_sha256": "94af58014fb24aaf1e7757ce804ea19e4023cc778da77ac0d725bd19aa0ba9e7",
+      "reference_sha256": "94af58014fb24aaf1e7757ce804ea19e4023cc778da77ac0d725bd19aa0ba9e7",
+      "modified": false,
+      "mode": "0o755"
+    }
+  ]
+}

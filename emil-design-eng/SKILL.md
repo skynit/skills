@@ -1,9 +1,13 @@
 ---
 name: emil-design-eng
-description: This skill encodes Emil Kowalski's philosophy on UI polish, component design, animation decisions, and the invisible details that make software feel great.
+description: "Evaluate interaction polish and motion decisions: whether to animate, feedback, timing, easing, springs, and interruption. Use for a concrete interaction-detail question or an explicit Emil-style review. General visual direction belongs to impeccable; ordinary component and state implementation belongs to frontend-ui-engineering."
 ---
 
 # Design Engineering
+
+## Scope
+
+Focus on interaction details and motion judgement. Use the relevant `animate`, `animate-compose`, or `animate-expo` skill for implementation, and the matching review or audit skill for existing motion. For broad visual or UX direction use `impeccable`; for component structure, state, accessibility, or responsive engineering use `frontend-ui-engineering`. Do not load this skill merely because a task changes UI. Preserve explicit user requests and the project's existing motion language.
 
 ## Initial Response
 

@@ -1,4 +1,4 @@
 interface:
-  display_name: "穿透平台部署"
-  short_description: "快速部署穿透平台，SSH 缺密码立即弹窗，后台并行构建与打包"
-  default_prompt: "使用 $deploy-tunnel-platform 快速部署当前前后端：先检查 SSH，缺密码立即弹窗，同时后台构建；复用可用发布包，备份切换后做基本上线检查。"
+  display_name: "穿透测试平台部署"
+  short_description: "部署穿透测试平台的 Go 后端与 Flutter Web 前端，复用产物并验证上线"
+  default_prompt: "使用 $deploy-tunnel-platform 快速部署穿透测试平台当前前后端：先检查 SSH，缺密码立即弹窗，同时后台构建；复用可用发布包，备份切换后做基本上线检查。"

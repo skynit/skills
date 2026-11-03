@@ -1,6 +1,6 @@
 ---
 name: iso-recreate
-description: Fully recreate a CWNAS Ubuntu installer ISO, including a fresh target RootFS, by running the project's complete build path. Use for installer, OS, package, service, kernel, initrd, boot, build-script, or other RootFS changes; use iso-refresh when only cwnas and frontend root changed.
+description: "完整重建 CWNAS Ubuntu 安装 ISO 及目标根文件系统。用于安装器、系统包、内核、initrd、启动或构建脚本等变更，或用户明确要求完整重建时；仅替换现有镜像内主程序和前端文件时使用 iso-refresh。"
 ---
 
 # CWNAS ISO Recreate

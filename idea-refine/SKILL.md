@@ -15,7 +15,7 @@ Refines raw ideas into sharp, actionable concepts worth building through structu
 - Use when you need to stress-test assumptions before committing to a direction
 - Use when you want to expand options before converging on one
 - Trigger phrases: "Help me refine this idea", "Ideate on [concept]", "Stress-test my plan"
-- Not for: a user who is unsure what they want at all (use `interview-me`), or a direction already chosen that needs a spec (use `spec-driven-development`)
+- When the goal itself is unclear, use `grill-with-docs` to clarify decisions and terminology. Once a direction is chosen, summarize the agreed requirements directly; use `review-code-plan` when an implementation plan needs checking.
 
 ## How It Works
 

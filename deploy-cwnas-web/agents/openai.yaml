@@ -1,4 +1,4 @@
 interface:
-  display_name: "CWNAS Web 部署"
-  short_description: "Safely deploy and verify CWNAS Web releases"
-  default_prompt: "Use $deploy-cwnas-web to replace the official CWNAS Web client package and verify the live deployment."
+  display_name: "CWNAS 官方穿透平台前端部署"
+  short_description: "替换已打包的 CWNAS 官方穿透平台前端资源，备份并验证线上页面与资源"
+  default_prompt: "使用 $deploy-cwnas-web 部署已打包的 CWNAS 官方穿透平台前端，备份现有资源并验证线上页面。"

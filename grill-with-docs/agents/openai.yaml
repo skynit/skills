@@ -1,0 +1,6 @@
+interface:
+  display_name: "设计访谈与文档"
+  short_description: "分轮澄清设计、校准领域术语，按授权整理定义和重要决策并复用现有文档"
+  default_prompt: "使用 $grill-with-docs 推敲当前方案，核对代码事实和领域定义，先给结论与文档草稿，不修改源码。"
+policy:
+  allow_implicit_invocation: false

@@ -1,6 +1,6 @@
 ---
 name: ui-ux-pro-max
-description: "UI/UX design intelligence for web and mobile. Searchable local database with 84 styles, 192 color palettes, 74 font pairings, 192 product types, 98 UX guidelines, 104 icon entries, 16 GSAP motion presets, and 25 chart types across 22 stacks (React, Next.js, Vue, Nuxt, Svelte, Astro, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui, Jetpack Compose, Angular, Laravel, JavaFX, WPF, WinUI, Avalonia, Uno Platform, UWP, Three.js, and HTML/CSS). Use when designing, building, or reviewing UI: pages, components, color schemes, typography, layout, accessibility, animation, or data visualization."
+description: "Search the bundled UI/UX reference database for palettes, font pairings, visual styles, chart choices, product patterns, or technology-stack rules. Use when those references are requested or needed for a specific design decision; ordinary component implementation and general UI review do not activate this skill."
 ---
 
 # UI/UX Pro Max - Design Intelligence
@@ -9,9 +9,9 @@ Searchable database of UI/UX design rules with priority-based recommendations: 8
 
 ## When to Apply
 
-Use this Skill when the task involves **UI structure, visual design decisions, interaction patterns, or user experience quality control**: designing new pages, creating/refactoring UI components, choosing color/typography/spacing/layout systems, reviewing UI for UX/accessibility/consistency, implementing navigation/animation/responsive behavior, or improving perceived quality and usability.
+Use the search database to answer a concrete reference question: palette, typography, style, chart, product pattern, or a stack-specific rule. Select the narrow domain needed; report how the reference fits the current product and preserve its established design.
 
-Skip it for pure backend logic, API/database design, non-visual performance work, infrastructure/DevOps, or non-visual scripts — unless the task changes how something **looks, feels, moves, or is interacted with**.
+Visual and UX direction belongs to `impeccable`; component, state, semantics, focus, and responsive engineering belong to `frontend-ui-engineering`. A generic UI request does not require this database or a new design system. Keep specialized animation and platform work with the corresponding specialist.
 
 ## Rule Categories by Priority
 
@@ -39,7 +39,7 @@ For the full rule list per category (all ~98 UX guidelines with rationale), read
 The search script lives inside this skill's own directory, not the project directory. Always invoke it by its full path — do not assume a particular working directory:
 
 ```bash
-python "${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py" "<query>" --domain <domain>
+python "/home/skynit/.codex/skills/ui-ux-pro-max/scripts/search.py" "<query>" --domain <domain>
 ```
 
 If `python` is not found, try `python3`, then `py -3`. Requires Python 3.x, no external dependencies (see README for install instructions if Python is missing).
@@ -54,27 +54,27 @@ Extract from the user request:
 - **Style keywords**: playful, vibrant, minimal, dark mode, content-first, immersive, etc.
 - **Stack**: detect from the project — check `package.json` deps (react/next/vue/svelte/nuxt/@angular), `pubspec.yaml` (Flutter), `*.xcodeproj`/`Package.swift` (SwiftUI), `composer.json` (Laravel), or React Native markers (`app.json` + `react-native` dep). If nothing is detectable, ask the user or default to `html-tailwind`. **Never assume a stack** — a hardcoded default silently misroutes every recommendation.
 
-### Step 2: Generate Design System (REQUIRED for new pages/projects)
+### Step 2: Choose the query scope
 
-Always start with `--design-system` to get comprehensive recommendations with reasoning:
+For a focused lookup, use the matching `--domain` query. Use `--design-system` only when the user asks for a complete design-system recommendation or the current design task explicitly needs one:
 
 ```bash
-python "${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py" "<product_type> <industry> <keywords>" --design-system [-p "Project Name"]
+python "/home/skynit/.codex/skills/ui-ux-pro-max/scripts/search.py" "<product_type> <industry> <keywords>" --design-system [-p "Project Name"]
 ```
 
 This searches product/style/color/landing/typography domains in parallel, applies reasoning rules from `ui-reasoning.csv`, and returns pattern, style, colors, typography, effects, and anti-patterns to avoid.
 
 **Example:**
 ```bash
-python "${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py" "beauty spa wellness service" --design-system -p "Serenity Spa"
+python "/home/skynit/.codex/skills/ui-ux-pro-max/scripts/search.py" "beauty spa wellness service" --design-system -p "Serenity Spa"
 ```
 
 ### Step 2b: Persist Design System (Master + Overrides Pattern)
 
-To save the design system for retrieval across sessions, add `--persist` **and always pass `--output-dir` pointed at the project root** — without it, files are written relative to whatever directory the tool happens to run from:
+When writing those design documents is authorized, save the design system for retrieval across sessions by adding `--persist` **and always pass `--output-dir` pointed at the project root** — without it, files are written relative to whatever directory the tool happens to run from:
 
 ```bash
-python "${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py" "<query>" --design-system --persist -p "Project Name" --output-dir "<project-root>"
+python "/home/skynit/.codex/skills/ui-ux-pro-max/scripts/search.py" "<query>" --design-system --persist -p "Project Name" --output-dir "<project-root>"
 ```
 
 This creates:
@@ -95,7 +95,7 @@ If `design-system/<project-slug>/MASTER.md` already exists, `--persist` **skips 
 Three optional 1-10 sliders that tune `--design-system` output without changing your query. Add any combination of them to the same command:
 
 ```bash
-python "${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py" "<query>" --design-system --variance <1-10> --motion <1-10> --density <1-10>
+python "/home/skynit/.codex/skills/ui-ux-pro-max/scripts/search.py" "<query>" --design-system --variance <1-10> --motion <1-10> --density <1-10>
 ```
 
 | Dial | Low (1-3) | Mid (4-7) | High (8-10) |
@@ -110,13 +110,13 @@ python "${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py" "<
 
 **Example:**
 ```bash
-python "${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py" "internal analytics dashboard" --design-system --variance 8 --motion 7 --density 8 -p "Ops Console"
+python "/home/skynit/.codex/skills/ui-ux-pro-max/scripts/search.py" "internal analytics dashboard" --design-system --variance 8 --motion 7 --density 8 -p "Ops Console"
 ```
 
 ### Step 3: Supplement with Detailed Searches (as needed)
 
 ```bash
-python "${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py" "<keyword>" --domain <domain> [-n <max_results>]
+python "/home/skynit/.codex/skills/ui-ux-pro-max/scripts/search.py" "<keyword>" --domain <domain> [-n <max_results>]
 ```
 
 | Need | Domain | Example |
@@ -139,7 +139,7 @@ Domain is auto-detected from the query if `--domain` is omitted — but auto-det
 ### Step 4: Stack Guidelines
 
 ```bash
-python "${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py" "<keyword>" --stack <stack>
+python "/home/skynit/.codex/skills/ui-ux-pro-max/scripts/search.py" "<keyword>" --stack <stack>
 ```
 
 **Available stacks:** `react`, `nextjs`, `vue`, `svelte`, `astro`, `nuxtjs`, `nuxt-ui`, `angular`, `laravel`, `swiftui`, `react-native`, `flutter`, `jetpack-compose`, `html-tailwind`, `shadcn`, `threejs`, `javafx`, `wpf`, `winui`, `avalonia`, `uno`, `uwp`. Use the stack detected in Step 1.
@@ -159,13 +159,13 @@ Do not fabricate output. Instead:
 
 ```bash
 # Step 2: design system
-python "${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py" "AI search tool modern minimal" --design-system -p "AI Search"
+python "/home/skynit/.codex/skills/ui-ux-pro-max/scripts/search.py" "AI search tool modern minimal" --design-system -p "AI Search"
 
 # Step 3: supplement
-python "${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py" "search loading animation" --domain ux
+python "/home/skynit/.codex/skills/ui-ux-pro-max/scripts/search.py" "search loading animation" --domain ux
 
 # Step 4: stack guidelines
-python "${CLAUDE_PLUGIN_ROOT}/.claude/skills/ui-ux-pro-max/scripts/search.py" "suspense streaming bundle" --stack nextjs
+python "/home/skynit/.codex/skills/ui-ux-pro-max/scripts/search.py" "suspense streaming bundle" --stack nextjs
 ```
 
 Then synthesize the design system + detailed searches and implement.

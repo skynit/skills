@@ -1,4 +1,4 @@
 interface:
-  display_name: "CWNAS ISO Refresh"
-  short_description: "Refresh app payloads in an existing CWNAS ISO"
+  display_name: "CWNAS ISO 内容替换"
+  short_description: "复用已有 CWNAS ISO 替换指定应用文件，并核对镜像身份和内嵌产物"
   default_prompt: "Use $iso-refresh to refresh the latest CWNAS ISO with the current cwnas binary and root directory."

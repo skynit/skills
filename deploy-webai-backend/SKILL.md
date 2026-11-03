@@ -1,6 +1,6 @@
 ---
 name: deploy-webai-backend
-description: 构建并部署官网 CWNAS 模型后端，配置云端 API 或本地模型，验收知识库导入、检索及流式对话。用于更新 webai-kb.cwnas.net 对应的 CWNAS 服务；不用于官网 Vue 前端或知识库网关部署。
+description: "构建并部署官网模型 NAS 上的 CWNAS 后端，配置云端 API 或本地模型，验证相关知识库导入、检索和流式对话。用于更新 webai-kb.cwnas.net 对应模型服务时；知识库网关与 Vue 前端另行处理。"
 ---
 
 # 部署官网 CWNAS 模型后端

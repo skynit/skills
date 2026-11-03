@@ -1,7 +1,0 @@
-interface:
-  display_name: "构建 Go 领域包"
-  short_description: "从零构建 Go 领域包，按仓库约定实现分层、低耦合与真实扩展验证"
-  default_prompt: "使用 $build-pkg 从零构建当前项目的 pkg 包，沿用项目习惯并验证职责、依赖方向和扩展链路。"
-
-policy:
-  allow_implicit_invocation: true

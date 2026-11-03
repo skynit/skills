@@ -1,6 +1,6 @@
 ---
 name: iso-refresh
-description: Refresh an existing CWNAS installer ISO by replacing the cwnas binary and frontend root inside its target squashfs, with an optional verified early-start tty2 console unit replacement. Use a full build for other installer, OS, service, kernel, initrd, boot, package, or build-script changes.
+description: "复用已验证的 CWNAS 安装 ISO，仅替换其中的 cwnas 主程序及完整前端 root；可按已支持的明确选项替换提前启动的 tty2 控制台单元。其他系统、安装器、内核、启动或构建输入变化使用 iso-recreate。"
 ---
 
 # CWNAS ISO Refresh
