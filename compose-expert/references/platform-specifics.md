@@ -2,7 +2,49 @@
 
 Compose Multiplatform shares most UI code across platforms, but entry points, interop APIs, and runtime behavior differ significantly. This reference covers what you need to know per platform.
 
+> Version baseline reviewed 2026-11-05: Compose Multiplatform 1.12.x stable;
+> 1.13 prerelease. Gate prerelease APIs explicitly.
+
 ---
+
+## Android desktop-class devices (Googlebook)
+
+Googlebook runs Android apps in a desktop windowing environment. This is
+Android, not Compose Desktop/JVM: keep Android lifecycle, permissions, and
+Android APIs, but design for resizable windows and non-touch input.
+
+```kotlin
+@Composable
+fun GooglebookAdaptiveScreen() {
+    val windowSize = currentWindowAdaptiveInfo().windowSizeClass
+    val expanded = windowSize.widthSizeClass == WindowWidthSizeClass.Expanded
+
+    if (expanded) {
+        Row(Modifier.fillMaxSize()) {
+            NavigationRail()
+            ContentPane(Modifier.weight(1f))
+        }
+    } else {
+        CompactContent()
+    }
+}
+```
+
+Use window capabilities, not `Build.MODEL`, to choose layout. Preserve state
+across resize and configuration changes. Support keyboard focus and shortcuts,
+mouse/trackpad hover and pointer affordances, tooltips, and drag-and-drop when
+these match the workflow. Keep semantics and touch input intact for hybrid
+hardware.
+
+For Googlebook and other large-screen Android targets, test resizable windows,
+split-screen, multi-window, multi-display, external displays, and state
+restoration. The adaptive quality matrix includes Googlebook, foldables,
+tablets, and Chromebook-sized configurations; target at least Tier 2 (Adaptive
+optimized) before calling the experience desktop-ready.
+
+Do not confuse this target with Compose Desktop below. `Window`, `Tray`, and
+Swing/AWT interop are JVM desktop APIs; they do not replace Android windowing
+and lifecycle APIs on Googlebook.
 
 ## 1. Desktop (JVM)
 
@@ -40,6 +82,12 @@ fun main() {
 ### Window Composable
 
 `Window` is the top-level container. Key parameters:
+
+Compose Multiplatform 1.12 also provides an experimental Window/Dialog state v2
+under `androidx.compose.ui.window.v2`. It separates requested bounds from actual
+window state and supports screen selection, intrinsic sizing, min/max sizes,
+and parent-relative dialog positioning. Keep v1 examples for stable production
+code unless the project explicitly opts into v2.
 
 | Parameter | Type | Default | Purpose |
 |-----------|------|---------|---------|
@@ -277,7 +325,7 @@ struct ComposeView: UIViewControllerRepresentable {
 fun MainViewController(): UIViewController = ComposeUIViewController(
     configure = {
         opaque = true               // true = opaque background (better perf), false = transparent
-        parallelRendering = false    // experimental: parallel rendering pipeline
+        // Concurrent rendering is enabled by default in CMP 1.11+.
         onFocusBehavior = OnFocusBehavior.FocusableAboveKeyboard  // auto-scroll focused field above keyboard
     }
 ) {
@@ -327,6 +375,12 @@ val uiView = LocalUIView.current
 ```
 
 ### Key Gotchas
+
+**Native text input is experimental (CMP 1.11+):**
+The opt-in UIKit-backed text input path improves caret placement, selection
+gestures, system context menus, autofill, translation, and search. Keep the
+default cross-platform path when consistency or stability is more important,
+and test both paths before adopting it.
 
 **DisposableEffect cleanup unreliable with UINavigationController:**
 `DisposableEffect.onDispose` may not fire when a Compose screen is popped from a `UINavigationController`. Do not rely on it for critical cleanup (e.g., releasing resources, stopping location updates). Use ViewModel `onCleared()` or explicit lifecycle observation instead.

@@ -106,11 +106,11 @@ fun StatefulCounter() {
 Computes a value from existing state, recomputing only when dependencies change.
 
 ```kotlin
-// ❌ Wrong: recomputes on every recomposition
-val isEven = count % 2 == 0
+// ❌ Reads the scroll offset (changes every frame) in a large scope
+val showButton = scrollState.value > 0
 
-// ✅ Correct: recomputes only when count changes
-val isEven = derivedStateOf { count % 2 == 0 }
+// ✅ Readers recompose only when the boolean flips
+val showButton by remember { derivedStateOf { scrollState.value > 0 } }
 ```
 
 **When to use:**
@@ -135,7 +135,7 @@ fun UserList(users: List<User>, filterText: String) {
 
 **Pitfall:** Using `derivedStateOf` for cheap operations (String concatenation, simple conditions) adds overhead. Only use when the computation is non-trivial.
 
-**Pitfall:** Accessing `.value` in a lambda passed to a child composable doesn't create a dependency. Use `snapshotFlow` for callbacks.
+**Pitfall:** a state read inside a lambda is tracked by whichever scope *runs* the lambda. A lambda run during layout or draw (`offset { }`, `graphicsLayer { }`, `drawBehind { }`) creates a dependency in that phase only; a lambda run later from an event callback (`onClick`) creates none. Use `snapshotFlow` to observe state from a coroutine.
 
 ## snapshotFlow
 
@@ -236,10 +236,12 @@ class UserViewModel {
 }
 ```
 
-**Pitfall:** Not annotating data classes used as parameters. Unannotated types are assumed unstable, triggering unnecessary recompositions.
+Do not add stability annotations reflexively. The compiler can infer many
+immutable types, and strong skipping can skip unstable parameters by identity.
+Annotate only when the type actually satisfies the documented contract.
 
 ```kotlin
-// ❌ Treated as unstable, causes recomposition
+// May be unstable; measure before changing it.
 class Config(val title: String, val color: Color)
 
 // ✅ Properly annotated
@@ -249,24 +251,19 @@ class Config(val title: String, val color: Color)
 
 ## Strong Skipping Mode
 
-In Compose 1.6+, strong skipping mode applies stricter recomposition logic.
+Strong skipping is enabled by default with Kotlin 2.0.20 and newer.
 
 **What changed:**
-- Composables skip recomposition if *all* parameters have unchanged identity and value
-- Unannotated parameter types are treated as unstable (always recompose)
-- `@Stable` and `@Immutable` annotations are now critical for performance
-- Lambda parameters always cause recomposition (they're new instances)
-
-**Enable strong skipping:**
-```gradle
-composeOptions {
-    kotlinCompilerExtensionVersion = "1.5.4+"  // enables by default
-}
-```
+- Stable parameters are compared with object equality; unstable parameters use
+  instance equality.
+- Lambdas created inside composition are remembered automatically.
+- Skipping still has comparison/bookkeeping cost; first avoid invalidations.
+- The Kotlin Compose compiler plugin version must match Kotlin. Do not configure
+  the obsolete `kotlinCompilerExtensionVersion` property in modern projects.
 
 **Practical impact:**
 ```kotlin
-// ❌ These create new instances, always recompose child
+// New unstable instances cannot be skipped by identity.
 @Composable
 fun Parent() {
     Child(title = buildString { append("Title") })
@@ -285,10 +282,10 @@ fun Parent() {
 
 ## State in ViewModels: StateFlow vs Compose State
 
-### StateFlow (Recommended for ViewModel)
+### StateFlow (strong default for ViewModels)
 - Survives composition recomposition and configuration changes
 - Works with lifecycle (`collectAsStateWithLifecycle`)
-- Thread-safe, works across layers
+- Safe to read from any thread; update atomically with `_state.update { }`, not `_state.value++` (read-modify-write races)
 
 ```kotlin
 class UserViewModel : ViewModel() {
@@ -308,10 +305,11 @@ fun UserScreen(viewModel: UserViewModel) {
 }
 ```
 
-### Compose State (For UI-only state)
-- Use for temporary, UI-local state
-- Don't hoist to ViewModel
-- Lost on back navigation
+### Compose State
+- Use `remember` for temporary UI-local state; it is lost when that composition leaves.
+- Snapshot state may also live in a testable state holder or ViewModel when
+  atomic snapshots/dynamic read tracking are required; see `appstate.md`.
+- Keep mutation private regardless of the state primitive.
 
 ```kotlin
 @Composable
@@ -348,18 +346,20 @@ fun Counter() {
 }
 ```
 
-### Reading State in Wrong Scope
+### Reading State Inside an Effect vs Keying the Effect
 ```kotlin
-// ❌ Reads happen inside lambda; changes don't re-launch effect
+// Reads the CURRENT value each iteration (the delegate reads State.value);
+// the effect just does not restart when count changes.
 var count by remember { mutableIntStateOf(0) }
 LaunchedEffect(Unit) {
     while (true) {
         delay(1000)
-        println(count)  // Always prints 0
+        println(count)
     }
 }
 
-// ✅ Pass state to LaunchedEffect key
+// Key the effect only when it must RESTART on change. Keying on a value that
+// changes every frame (for example an animation's .value) relaunches every frame.
 LaunchedEffect(count) {
     println("Count changed: $count")
 }
@@ -487,15 +487,10 @@ This pattern (used by `rememberScrollState`, `rememberDrawerState`, etc.) groups
 
 ## Production State Rules
 
-### 1. mutableStateOf ONLY in composables, never in ViewModels
+### 1. Choose state semantics deliberately in ViewModels
 
 ```kotlin
-// BAD: Compose state in ViewModel couples VM to Compose runtime
-class MyViewModel : ViewModel() {
-    var name by mutableStateOf("") // Don't do this
-}
-
-// GOOD: StateFlow in ViewModel — framework-agnostic, testable
+// Flow is a strong default when non-Compose consumers or stream operators matter.
 class MyViewModel : ViewModel() {
     private val _name = MutableStateFlow("")
     val name = _name.asStateFlow()
@@ -503,6 +498,12 @@ class MyViewModel : ViewModel() {
     fun updateName(new: String) { _name.value = new }
 }
 ```
+
+Compose runtime state is also supported outside UI. Jetpack AppState provides
+`Transform` and `StateStore` for ViewModels, repositories, managers, and
+services. Use snapshot state when its atomic snapshots or dynamic read tracking
+provide a concrete benefit; keep mutations private and test the state holder.
+See `appstate.md`. Do not enforce a blanket ban on `mutableStateOf` in ViewModels.
 
 ### 2. SharedFlow for one-shot events, NOT Channel
 

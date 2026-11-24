@@ -16,7 +16,7 @@ Every frame consists of three phases. Understanding state reads in each phase pr
 
 ### Drawing Phase
 - Emits draw operations, runs `Canvas` and custom `DrawScope`
-- Cannot read mutable state without stability warnings
+- A state read here invalidates only the draw phase (no recomposition or relayout), so read frequently changing state inside draw lambdas
 
 **Source**: `androidx/compose/runtime/Composer.kt`
 
@@ -81,9 +81,10 @@ Mark stable types explicitly:
 data class Person(val name: String, val age: Int)
 
 @Stable
-class UserViewModel : ViewModel {
-    private val _state = MutableState(UserState())
-    val state: State<UserState> = _state
+class Counter {
+    var count by mutableIntStateOf(0)
+        private set
+    fun increment() { count++ }
 }
 
 // Composable receiving stable types can skip recomposition
@@ -99,30 +100,24 @@ fun PersonCard(person: Person) {
 
 ## Strong Skipping Mode (Default)
 
-Android Gradle Plugin 8.0+ and Compose compiler 1.5.0+ enable **strong skipping mode**. This changes how lambdas are treated:
-
-Without strong skipping, every lambda is unstable. With it enabled:
-- Lambdas become stable if all captured variables are stable
-- Fewer unnecessary recompositions
+Strong skipping is enabled by default with Kotlin 2.0.20 and newer. Restartable
+composables with unstable parameters can be skipped using instance equality,
+and lambdas inside composition are remembered automatically.
 
 ```kotlin
-// With strong skipping: lambda is stable if count is stable
+// The lambda is remembered automatically under strong skipping.
 @Composable
 fun Counter(count: Int) {
-    Button(onClick = { println(count) }) {  // Stable lambda
+    Button(onClick = { println(count) }) {
         Text("Count: $count")
     }
 }
 ```
 
-Check `build.gradle.kts`:
-```kotlin
-android {
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.0"
-    }
-}
-```
+Do not add obsolete `kotlinCompilerExtensionVersion` configuration to modern
+Kotlin projects. Use the Kotlin Compose compiler Gradle plugin matching the
+Kotlin version. Skipping still has parameter-comparison and bookkeeping cost;
+avoiding unnecessary invalidations is often better than forcing stability.
 
 ---
 
@@ -157,10 +152,10 @@ Use `Modifier.offset { }` (lambda) instead of `Modifier.offset()` (parameter) fo
 
 ## derivedStateOf — Reducing Recomposition Frequency
 
-When deriving expensive computations from state, wrap in `derivedStateOf` to dedup recompositions:
+Cache expensive calculations with `remember(keys)`; use `derivedStateOf` only to derive a value from fast-changing State:
 
 ```kotlin
-// Bad: recomposes on every items change
+// Bad: re-filters on every recomposition
 @Composable
 fun SearchResults(items: List<Item>, query: String) {
     val filtered = items.filter { query in it.title }  // Composition phase
@@ -169,19 +164,40 @@ fun SearchResults(items: List<Item>, query: String) {
     }
 }
 
-// Good: only recomposes if filtered result actually changes
+// Good: recompute only when inputs change (plain remember; no State inputs to derive from)
 @Composable
 fun SearchResults(items: List<Item>, query: String) {
-    val filtered = remember(items, query) {
-        derivedStateOf { items.filter { query in it.title } }
-    }
+    val filtered = remember(items, query) { items.filter { query in it.title } }
     LazyColumn {
-        items(filtered.value) { /* ... */ }
+        items(filtered) { /* ... */ }
     }
 }
 ```
 
-`derivedStateOf` deduplicates downstream recompositions — two different filters yielding the same list trigger only one downstream recomposition.
+`remember(keys)` caches a calculation. `derivedStateOf` is for a value computed from
+**State objects that change more often than the result**: readers recompose only when
+the derived value changes.
+
+```kotlin
+val showScrollToTop by remember { derivedStateOf { listState.firstVisibleItemIndex > 0 } }
+```
+
+### computedStateOf (Compose Runtime 1.13+)
+
+`computedStateOf` also invalidates observers only when its result changes, but it
+recalculates on every read instead of maintaining a cached derived value. It can
+be cheaper for small predicates that are read once after frequent writes.
+
+```kotlin
+val showScrollToTop by remember {
+    computedStateOf { scrollState.value > 0 }
+}
+```
+
+Use `derivedStateOf` when repeated reads benefit from caching or the calculation
+allocates/is expensive. Use `computedStateOf` for cheap calculations dominated
+by read-after-write invalidation cost. Runtime 1.13 is prerelease as of this
+reference update, so gate the API on the project's dependency channel.
 
 ---
 
@@ -344,15 +360,9 @@ android {
 }
 ```
 
-Custom rules to preserve stability:
-
-```proguard
--keep @androidx.compose.runtime.Stable class **
--keep @androidx.compose.runtime.Immutable class **
--keepclassmembers class * {
-    @androidx.compose.runtime.Stable <methods>;
-}
-```
+Do not add keep rules for `@Stable`/`@Immutable`: stability is resolved by the Compose compiler at
+build time, not at runtime, so R8 rules do not affect it. For multi-module stability, use a
+`stability_config.txt`.
 
 ---
 
@@ -387,19 +397,10 @@ Reports frame times (ms), jank, jitter. Target <16.67ms for 60 fps.
 ## Common Hot Paths
 
 ### String Formatting in Composition
-```kotlin
-// Bad: allocates string every recomposition
-@Composable
-fun Counter(count: Int) {
-    Text("Count: ${count}")  // String.format called
-}
-
-// Still composed, but optimized
-@Composable
-fun Counter(count: Int) {
-    Text(buildString { append("Count: "); append(count) })
-}
-```
+String templates (`"Count: $count"`) compile to `StringBuilder` calls; the allocation is small and
+`buildString` is no faster. The real cost is recomposing the scope that builds the string every
+frame: defer the read (lambda/`graphicsLayer`/draw phase) or hoist the changing value, and use
+`stringResource(R.string.count, count)` for localized text.
 
 ### List Filtering Without derivedStateOf
 ```kotlin
@@ -414,11 +415,9 @@ fun FilteredList(items: List<Item>, predicate: (Item) -> Boolean) {
 // Good
 @Composable
 fun FilteredList(items: List<Item>, predicate: (Item) -> Boolean) {
-    val filtered = remember(items, predicate) {
-        derivedStateOf { items.filter(predicate) }
-    }
+    val filtered = remember(items, predicate) { items.filter(predicate) }
     LazyColumn {
-        items(filtered.value) { /* ... */ }
+        items(filtered) { /* ... */ }
     }
 }
 ```
@@ -476,6 +475,9 @@ data class User(val name: String, val age: Int)
 - **Compose Compiler Reports**: https://developer.android.com/develop/ui/compose/performance/stability-report
 - **Macrobenchmark**: https://developer.android.com/develop/ui/compose/performance/measurement
 - **Baseline Profiles**: https://developer.android.com/develop/ui/compose/performance/baseline-profiles
+- **In-process tracing (`androidx.tracing` 2.0)**: https://developer.android.com/topic/performance/tracing/in-process-tracing
+- **Tracing release notes**: https://developer.android.com/jetpack/androidx/releases/tracing
+- **Jetpack Keep**: https://developer.android.com/topic/performance/app-optimization/jetpack-keep-annotations
 
 ---
 
@@ -498,7 +500,7 @@ Canvas(modifier = Modifier.fillMaxSize()) {
 }
 ```
 
-Rule: Never use `fillMaxSize()` on Canvas without an explicit height constraint. Always guard DrawScope operations.
+Rule: always guard DrawScope math against zero size. `fillMaxSize()` on a Canvas is fine when the parent bounds the height; in unbounded-height parents (`verticalScroll`, lazy items) give it an explicit height.
 
 ---
 
@@ -515,7 +517,82 @@ fun ExpensiveScreen() {
 }
 ```
 
-Enables identifying slow composables in production profiling without adding logging.
+Composition tracing identifies how long composables take. Compose Runtime 1.13
+adds recomposition tracing, which records state reads/writes and call stacks that
+caused recomposition in Perfetto. Use it to find the invalidation source before
+adding `remember`, annotations, or derived state.
+
+### App-level tracing with `androidx.tracing` 2.0
+
+Composition and recomposition tracing show Compose internals. For your own
+code — repositories, use cases, image decoding, coroutine pipelines — add
+sections with `androidx.tracing` 2.0, a Kotlin API that writes Perfetto-format
+events from inside the process.
+
+```kotlin
+dependencies {
+    // Libraries that only emit events: depend on the lightweight API.
+    implementation("androidx.tracing:tracing:<version>")
+    // App module only: Android/JVM implementation and Perfetto sink.
+    implementation("androidx.tracing:tracing-wire:<version>")
+}
+```
+
+Check the release page for the current version before pinning (2.0.5 was the
+latest stable on 2026-10-21). On Android, `tracing-wire` initializes itself
+through AndroidX Startup and writes Perfetto files to the app's no-backup files
+directory; on the JVM you create a `TraceSink` and `TraceDriver` yourself.
+
+```kotlin
+suspend fun loadFeed(): Feed =
+    Tracer.global.traceCoroutine(category = "feed", name = "loadFeed") {
+        repository.refresh()
+    }
+```
+
+Rules:
+
+- Use `Tracer.global` at the call site; do not cache the reference — the global
+  tracer can be replaced after app initialization. Never call `setGlobalTracer`
+  from a library.
+- Use `trace(...)` for blocking code and `traceCoroutine(...)` for suspending
+  code. `traceCoroutine` propagates context across suspension points and thread
+  switches, so related work appears as connected flows in Perfetto.
+- Both accept a `category`, `name`, optional propagation token, `isRoot`, and a
+  `metadataBlock` for annotations (arguments, source file/line, call stack
+  entries). Keep metadata small; do not record user identifiers, tokens, or
+  message content.
+- Do not catch `CancellationException` inside a traced block to "close" the
+  section — the section ends when the block exits, including by cancellation.
+- Reusable libraries depend on `tracing` only; the app chooses the backend with
+  `tracing-wire`.
+- The library does not capture CPU scheduling or memory itself. Open the
+  generated file in Perfetto and merge it with a system trace.
+
+---
+
+## Custom Draw Cost
+
+When many items animate or drag at once and recomposition is already deferred, jank usually
+comes from the draw phase: cost = passes per item x items x layer size.
+
+- **Count passes.** Looping `drawContent()` N times (for example a multi-step blur-shadow loop plus an outline loop) re-executes the whole content N times per item per frame. Prefer a few passes, a
+  platform shadow API, or caching the result.
+- **`saveLayer`/offscreen layers allocate buffers.** Under `CompositingStrategy.Auto`, a layer
+  goes offscreen when alpha < 1 or a `RenderEffect` is set; `CompositingStrategy.Offscreen`
+  forces it. Use offscreen only when needed (for example `BlendMode.Clear` masking).
+  Do not nest `saveLayer` inside a per-pass loop.
+- **Cache static output.** If the cutout/shadow does not change per frame, record it once into
+  a `GraphicsLayer` (`rememberGraphicsLayer()` + `record {}` + `drawLayer()`, Compose 1.7+) or
+  render it to an `ImageBitmap`, then draw the cached layer while the item moves.
+- **Allocate in `drawWithCache`, not in the draw lambda.** `Paint`, `Brush`, `Shader`, `Path`
+  created per draw are garbage every frame; `drawWithCache` keeps them until the size or a read
+  state changes.
+- **Reads belong in the draw lambda.** Animated alpha, offset, and progress read inside
+  `graphicsLayer {}`/`drawBehind {}` invalidate draw only. Passing the animated `Float` as a
+  composable parameter recomposes the child every frame.
+- **Measure.** Compare frame time with the effect on and off using Macrobenchmark
+  `FrameTimingMetric` and a Perfetto trace; scale the item count, because cost multiplies.
 
 ---
 
@@ -574,6 +651,35 @@ Fix unstable types by:
 
 ---
 
+## Jetpack Keep (alpha) — keep rules next to reflection
+
+Compose itself needs no hand-written keep rules, but release builds that use
+reflection or JNI do. Jetpack Keep (`androidx.annotation.keep`, `1.0.0-alpha01`,
+requires AGP 8.7+) replaces broad `-keep` rules with annotations on the code that
+performs the reflection; its Gradle plugin generates **conditional** rules, so
+R8 keeps the target only if it keeps the annotated caller.
+
+- Add both the library (`androidx.annotation.keep:keep`) and the Gradle plugin
+  (`androidx.annotation.keep`) to every module that uses it; they share one
+  version. The plugin reads only that module's own code.
+- Annotate the reflecting function: `@UsesReflectionToConstruct`,
+  `@UsesReflectionToAccessMethod`, `@UsesReflectionToAccessField`. Prefer
+  `classConstant` over `className` and the most specific class; omit
+  `parameterTypes` to keep every overload, pass an empty array for the
+  no-argument form.
+- `@UnconditionallyKeep` is for code called from outside Kotlin/Java (for example
+  JNI). It limits optimization, so use it only when the `@UsesReflection*` forms
+  do not apply.
+- Run `./gradlew :app:lint` (`ReflectionWithoutKeepAnnotations`,
+  `MissingKeepAnnotationPlugin`) then `lintFix`; inspect the output of
+  `./gradlew :app:releaseExtractKeepRules` before deleting any old rule.
+- It is alpha: a new version can generate rules that keep less, causing
+  `ClassNotFoundException` only in release builds. Diff generated rules on every
+  upgrade and test a release build. Reflection discovered by annotation is not
+  covered yet; keep a manual rule for it.
+
+---
+
 ## Production Performance Rules
 
 1. **R8: strip previews + semantics in release** — add to `proguard-rules.pro`:
@@ -602,7 +708,7 @@ fun StableList(items: ImmutableList<Item>) { ... }
 ReportDrawnWhen { items.isNotEmpty() }
 ```
 
-5. **Canvas always explicitly sized** — never `fillMaxSize()` without a height constraint:
+5. **Canvas sized deliberately** — in unbounded-height parents use an explicit height instead of `fillMaxSize()`:
 ```kotlin
 // BAD
 Canvas(Modifier.fillMaxSize()) { ... }

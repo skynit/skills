@@ -17,6 +17,10 @@ Implement an agreed or existing design with correct components, state, data flow
 
 Visual direction, information hierarchy, and UX redesign use `impeccable`. Palette, font, style, chart, and stack-reference lookup use `ui-ux-pro-max` only when that information is needed. Motion decisions and interaction polish use `emil-design-eng` or the matching animation specialist. Load only the skill needed for the current decision; a state or accessibility fix does not trigger a visual redesign. Use framework-specific skills for native Compose, Flutter, or SwiftUI work.
 
+## Verify With What the Project Has
+
+Run the project's own test, type-check, or lint commands. Don't install a framework, test runner, or type checker just to check your work; if the project has none, review the code against the [Verification](#verification) list and say what you could not run.
+
 ## Component Architecture
 
 ### File Structure
@@ -79,20 +83,20 @@ export function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
 ```tsx
 // Container: handles data
 export function TaskListContainer() {
-  const { tasks, isLoading, error, refetch } = useTasks();
+  const { tasks, isLoading, error, refetch, toggleTask, deleteTask } = useTasks();
 
   if (isLoading) return <TaskListSkeleton />;
   if (error) return <ErrorState message="Failed to load tasks" retry={refetch} />;
   if (tasks.length === 0) return <EmptyState message="No tasks yet" />;
 
-  return <TaskList tasks={tasks} />;
+  return <TaskList tasks={tasks} onToggle={toggleTask} onDelete={deleteTask} />;
 }
 
 // Presentation: handles rendering
-export function TaskList({ tasks }: { tasks: Task[] }) {
+export function TaskList({ tasks, onToggle, onDelete }: { tasks: Task[] } & Pick<TaskItemProps, 'onToggle' | 'onDelete'>) {
   return (
     <ul role="list" className="divide-y">
-      {tasks.map(task => <TaskItem key={task.id} task={task} />)}
+      {tasks.map(task => <TaskItem key={task.id} task={task} onToggle={onToggle} onDelete={onDelete} />)}
     </ul>
   );
 }
@@ -170,6 +174,8 @@ Don't skip heading levels. Don't use heading styles for non-heading content.
 
 Every component must meet these standards:
 
+For menus, dialogs, tabs, listboxes and comboboxes, follow the [WAI-ARIA APG pattern](https://www.w3.org/WAI/ARIA/apg/patterns/) exactly.
+
 ### Keyboard Navigation
 
 ```tsx
@@ -227,7 +233,7 @@ function Dialog({ isOpen, onClose }: DialogProps) {
 
 ```tsx
 // Don't show blank screens
-function TaskList({ tasks }: { tasks: Task[] }) {
+function TaskList({ tasks, onCreateTask }: { tasks: Task[]; onCreateTask: () => void }) {
   if (tasks.length === 0) {
     return (
       <div role="status" className="text-center py-12">
@@ -265,7 +271,7 @@ Test at these breakpoints: 320px, 768px, 1024px, 1440px.
 // Skeleton loading (not spinners for content)
 function TaskListSkeleton() {
   return (
-    <div className="space-y-3" aria-busy="true" aria-label="Loading tasks">
+    <div className="space-y-3" role="status" aria-busy="true" aria-label="Loading tasks">
       {Array.from({ length: 3 }).map((_, i) => (
         <div key={i} className="h-12 bg-muted animate-pulse rounded" />
       ))}
@@ -298,7 +304,7 @@ function useToggleTask() {
 
 ## See Also
 
-For detailed accessibility requirements and testing tools, see `../../references/accessibility-checklist.md`.
+For detailed accessibility requirements and testing tools, see `references/accessibility-checklist.md`.
 
 ## Common Rationalizations
 
@@ -321,7 +327,7 @@ For detailed accessibility requirements and testing tools, see `../../references
 
 ## Verification
 
-After building UI:
+After building UI, check what you can with the project's own tooling, and review the rest against this list. Don't add dependencies or install toolchains only to verify; say which checks you couldn't run.
 
 - [ ] Component renders without console errors
 - [ ] All interactive elements are keyboard accessible (Tab through the page)

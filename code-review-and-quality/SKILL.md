@@ -186,6 +186,8 @@ For each file changed:
 
 ### Step 4: Categorize Findings
 
+Before reporting a finding, check it against the callers, guards and tests that reach the changed code, and drop it if they rule it out. Label defects that already exist in the base separately from regressions this change introduces. Zero findings is a valid result; do not invent one.
+
 Label every comment with its severity so the author knows what's required vs optional:
 
 | Prefix | Meaning | Author Action |
@@ -211,6 +213,8 @@ Check the author's verification story:
 - Are there screenshots for UI changes?
 - Is there a before/after comparison?
 ```
+
+For a pull request review, confirm the checkout is clean and matches the reviewed commit before running tests or probes. For an uncommitted-work review, state the baseline and identify which working-tree changes the evidence covers.
 
 ## Independent Review
 
@@ -324,8 +328,8 @@ For triaging `npm audit` findings and supply-chain risk (typosquatting, compromi
 ```
 ## See Also
 
-- For detailed security review guidance, see `../../references/security-checklist.md`
-- For performance review checks, see `../../references/performance-checklist.md`
+- For detailed security review guidance, see `references/security-checklist.md`
+- For performance review checks, see `references/performance-checklist.md`
 
 ## Common Rationalizations
 

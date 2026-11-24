@@ -5,8 +5,13 @@ phrases: "review this PR", "review this diff", "check this code", "what's wrong 
 
 When Review Mode activates:
 1. Do **not** follow the generation workflow in `SKILL.md`
-2. Follow only this document
-3. Output a structured local report — do not post to GitHub
+2. Follow this document for the workflow and report format
+3. Also read the topic reference(s) for the dimensions under review (see Quick Routing in
+   `SKILL.md`): this checklist does not cover draw cost, shaders, or state-read phases
+4. Output a structured local report — do not post to GitHub
+
+**Local file or directory (no PR URL):** skip Steps 1–2 (the `gh` steps). Read the named file(s)
+in full, then continue from Step 3.
 
 ---
 
@@ -132,34 +137,35 @@ Scan the full file for each changed `@Composable` function.
 
 ### Category 2: Recomposition
 
-- [ ] **No unstable parameter types** without stability annotations:
-  - Plain `List<T>` — compiler infers as unstable. Use `@Immutable` data class wrapper,
-    `ImmutableList<T>` (kotlinx-collections-immutable), or annotate the call site
+- [ ] **Unstable parameters are intentional and measured:**
+  - Plain `List<T>` is unstable, but strong skipping can skip it when the same
+    instance is passed. Use immutable collections/wrappers when value equality
+    and the stability contract justify the change—not as a ritual annotation.
   - `HashMap`, `MutableMap`, any mutable collection — not stable
   - Non-`data` class without `@Stable` — compiler cannot infer stability
 
-- [ ] **Lambdas not created inline without `remember`.** A new lambda instance on every
-  recomposition of the parent prevents the child from being skipped.
+- [ ] **Lambda allocation matches the compiler mode.** With strong skipping
+  (default on Kotlin 2.0.20+), lambdas inside composition are remembered automatically.
   ```kotlin
-  // BAD — new lambda every parent recomposition
+  // Fine under default strong skipping.
   MyComposable(onClick = { doSomething() })
 
   // OK — stable reference
   val onClick = remember { { doSomething() } }
   MyComposable(onClick = onClick)
   ```
-  Exception: if strong skipping mode is enabled in the Compose compiler (`freeCompilerArgs +=
-  "-P", "plugin:androidx.compose.compiler.plugins.kotlin:experimentalStrongSkipping=true"`),
-  lambdas are stable by default.
+  Only add manual `remember` when supporting an older compiler mode or when
+  measurement shows a real allocation/identity issue.
 
-- [ ] **`derivedStateOf {}` used for computed values.** Flag values computed from state reads
-  inside a composable body without `remember { derivedStateOf { ... } }`:
+- [ ] **`derivedStateOf {}` used where it pays off.** Flag a value computed from **State that
+  changes much more often than the result**, read in a scope that is otherwise expensive, with
+  no `derivedStateOf`. Do not flag cheap predicates on state the scope already needs:
   ```kotlin
-  // BAD — recomputes and recomposes every time any state changes
-  val isValid = username.isNotEmpty() && password.length > 8
+  // Worth flagging: scroll offset changes every frame, the boolean rarely does
+  val showButton = listState.firstVisibleItemIndex > 0   // read in a large scope
 
   // OK
-  val isValid by remember { derivedStateOf { username.isNotEmpty() && password.length > 8 } }
+  val showButton by remember { derivedStateOf { listState.firstVisibleItemIndex > 0 } }
   ```
 
 - [ ] **`remember {}` keys are correct.**
@@ -170,13 +176,14 @@ Scan the full file for each changed `@Composable` function.
 
 Cross-reference with `references/material3-motion.md` for token values and easing names.
 
-- [ ] **No hardcoded integer durations** in `tween()`, `spring()`, or `keyframes {}`. Flag any
-  `tween(N)` where N is a plain integer literal. Suggest nearest `MotionTokens.Duration*` token.
+- [ ] **Durations and easings come from the theme or named constants.** Prefer
+  `MaterialTheme.motionScheme` specs inside M3-styled components. Flag a bare `tween(N)` only when
+  it is not user-configurable or intentionally custom. `MotionTokens` is `internal` to material3:
+  never suggest app code reference it; suggest a named constant with the token's value instead.
 
-- [ ] **No pre-M3 easing constants:**
-  - `FastOutSlowInEasing` → `MotionTokens.EasingEmphasizedCubicBezier`
-  - `LinearOutSlowInEasing` → `MotionTokens.EasingEmphasizedDecelerateCubicBezier`
-  - `FastOutLinearInEasing` → `MotionTokens.EasingEmphasizedAccelerateCubicBezier`
+- [ ] **Easing choice is deliberate.** `FastOutSlowInEasing` and friends are valid public
+  easings; do not flag them as errors. Suggest `motionScheme` (or an emphasized `CubicBezierEasing`
+  constant) only for M3-styled components that should follow the app's motion scheme.
 
 - [ ] **`animateColorAsState` has an `animationSpec`.** No-spec `animateColorAsState(target)`
   uses the default spring which is inappropriate for color transitions.

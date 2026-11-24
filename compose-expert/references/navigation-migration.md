@@ -19,7 +19,7 @@ For Nav 2 reference, see `navigation.md`.
 | Routes are strings or `@Serializable` types | Keys are `@Serializable` types implementing `NavKey` |
 | Imperative: `navController.navigate(Detail(id))` | List ops: `backStack.add(Detail(id))`, `backStack.removeLastOrNull()` |
 | `NavGraph` groups destinations | No graph object — entries are resolved by an `entryProvider` lambda |
-| Library parses deep links | Your code parses URIs and constructs the back stack |
+| Library parses deep links | Since 1.2: `DeepLinkMatcher`s map URIs to keys; you still own the resulting back stack |
 | Graph-scoped ViewModels via `getBackStackEntry()` | Entry-scoped ViewModels via `rememberViewModelStoreNavEntryDecorator()` |
 | `currentBackStackEntryAsState()` for tab selection | Inspect the list directly: `backStack.last()` |
 | `saveState` / `restoreState` for tab persistence | Per-tab back stacks held in your state, or a root-swap pattern |
@@ -79,10 +79,13 @@ val sharedViewModel: CheckoutViewModel = hiltViewModel(parentEntry)
 val sharedViewModel: CheckoutViewModel = viewModel() // Activity-scoped
 ```
 
-### 5. Parse deep links yourself
+### 5. Match deep links into navigation keys
 
-Nav 3 does not parse deep links. Parse the URI in your platform entry point
-(Activity, scene delegate, etc.) and construct the back stack manually:
+Since Navigation 3 **1.2.0** (stable), the library ships built-in type-safe deep
+linking via `DeepLinkRequest` and `DeepLinkMatcher` in
+`androidx.navigation3.runtime.deeplink`. Manifest `<intent-filter>` declarations
+stay the same as Nav 2; matching moves to your entry point (`onCreate` /
+`onNewIntent`), and the match result becomes your initial back stack.
 
 ```kotlin
 // Nav 2
@@ -90,14 +93,47 @@ composable<Detail>(
     deepLinks = listOf(navDeepLink<Detail>(basePath = "https://example.com/detail"))
 ) { /* ... */ }
 
-// Nav 3
-LaunchedEffect(deepLinkId) {
-    if (deepLinkId != null) {
-        backStack.clear()
-        backStack.addAll(listOf(Home, Detail(deepLinkId)))
-    }
+// Nav 3 (1.2+)
+@Serializable
+data class Detail(val id: String) : NavKey
+
+val detailMatcher = UriDeepLinkMatcher(
+    DeepLinkUri("example.com/detail/{id}"),
+    serializer<Detail>(),
+).withBackStack { matchResult ->
+    // lazy synthetic parent stack → system back lands on Home, not the task
+    listOf(Home, matchResult.key)
 }
 ```
+
+Collate every matcher (explicitly, or contributed from feature modules via DI
+multibindings), build a request from the incoming intent, and take the best
+match:
+
+```kotlin
+val request = DeepLinkRequest(intent = intent) // copies data, action, MIME, extras
+
+val matchResult = deepLinkMatchers             // List<DeepLinkMatcher<*, *>>
+    .mapNotNull { it.match(request) }
+    .maxOrNull() // MatchResult is Comparable — most specific pattern wins
+
+val initialBackStack: List<NavKey> = when (matchResult) {
+    null -> listOf(Home)
+    is BackStackMatchResult<*, *> -> {
+        @Suppress("UNCHECKED_CAST")
+        matchResult.backStack as List<NavKey>
+    }
+    else -> listOf(matchResult.key as NavKey)
+}
+```
+
+Built-in matchers: `UriDeepLinkMatcher` (pattern URIs deserialized into
+`@Serializable` keys via Kotlin Serialization), `StaticKeyDeepLinkMatcher`
+(fixed key plus action/MIME filters), `BackStackMatcher` (synthetic stacks).
+Non-primitive arguments take a custom `DeepLinkSerializer`; use cases pattern
+matching cannot express take a custom `DeepLinkMatcher` subclass. Match in both
+`onCreate` and `onNewIntent` — single-task activities receive later links via
+the latter.
 
 ### 6. Replace tab navigation
 
@@ -166,11 +202,12 @@ constraints, not novelty.
   direct equivalent of Nav 2's graph scope (`getBackStackEntry("graphRoute")`).
   Sharing ViewModels across entries means lifting state to a parent composable
   or to a higher DI scope, which often ripples into module boundaries.
-- **You depend on library-managed deep links.** The Nav 3 migration guide
-  lists deep links under "unsupported features" today — you parse URIs in your
-  platform entry point and construct the back stack yourself. If you have a
-  large surface of Nav 2 `navDeepLink<T>` declarations, porting them means
-  writing your own URI parser before you ship.
+- **You depend on declarative per-destination deep links.** Nav 3 supports
+  deep links since 1.2 (`DeepLinkMatcher`, step 5), but matching is
+  centralized at the entry point — there is no per-destination declaration
+  equivalent to Nav 2's `navDeepLink<T>`. A large Nav 2 deep-link surface
+  means rewriting declarations as matchers: real porting work, no longer
+  unsupported.
 
 ### Hybrid is fine
 
@@ -263,6 +300,13 @@ SharedTransitionLayout {
     )
 }
 ```
+
+### Predictive back
+
+Navigation 3 1.2 ships richer predictive-back handling for `NavDisplay`,
+so back gestures preview the destination being returned to. Verify behavior
+against your project's `navigation3` version and see the
+[1.2.0 release notes](https://developer.android.com/jetpack/androidx/releases/navigation3#navigation3_version_12_2).
 
 ### Adaptive list-detail (two-pane) with Nav 3
 
