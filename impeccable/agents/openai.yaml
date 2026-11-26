@@ -1,0 +1,5 @@
+# Modified for this repository: local display text and invocation prompt.
+interface:
+  display_name: Impeccable
+  short_description: "Visual direction, hierarchy, UX flows, and design critique"
+  default_prompt: "Use $impeccable to refine this interface's visual direction and UX within the requested scope."
