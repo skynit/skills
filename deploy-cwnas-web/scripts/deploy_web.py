@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 from pathlib import Path, PurePosixPath
+import re
 import stat
 import subprocess
 import sys
@@ -16,6 +17,32 @@ import zipfile
 def digest(path: Path) -> str:
     with path.open("rb") as stream:
         return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def official_mode_enabled(main_script: bytes) -> bool:
+    enabled = rb"(?:!\s*0|true)"
+    if re.search(rb"\bconfigureCwnasPlatformWeb\(\s*" + enabled + rb"\s*\)", main_script):
+        return True
+
+    identifier = rb"[\w$]+"
+    # Dart can emit a property-call helper instead of a direct call.
+    interop_call = (
+        rb"\b(?P<namespace>" + identifier + rb")\.(?P<helper>" + identifier
+        + rb")\(\s*(?P=namespace)\." + identifier + rb"\(\s*\)\s*,\s*"
+        + rb"""(?P<quote>["'])configureCwnasPlatformWeb(?P=quote)\s*,\s*"""
+        + enabled + rb"\s*,"
+    )
+    for call in re.finditer(interop_call, main_script):
+        helper = (
+            rb"(?:^|[,\n])\s*" + re.escape(call["helper"])
+            + rb"\((?P<receiver>" + identifier + rb"),(?P<property>" + identifier
+            + rb"),(?P<argument>" + identifier + rb"),(?P<converter>" + identifier
+            + rb")\)\{return (?P=converter)\." + identifier
+            + rb"\((?P=receiver)\[(?P=property)\]\((?P=argument)\)\)\}"
+        )
+        if re.search(helper, main_script):
+            return True
+    return False
 
 
 def service_state(service: str) -> str:
@@ -114,9 +141,9 @@ def main() -> int:
 
         staged = backup / "web"
         version = json.loads((staged / "version.json").read_text())
-        main_script = (staged / "main.dart.js").read_text()
-        if "configureCwnasPlatformWeb(!0)" not in main_script:
-            raise ValueError("official platform mode is disabled")
+        main_script = (staged / "main.dart.js").read_bytes()
+        if not official_mode_enabled(main_script):
+            raise ValueError("cannot verify official platform mode in main.dart.js")
 
         for path in [staged, *staged.rglob("*")]:
             path.chmod(0o755 if path.is_dir() else 0o644)
