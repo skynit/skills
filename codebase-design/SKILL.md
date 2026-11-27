@@ -1,17 +1,7 @@
 ---
 name: codebase-design
-description: Shared vocabulary for designing deep modules. Use when the user wants
-  to design or improve a module's interface, find deepening opportunities, decide
-  where a seam goes, make code more testable or AI-navigable, or when another skill
-  needs the deep-module vocabulary.
-metadata:
-  source-repository: mattpocock/skills
-  source-commit: 4ae2317ddb22b046e26455e4f9c9b3aaaf62212d
-  local-adaptation: Codex invocation and project authorization conventions
+description: Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary.
 ---
-
-在 Codex 中，文中的 Skill tool 调用表示读取并遵循可用技能列表中对应的 `SKILL.md`；沿用其调用策略和当前任务授权。
-
 
 # Codebase Design
 
@@ -19,7 +9,7 @@ Design **deep modules**: a lot of behaviour behind a small interface, placed at 
 
 ## Glossary
 
-Use this vocabulary to discuss design. Preserve accurate project terms such as service, API, boundary, and Go interface; explain a new concept when first introducing it. The architectural interface here includes caller obligations and is broader than a Go interface type.
+Use these terms exactly: don't substitute "component," "service," "API," or "boundary." Consistent language is the whole point.
 
 **Module**: anything with an interface and an implementation. Deliberately scale-agnostic: a function, class, package, or tier-spanning slice. _Avoid_: unit, component, service.
 
@@ -72,7 +62,7 @@ When designing an interface, ask:
 - **Depth is a property of the interface, not the implementation.** A deep module can be internally composed of small, mockable, swappable parts; they just aren't part of the interface. A module can have **internal seams** (private to its implementation, used by its own tests) as well as the **external seam** at its interface.
 - **The deletion test.** Imagine deleting the module. If complexity vanishes, it was a pass-through. If complexity reappears across N callers, it was earning its keep.
 - **The interface is the test surface.** Callers and tests cross the same seam. If you want to test *past* the interface, the module is probably the wrong shape.
-- **Justify a seam by its responsibility.** One implementation alone does not prove an interface is unnecessary: check platform isolation, system calls, resource ownership, and meaningful test substitution. Add a seam only for a current need.
+- **One adapter means a hypothetical seam. Two adapters means a real one.** Don't introduce a seam unless something actually varies across it.
 
 ## Designing for testability
 

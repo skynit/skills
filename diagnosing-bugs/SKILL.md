@@ -1,15 +1,7 @@
 ---
 name: diagnosing-bugs
-description: Diagnosis loop for hard bugs and performance regressions. Use when the
-  user says "diagnose"/"debug this", or reports something broken/throwing/failing/slow.
-metadata:
-  source-repository: mattpocock/skills
-  source-commit: 4ae2317ddb22b046e26455e4f9c9b3aaaf62212d
-  local-adaptation: Codex invocation and project authorization conventions
+description: Diagnosis loop for hard bugs and performance regressions. Use when the user says "diagnose"/"debug this", or reports something broken/throwing/failing/slow.
 ---
-
-在 Codex 中，文中的 Skill tool 调用表示读取并遵循可用技能列表中对应的 `SKILL.md`；沿用其调用策略和当前任务授权。
-
 
 # Diagnosing Bugs
 
@@ -144,7 +136,3 @@ Required before declaring done:
 - [ ] All `[DEBUG-...]` instrumentation removed (`grep` the prefix)
 - [ ] Throwaway prototypes deleted (or moved to a clearly-marked debug location)
 - [ ] The hypothesis that turned out correct is stated in the commit / PR message, so the next debugger learns
-
-## 授权与验证范围
-
-诊断和分析请求按只读处理，建立复现命令不自动授权修改源码或添加日志；需要改动时先检查已有授权。临时脚本和捕获产物优先放系统临时目录。沿用项目要求的最小定向测试范围，压力循环仅在实际需要复现偶发问题时使用；报告未覆盖的平台和硬件条件。

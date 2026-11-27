@@ -7,7 +7,10 @@
 | `compose-expert` | [aldefy/compose-skill `v2.5.2`](https://github.com/aldefy/compose-skill/releases/tag/v2.5.2) | [MIT](licenses/aldefy-compose-skill.txt) |
 | Addy Osmani 的 11 个工程技能 | [addyosmani/agent-skills `0.6.17`](https://github.com/addyosmani/agent-skills/releases/tag/0.6.17) | [MIT](licenses/addyosmani-agent-skills.txt) |
 | Emil Kowalski 的 13 个技能 | [emilkowalski/skills `64eb3de`](https://github.com/emilkowalski/skills/commit/64eb3deb9a5fbfa041faf783e0bc3fd635872e9c) | [MIT](licenses/emilkowalski-skills.txt) |
+| Matt Pocock 的 39 个技能（基线） | [mattpocock/skills `4ae2317`](https://github.com/mattpocock/skills/tree/4ae2317ddb22b046e26455e4f9c9b3aaaf62212d)；`software-factory` 后续单独更新 | [MIT](licenses/mattpocock-skills.txt) |
 | `software-factory` | [mattpocock/skills `abeeaf9`](https://github.com/mattpocock/skills/tree/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/in-progress/software-factory) | [MIT](licenses/mattpocock-skills.txt) |
+| `humanizer-zh` | [本地修订及参考来源](humanizer-zh/README.md) | [MIT](humanizer-zh/LICENSE) |
+| `archify` | [tt-a1i/archify](https://github.com/tt-a1i/archify)，随包元数据标记为 [`3.3.0`](archify/skill-release.json) | [Apache-2.0](archify/LICENSE)、[历史许可](archify/LICENSE-MIT)、[第三方声明](archify/THIRD_PARTY_NOTICES.md) |
 | `ui-ux-pro-max` | [nextlevelbuilder/ui-ux-pro-max-skill `e8b065f`](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill/commit/e8b065f0f3aaf2e680fd125f000e4f5e351ed108) | [MIT](licenses/nextlevelbuilder-ui-ux-pro-max-skill.txt) |
 | `impeccable` | [pbakaus/impeccable `skill-v4.10.0`](https://github.com/pbakaus/impeccable/releases/tag/skill-v4.10.0) | [Apache-2.0](impeccable/LICENSE)、[第三方声明](impeccable/NOTICE.md) |
 | `reverse-engineer-anything` | [morluto/rea `rea-agents-6.10.1`](https://github.com/morluto/rea/releases/tag/rea-agents-6.10.1) | [MIT](reverse-engineer-anything/LICENSE) |

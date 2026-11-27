@@ -1,15 +1,7 @@
 ---
 name: tdd
-description: Test-driven development. Use when the user wants to build features or
-  fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
-metadata:
-  source-repository: mattpocock/skills
-  source-commit: 4ae2317ddb22b046e26455e4f9c9b3aaaf62212d
-  local-adaptation: Codex invocation and project authorization conventions
+description: Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
 ---
-
-在 Codex 中，文中的 Skill tool 调用表示读取并遵循可用技能列表中对应的 `SKILL.md`；沿用其调用策略和当前任务授权。
-
 
 # Test-Driven Development
 
@@ -27,7 +19,7 @@ See [tests.md](tests.md) for examples and [mocking.md](mocking.md) for mocking g
 
 A **seam** is the public boundary you test at: the interface where you observe behavior without reaching inside. Tests live at seams, never against internals.
 
-**Test only at pre-agreed seams.** Before writing any test, identify the seams under test. An existing approved task contract or explicit instruction can already confirm them; ask only when the choice remains materially unresolved. No test is written outside the authorized scope. You can't test everything, so agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
+**Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. You can't test everything, so agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
 
 Ask: "What's the public interface, and which seams should we test?" Give each proposed seam a one-line note on what it catches and what it misses.
 
@@ -43,8 +35,4 @@ When the shape of that interface is itself in question (how deep the module is, 
 
 - **Red before green.** Write the failing test first, then only enough code to pass it. Don't anticipate future tests or add speculative features.
 - **One slice at a time.** One seam, one test, one minimal implementation per cycle.
-- **Refactoring is not part of the loop.** It belongs to the review stage (see the installed `code-review-and-quality` skill), not the red → green implementation cycle.
-
-## 项目验证范围
-
-按适用的 `AGENTS.md` 选择当前任务涉及包内的最小必要验证，优先复用已有测试文件；定向运行后确认实际命中用例。文档任务只做文件级检查。需要其他平台、硬件或原生依赖时，明确未验证范围。
+- **Refactoring is not part of the loop.** It belongs to the review stage (see the `code-review` skill), not the red → green implementation cycle.

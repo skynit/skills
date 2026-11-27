@@ -1,15 +1,8 @@
 ---
 name: improve-codebase-architecture
-description: Scan a codebase for deepening opportunities, present them as a visual
-  HTML report, then grill through whichever one you pick.
-metadata:
-  source-repository: mattpocock/skills
-  source-commit: 4ae2317ddb22b046e26455e4f9c9b3aaaf62212d
-  local-adaptation: Codex invocation and project authorization conventions
+description: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
+disable-model-invocation: true
 ---
-
-在 Codex 中，文中的 Skill tool 调用表示读取并遵循可用技能列表中对应的 `SKILL.md`；沿用其调用策略和当前任务授权。
-
 
 # Improve Codebase Architecture
 
@@ -17,7 +10,7 @@ Surface architectural friction and propose **deepening opportunities**: refactor
 
 This command is _informed_ by the project's domain model and built on a shared design vocabulary:
 
-- Call the Skill tool with "codebase-design" for the architecture vocabulary (**module**, **interface**, **depth**, **seam**, **adapter**, **leverage**, **locality**) and its principles (the deletion test, "the interface is the test surface", and responsibility-based seam evaluation). Use these terms when they clarify the design, while preserving accurate project names and distinctions.
+- Call the Skill tool with "codebase-design" for the architecture vocabulary (**module**, **interface**, **depth**, **seam**, **adapter**, **leverage**, **locality**) and its principles (the deletion test, "the interface is the test surface", "one adapter = hypothetical seam, two = real"). Use these terms exactly in every suggestion, and don't drift into "component," "service," "API," or "boundary."
 - The domain language in `GLOSSARY.md` gives names to good seams; ADRs in `docs/adr/` record decisions this command should not re-litigate.
 
 ## Process
@@ -58,7 +51,7 @@ For each candidate, render a card with:
 
 End the report with a **Top recommendation** section: which candidate you'd tackle first and why.
 
-**Use GLOSSARY.md vocabulary for the domain, and the `/codebase-design` vocabulary for the architecture.** If `GLOSSARY.md` defines "Order," talk about "the Order intake module," not "the FooBarHandler," and preserve "Order service" if that is the project's precise term.
+**Use GLOSSARY.md vocabulary for the domain, and the `/codebase-design` vocabulary for the architecture.** If `GLOSSARY.md` defines "Order," talk about "the Order intake module," not "the FooBarHandler," and not "the Order service."
 
 **ADR conflicts**: if a candidate contradicts an existing ADR, only surface it when the friction is real enough to warrant revisiting the ADR. Mark it clearly in the card (e.g. a warning callout: _"contradicts ADR-0007, but worth reopening because…"_). Don't list every theoretical refactor an ADR forbids.
 
@@ -66,17 +59,13 @@ See [HTML-REPORT.md](HTML-REPORT.md) for the full HTML scaffold, diagram pattern
 
 Do NOT propose interfaces yet. After the file is written, ask the user: "Which of these would you like to explore?"
 
-### 3. Interview and domain notes
+### 3. Grilling loop
 
-Once the user picks a candidate, follow the relevant interview and domain-note guidance in [the integrated design interview](../grill-with-docs/SKILL.md): constraints, dependencies, the shape of the deepened module, what sits behind the seam, and what tests survive. Reuse settled decisions and the current authorization; this is part of exploring the chosen candidate, not a mandatory new interview.
+Once the user picks a candidate, call the Skill tool with "grilling" to walk the decision tree with them: constraints, dependencies, the shape of the deepened module, what sits behind the seam, what tests survive.
 
-As decisions crystallize, keep the domain definitions current within the authorized document scope; otherwise present proposed entries:
+Side effects happen inline as decisions crystallize; call the Skill tool with "domain-modeling" to keep the domain model current as you go:
 
-- **Naming a deepened module after a concept not in `GLOSSARY.md`?** Add the term to `GLOSSARY.md`. Create the file lazily only when its modification is authorized; otherwise include the proposed definition in the report.
-- **Sharpening a fuzzy term during the conversation?** Update its existing authoritative definition if authorized; otherwise show the proposed revision.
+- **Naming a deepened module after a concept not in `GLOSSARY.md`?** Add the term to `GLOSSARY.md`. Create the file lazily if it doesn't exist.
+- **Sharpening a fuzzy term during the conversation?** Update `GLOSSARY.md` right there.
 - **User rejects the candidate with a load-bearing reason?** Offer an ADR, framed as: _"Want me to record this as an ADR so future architecture reviews don't re-suggest it?"_ Only offer when the reason would actually be needed by a future explorer to avoid re-suggesting the same thing; skip ephemeral reasons ("not worth it right now") and self-evident ones.
 - **Want to explore alternative interfaces for the deepened module?** Call the Skill tool with "codebase-design" and use its design-it-twice parallel sub-agent pattern.
-
-## 项目适配
-
-默认只读审查指定范围；未指定时从近期改动定位候选。报告给出源码证据、影响及最小替代方案，源码重构按明确授权执行。先读取适用的 `AGENTS.md`；领域定义和历史决策优先使用项目已有位置，缺少词汇表不阻塞审查。讨论中的文档更新受对应文档授权约束。

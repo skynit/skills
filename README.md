@@ -2,7 +2,7 @@
 
 这份 README 帮助你按任务选择技能，并知道应该提供什么、能够得到什么，以及何时需要换一个入口。它是使用指南；具体操作步骤、脚本参数、服务器默认配置和支持条件以每项链接的 `SKILL.md` 为准。
 
-按 **2026-11-03** 本地文件清点，本指南收录 **82 个不重复入口**，覆盖当前技能目录、`.system/` 与共享目录 `~/.agents/skills/`。同一技能的符号链接只计一次。插件管理的文档、表格、演示文稿等入口不在本目录重复列出；本地存在也不代表当前会话已经提供，实际调用以会话可用列表为准。
+本指南同时介绍仓库收录的技能和本机环境提供的入口。可用技能以当前会话识别的列表为准。
 
 ## 怎么使用这份指南
 
@@ -10,6 +10,8 @@
 2. 在目标条目中核对作用、使用场景与输入、预期结果与边界，再复制并补充调用示例。
 3. 只有需要实际执行时再读对应技能定义；无需把全部技能和引用一次加载。
 4. 一个任务跨越几个阶段时，参考最后的[工作流建议](#工作流建议)，跳过已经完成或不需要的阶段。
+
+直接找这批仓库内的技能：[Matt Pocock 技能（39 项）](#matt-pocock-技能)、[中文润色与架构图](#中文润色与架构图)。使用时保留完整技能目录，不能只复制 `SKILL.md`，否则可能缺少引用、脚本或配套文件。
 
 示例都是发给 Codex 的对话提示词，不是终端命令：
 
@@ -27,7 +29,7 @@ $review-code-simplification 精简指定文件的重复实现，保持行为不�
 | 当前问题 | 先看哪个入口 | 判断依据 |
 | --- | --- | --- |
 | 有想法，但方向和范围没定 | [idea-refine](#idea-refine) 或 [grill-with-docs](#grill-with-docs) | 前者比较方向；后者分轮追问方案、核对术语，并按文档授权整理决定。 |
-| 讨论充分，需要整理方案或任务 | 直接要求整理；方案审查用 [review-code-plan](#review-code-plan) | 给出目标、范围、验收条件及必要依赖，无需单独启动规格或任务发布技能。 |
+| 讨论充分，需要整理方案或任务 | 只要草稿时直接要求整理；需要发布到工单系统时看 [Matt Pocock 技能](#matt-pocock-技能) | 先明确目标、范围、验收条件与依赖，再决定是否发布。 |
 | 实施前担心计划有漏洞 | [review-code-plan](#review-code-plan) | 检查拟议改法与真实源码、契约和失败分支是否相符。 |
 | 出现错误或性能回退 | [diagnosing-bugs](#diagnosing-bugs) | 先建立能捕获具体症状的验证，再定位原因。 |
 | 已明确行为，准备实现 | 直接说明修改范围；先测试时用 [tdd](#tdd) | 按项目约定实施可验证的小步，保留已有改动并做相关定向验证。 |
@@ -73,7 +75,7 @@ $review-code-simplification 精简指定文件的重复实现，保持行为不�
 | --- | --- |
 | 显示名称 | 设计访谈与文档 |
 | 调用方式 | **显式调用**；[技能定义](grill-with-docs/SKILL.md) |
-| 作用 | 分轮追问设计和计划，自己查证代码与环境事实；同步核对业务术语、概念关系和关键取舍。访谈与领域记录已整合为自包含流程。 |
+| 作用 | 调用 `grilling` 分轮追问设计和计划，再用 `domain-modeling` 核对业务术语、概念关系和关键决定。 |
 | 使用场景与输入 | 适合方案边界未定、术语含义冲突，或需要记录重要决定。提供目标、现有方案、相关指南和文档授权范围；只需核对定义时可以跳过完整访谈。 |
 | 预期结果与边界 | 得到已确定结论、未决事项及必要的定义和决策记录。优先复用现有文档，只读讨论给草稿；明确授权后才写对应文档，不自动改源码或发布任务。 |
 | 调用示例 | `$grill-with-docs 推敲 CW 分享审批方案，先核对源码与已有定义，分轮澄清取舍；本轮只给结论与文档草稿。` |
@@ -650,7 +652,7 @@ $review-code-simplification 精简指定文件的重复实现，保持行为不�
 | 项目 | 详细说明 |
 | --- | --- |
 | 调用方式 | **显式调用**；[技能定义](prototype/SKILL.md) |
-| 作用 | 围绕同一 UI 需求构建几个布局和交互方向确实不同的原型，放在可视化选择器中比较，让用户基于实际效果决定采用哪一个。 |
+| 作用 | 用一次性原型回答一个设计问题：逻辑问题用独立 HTML 演示状态和边界；界面问题用可切换的原型比较布局与交互。 |
 | 使用场景与输入 | 适合目标清楚但表达方式未定，想比较多种组件方案。提供组件目的、真实内容、技术栈与约束；它不是只换颜色的多套皮肤。 |
 | 预期结果与边界 | 得到可切换原型和比较说明，选择后再按要求提升为正式实现。默认不替用户决定胜出方案，也不把全部原型留进产品主流程。 |
 | 调用示例 | `$prototype 为文件分享卡片实现三个结构不同的原型，沿用设计系统，用选择器比较，暂不替换正式组件。` |
@@ -1019,6 +1021,36 @@ $review-code-simplification 精简指定文件的重复实现，保持行为不�
 | 预期结果与边界 | 得到实际安装位置和结果；已有同名目录应按具体需求处理，不能悄悄覆盖本地适配。安装完成不等于当前会话已发现所有新入口，也不自动执行技能业务流程。 |
 | 调用示例 | `$skill-installer 从指定仓库安装我列出的技能目录，检查已有同名项，保留本地适配并报告实际安装位置。` |
 
+
+## Matt Pocock 技能
+
+仓库收录本机使用的 39 项技能，分类沿用安装清单。拿不准用哪个，先点名 `$ask-matt`；已有方案但想找漏洞，用 `$grill-me`；范围和验收条件明确后，用 `$implement`。示例是给 Codex 的提示词，不是终端命令：
+
+```text
+$grill-me 推敲这个方案，每次问一个关键问题；先查代码，本轮不改文件。
+$implement 按确认的验收条件实施，只修改指定范围，只跑相关测试。
+$code-review 审查当前分支相对 main 的变更，分别检查项目规范和原始需求，只报告问题。
+```
+
+`grill-with-docs` 组合了 [`grilling`](grilling/SKILL.md) 和 [`domain-modeling`](domain-modeling/SKILL.md)：前者追问方案，后者梳理项目术语和设计决定。`prototype` 可以做逻辑演示或界面原型；一次性原型不是生产代码。涉及写文件、发布工单、改配置或启动后台任务时，先明确授权。面向 Claude Code 的入口保留原样，不保证在 Codex 中可直接运行。
+
+| 分类 | 入口与用途 |
+| --- | --- |
+| 工程 · 选入口与设计 | [`ask-matt`](ask-matt/SKILL.md) 选工作流、[`grill-with-docs`](grill-with-docs/SKILL.md) 访谈并整理文档、[`domain-modeling`](domain-modeling/SKILL.md) 整理领域术语和决定、[`codebase-design`](codebase-design/SKILL.md) 设计模块、[`improve-codebase-architecture`](improve-codebase-architecture/SKILL.md) 找架构改进点、[`prototype`](prototype/SKILL.md) 做一次性原型 |
+| 工程 · 实现与检查 | [`implement`](implement/SKILL.md) 按规格或工单实施、[`implement-spec`](implement-spec/SKILL.md) 落实规格拆出的工单、[`tdd`](tdd/SKILL.md) 先写测试再实现、[`diagnosing-bugs`](diagnosing-bugs/SKILL.md) 查难复现故障、[`code-review`](code-review/SKILL.md) 按规范和需求审查、[`research`](research/SKILL.md) 查一手资料并记录结果 |
+| 工程 · 协作与流程 | [`setup-matt-pocock-skills`](setup-matt-pocock-skills/SKILL.md) 配置工单、标签和文档位置、[`to-spec`](to-spec/SKILL.md) 整理并发布规格、[`to-tickets`](to-tickets/SKILL.md) 拆分带依赖的工单、[`triage`](triage/SKILL.md) 筛查并整理工单、[`wayfinder`](wayfinder/SKILL.md) 用决策工单拆解大任务、[`pr`](pr/SKILL.md) 写合并请求说明、[`retro`](retro/SKILL.md) 复盘会话、[`wizard`](wizard/SKILL.md) 编写供人逐步操作的 Bash 向导 |
+| 对话与学习 | [`grill-me`](grill-me/SKILL.md) 点名发起方案追问、[`grilling`](grilling/SKILL.md) 压测思路、[`handoff`](handoff/SKILL.md) 整理交接文档、[`teach`](teach/SKILL.md) 围绕工作区学习、[`to-questionnaire`](to-questionnaire/SKILL.md) 给他人整理问卷、[`wait-what`](wait-what/SKILL.md) 换个方式讲清上一条、[`writing-for-agents`](writing-for-agents/SKILL.md) 写给智能体看的文档 |
+| 开发中的入口 | [`chief-of-staff`](chief-of-staff/SKILL.md) 协调多智能体、[`claude-handoff`](claude-handoff/SKILL.md) 交给 Claude 后台代理、[`loop-me`](loop-me/SKILL.md) 推敲循环工作流、[`setup-ts-deep-modules`](setup-ts-deep-modules/SKILL.md) 约束 TypeScript 模块依赖、[`software-factory`](software-factory/SKILL.md) 设计自动化任务与服务、[`writing-fragments`](writing-fragments/SKILL.md) 收集素材、[`writing-beats`](writing-beats/SKILL.md) 排列叙述节点、[`writing-shape`](writing-shape/SKILL.md) 逐段成文 |
+| 专项工具 | [`git-guardrails-claude-code`](git-guardrails-claude-code/SKILL.md) 给危险 Git 命令加拦截规则、[`migrate-to-shoehorn`](migrate-to-shoehorn/SKILL.md) 替换测试里的类型断言、[`scaffold-exercises`](scaffold-exercises/SKILL.md) 创建课程练习结构、[`setup-pre-commit`](setup-pre-commit/SKILL.md) 配置提交前检查 |
+
+上游版本和许可证见[来源记录](UPSTREAM.md)。
+
+## 中文润色与架构图
+
+| 技能 | 什么时候用 | 调用示例 |
+| --- | --- | --- |
+| [`humanizer-zh`](humanizer-zh/SKILL.md) | 润色已有中文稿，删空话和重复，保留事实、语气和不确定性；不判断文本是否由 AI 写成。 | `$humanizer-zh 润色这段更新说明，保留版本号、事实和作者语气，不扩写。` |
+| [`archify`](archify/SKILL.md) | 根据源码或说明生成可独立打开的交互式 HTML 架构图、流程图、时序图等。命令行工具需要 Node.js 18 或更高版本，浏览器检查还需要浏览器环境。 | `$archify 只读检查文件上传流程，把权限检查、落盘和失败分支画成交互式 HTML 流程图。` |
 
 ## 文件、来源与维护
 
